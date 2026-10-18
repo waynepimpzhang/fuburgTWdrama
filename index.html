@@ -43,6 +43,7 @@ h3{font-size:19px;line-height:1.3}
 .eyebrow{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
 /* hero */
 .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,300px);gap:32px;align-items:start;padding-top:36px}
+.showlogo{width:min(260px,60%);height:auto;margin:0 0 14px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.18))}
 .hero p.logline{font-size:17px;max-width:46ch;margin:14px 0 0}
 .facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:22px}
 .fact{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
@@ -141,6 +142,7 @@ footer{padding-block:40px 56px;color:var(--muted);font-size:13px}
 <main class="wrap">
 <section id="overview" class="hero">
   <div>
+    <img class="showlogo" src="assets/img/logo_anqin_shijia.png" alt="安親世家" width="500" height="173">
     <div class="eyebrow">安親活力褲｜15 秒鄉土劇短片</div>
     <h1>阿母的客兄</h1>
     <p class="logline">阿公懷疑阿嬤最近天天一早出門，是去「討客兄」，拉著女兒一路跟蹤到公園，結果發現阿嬤穿著活力褲，在漫步機上踩得比誰都有自信。</p>
@@ -275,12 +277,12 @@ footer{padding-block:40px 56px;color:var(--muted);font-size:13px}
       <li>「討客兄」的笑點建立在懷疑長輩外遇上；備案台詞：「敢是去交男朋友？」（Kám-sī khì kau lâm-pîng-iú?）</li>
       <li>品牌名「安親」（An-tshin）的發音需親耳確認。</li>
       <li>「輕鬆」屬使用感受，可以用；若改用 B 案，「免驚漏」需規格依據。</li>
-      <li>「安親世家」劇名 LOGO 待設計。</li>
+      <li>「安親世家」劇名 LOGO 目前是 AI 生成版；正式上片前建議請設計師用書法字型重製。</li>
     </ul></div>
     <div class="panel"><h3>製作</h3><ul class="clean">
       <li>阿嬤要有尊嚴：笑點只放在阿公和女兒的誤會上。</li>
       <li>產品包裝、LOGO、字卡一律後期合成，不交給生成模型。</li>
-      <li>定格 01–14 都已生成；鏡 2 採用 B 版過肩鏡頭。定格版影片是把八張定格依 v7 時間點排好，配上同一段台語配音。</li>
+      <li>定格 01–14 都已生成；鏡 2 採用 B 版過肩鏡頭。定格版影片是把八張定格依 v7 時間點排好，配上台語配音、左上角「安親世家」LOGO 與中文字幕。</li>
       <li>白模是輸入資料：prompt 要註明灰白材質、無臉人偶、方塊道具不得出現在成品。</li>
     </ul></div>
   </div>
