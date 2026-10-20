@@ -4,46 +4,62 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>阿母的客兄｜安親活力褲</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="安親活力褲 15 秒鄉土劇短片：劇情、分鏡、台語台詞、白模預演與 Nano Banana Pro 素材。">
+<meta name="description" content="安親活力褲 15 秒台語鄉土劇短片的製作紀錄：白模與定格、台語配音、Seedance 影片生成、後期與交付。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* layout: production bible — sticky section nav, hero with the previz video, storyboard shot cards (meta column + frame strip), asset cards that toggle image / prompt */
+/* layout: production record — sticky header with stage tabs (one panel per stage); inside each panel: handoff summary box, then sections of cards, tables and prompt slabs */
 :root{
   --bg:#f3f5f4; --surface:#ffffff; --sunk:#eaeeec; --ink:#1b2321; --muted:#5d6966; --line:#d9e0dd;
-  --teal:#0e7069; --teal-ink:#ffffff; --red:#b3262d; --amber:#8a6514;
+  --teal:#0e7069; --teal-soft:#dcefec; --teal-ink:#ffffff; --red:#b3262d; --red-soft:#f8e3e3; --amber:#8a6514; --amber-soft:#f6ecd6;
   --f-display:"Noto Serif TC","PMingLiU","MingLiU",serif; --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
   color-scheme:light;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121615;--surface:#1a201e;--sunk:#151a19;--ink:#e6ecea;--muted:#9aa7a3;--line:#2c3533;--teal:#4fc0b4;--teal-ink:#0f1413;--red:#ec7b7f;--amber:#dcb35a;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#121615;--surface:#1a201e;--sunk:#151a19;--ink:#e6ecea;--muted:#9aa7a3;--line:#2c3533;--teal:#4fc0b4;--teal-ink:#0f1413;--red:#ec7b7f;--amber:#dcb35a;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121615;--surface:#1a201e;--sunk:#151a19;--ink:#e6ecea;--muted:#9aa7a3;--line:#2c3533;--teal:#4fc0b4;--teal-soft:#16302d;--teal-ink:#0f1413;--red:#ec7b7f;--red-soft:#3a1d1f;--amber:#dcb35a;--amber-soft:#33291424;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121615;--surface:#1a201e;--sunk:#151a19;--ink:#e6ecea;--muted:#9aa7a3;--line:#2c3533;--teal:#4fc0b4;--teal-soft:#16302d;--teal-ink:#0f1413;--red:#ec7b7f;--red-soft:#3a1d1f;--amber:#dcb35a;--amber-soft:#332914;color-scheme:dark}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:64px}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html{scroll-padding-top:120px}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 var(--f-body);-webkit-text-size-adjust:100%}
-img,video{max-width:100%;display:block}
+img,video,audio{max-width:100%;display:block}
 a{color:var(--teal)}
+code{font:12.5px var(--f-mono);background:var(--sunk);padding:1px 5px;border-radius:4px}
 .wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surface);z-index:20}
-nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-nav.top .wrap{display:flex;align-items:center;gap:16px;min-height:52px}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:18px;min-height:58px}
 .brand{font:700 17px var(--f-display);white-space:nowrap}
-.links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;min-width:0}
-.links::-webkit-scrollbar{display:none}
-.links a{color:var(--muted);text-decoration:none;font-size:14px;padding:6px 10px;border-radius:999px;white-space:nowrap}
-.links a:hover,.links a:focus-visible{background:var(--sunk);color:var(--ink)}
-section{padding-block:44px 8px}
+.brand small{display:block;font:500 11px var(--f-body);color:var(--muted);letter-spacing:.04em}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;min-width:0;padding-block:8px}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{display:flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:14px;padding:7px 12px;border-radius:999px;white-space:nowrap;border:1px solid transparent}
+.tabs a .n{font:500 11px var(--f-mono);width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:var(--sunk);color:var(--muted)}
+.tabs a:hover{background:var(--sunk);color:var(--ink)}
+.tabs a[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.tabs a[aria-selected="true"] .n{background:var(--bg);color:var(--ink)}
+.tabs a:focus-visible,.chip:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.subnav{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.subnav a{font-size:13px;color:var(--muted);text-decoration:none;border:1px solid var(--line);background:var(--surface);padding:3px 11px;border-radius:999px}
+.subnav a:hover{color:var(--ink)}
+[role="tabpanel"][hidden]{display:none}
+section{padding-block:40px 6px}
+.panelhead{padding-top:34px}
 h1,h2,h3{font-family:var(--f-display);font-weight:700;text-wrap:balance;margin:0}
 h1{font-size:clamp(30px,5vw,46px);line-height:1.15}
-h2{font-size:clamp(23px,3.2vw,30px);line-height:1.25;margin-bottom:6px}
-h3{font-size:19px;line-height:1.3}
-.lead{color:var(--muted);max-width:64ch;margin:6px 0 0}
+h2{font-size:clamp(22px,3vw,28px);line-height:1.25;margin-bottom:6px}
+h3{font-size:18px;line-height:1.35}
+.lead{color:var(--muted);max-width:68ch;margin:6px 0 0}
+p{max-width:72ch}
 .eyebrow{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+/* handoff box */
+.handoff{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 24px}
+.handoff h4{margin:0 0 4px;font-size:12.5px;color:var(--teal);font-weight:700;letter-spacing:.04em}
+.handoff ul{margin:0;padding-left:1.1em;font-size:14px}
+.handoff p{margin:0;font-size:14px}
+.path{font:12.5px/1.6 var(--f-mono);color:var(--muted);word-break:break-all}
 /* hero */
-.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,300px);gap:32px;align-items:start;padding-top:36px}
-.showlogo{width:min(260px,60%);height:auto;margin:0 0 14px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.18))}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,300px);gap:32px;align-items:start;padding-top:34px}
+.showlogo{width:min(240px,60%);height:auto;margin:0 0 14px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.18))}
 .hero p.logline{font-size:17px;max-width:46ch;margin:14px 0 0}
 .facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:22px}
 .fact{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
@@ -54,14 +70,25 @@ h3{font-size:19px;line-height:1.3}
 .vtabs{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
 .chip{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.chip:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
 .legend{font-size:12.5px;color:var(--muted);margin-top:8px}
 @media (max-width:760px){.hero{grid-template-columns:1fr}.hero .side{max-width:320px}}
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:18px;counter-reset:st}
+@media (max-width:980px){.pipe{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.pipe{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.pipe{grid-template-columns:1fr}}
+.pipe a{display:grid;gap:4px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;color:inherit;text-decoration:none;position:relative}
+.pipe a:hover{border-color:var(--teal)}
+.pipe .k{font:500 12px var(--f-mono);color:var(--teal)}
+.pipe b{font-size:16px}
+.pipe span{font-size:13px;color:var(--muted)}
+.pipe .done{font-size:11.5px;color:var(--teal);background:var(--teal-soft);border-radius:999px;padding:1px 8px;justify-self:start;margin-top:4px}
 /* timeline bar */
-.tl{margin-top:22px;display:grid;grid-template-columns:repeat(150,minmax(0,1fr));height:34px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
-.tl a{display:flex;align-items:center;justify-content:center;font:500 12px var(--f-mono);color:var(--ink);text-decoration:none;border-right:1px solid var(--line);white-space:nowrap;overflow:hidden}
-.tl a:last-child{border-right:none}
-.tl a:nth-child(odd){background:var(--sunk)}
+.tl{margin-top:16px;display:grid;height:40px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.tl a,.tl div{display:flex;flex-direction:column;align-items:center;justify-content:center;font:500 12px/1.2 var(--f-mono);color:var(--ink);text-decoration:none;border-right:1px solid var(--line);white-space:nowrap;overflow:hidden}
+.tl small{font-size:10.5px;color:var(--muted)}
+.tl > :last-child{border-right:none}
+.tl > :nth-child(odd){background:var(--sunk)}
 .tlnote{display:flex;justify-content:space-between;font:12px var(--f-mono);color:var(--muted);margin-top:4px}
 /* storyboard */
 .shots{display:grid;gap:18px;margin-top:20px}
@@ -77,18 +104,20 @@ h3{font-size:19px;line-height:1.3}
 .line .tw{font-family:var(--f-display);font-size:18px;line-height:1.5}
 .line .tl8{font:13px/1.5 var(--f-mono);color:var(--muted)}
 .line .zh{font-size:13.5px}
-.frames{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px;align-content:start}
-.frame{margin:0;display:grid;gap:4px}
-.frame .ph{aspect-ratio:9/16;border-radius:8px;overflow:hidden;background:var(--sunk);border:1px solid var(--line);display:grid;place-items:center}
+.frames{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;align-content:start}
+.frame{margin:0;display:grid;gap:4px;align-content:start}
+.frame .ph{aspect-ratio:9/16;border-radius:8px;overflow:hidden;background:var(--sunk);border:1px solid var(--line);display:grid;place-items:center;position:relative}
 .frame img{width:100%;height:100%;object-fit:cover;cursor:zoom-in}
-.frame .wait{font-size:12px;color:var(--amber);text-align:center;padding:8px}
 .frame figcaption{font-size:12px;color:var(--muted);line-height:1.4}
 .frame figcaption b{color:var(--ink);font-weight:500}
+.frame.old .ph::after{content:"已替換";position:absolute;top:6px;left:6px;font-size:11px;background:rgba(0,0,0,.65);color:#fff;padding:1px 7px;border-radius:999px}
+.frame.new .ph{outline:2px solid var(--teal);outline-offset:-2px}
+.frame.new .ph::after{content:"影片用";position:absolute;top:6px;left:6px;font-size:11px;background:var(--teal);color:var(--teal-ink);padding:1px 7px;border-radius:999px}
 details{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
 summary{cursor:pointer;font-size:13.5px;color:var(--teal);font-weight:500}
 .ptitle{font-size:13px;font-weight:700;margin:12px 0 4px}
-.promptbox{position:relative}
-pre{margin:0;background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:14px 14px 14px;font:12.5px/1.65 var(--f-mono);white-space:pre-wrap;word-break:break-word;max-height:320px;overflow:auto}
+.promptbox{position:relative;margin-top:6px}
+pre{margin:0;background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:14px;font:12.5px/1.65 var(--f-mono);white-space:pre-wrap;word-break:break-word;max-height:360px;overflow:auto}
 .copy{position:absolute;top:8px;right:8px;font:inherit;font-size:12px;border:none;border-radius:999px;background:var(--teal);color:var(--teal-ink);padding:4px 12px;cursor:pointer}
 /* tables */
 .tblwrap{overflow-x:auto;margin-top:14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
@@ -96,12 +125,15 @@ table{border-collapse:collapse;width:100%;font-size:14px;min-width:620px}
 th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-size:12.5px;color:var(--muted);font-weight:500;background:var(--sunk)}
 tr:last-child td{border-bottom:none}
-td.mono{font:12.5px/1.6 var(--f-mono)}
+td.mono,.mono{font:12.5px/1.6 var(--f-mono)}
 td .tw{font-family:var(--f-display);font-size:16px}
-#lines td:nth-child(1),#lines td:nth-child(2),#lines th:nth-child(1),#lines th:nth-child(2){white-space:nowrap}
-.pick{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:999px;background:var(--teal);color:var(--teal-ink);margin-left:6px;vertical-align:2px}
+.nowrap{white-space:nowrap}
+.pick{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:999px;background:var(--teal);color:var(--teal-ink);margin-left:6px;vertical-align:2px;white-space:nowrap}
+.pick.no{background:var(--red)}
+.pick.mid{background:var(--amber);color:#fff}
 b.rh{color:var(--red)}
-/* assets */
+#voice td:first-child,#voice th:first-child{white-space:nowrap}
+/* asset cards */
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:18px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
 .card.wide{grid-column:1/-1}
@@ -117,14 +149,81 @@ b.rh{color:var(--red)}
 .card.wide .cimgs{grid-template-columns:1fr}
 .cimgs img{border-radius:8px;width:100%;cursor:zoom-in;background:var(--sunk)}
 .tips{margin:0;padding-left:1.2em;font-size:13px;color:var(--muted)}
-/* spec */
+/* panels */
 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:14px}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
 .panel h3{font-size:17px;margin-bottom:8px}
 ul.clean{margin:0;padding-left:1.15em}
-ul.clean li+li{margin-top:4px}
+ul.clean li+li{margin-top:5px}
+ol.rules{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:r}
+ol.rules li{counter-increment:r;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px 12px 52px;position:relative}
+ol.rules li::before{content:counter(r);position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:50%;background:var(--teal);color:var(--teal-ink);display:grid;place-items:center;font:500 13px var(--f-mono)}
+ol.rules b{display:block}
+ol.rules span{font-size:14px;color:var(--muted)}
+.note{background:var(--amber-soft);border-radius:12px;padding:14px 16px;margin-top:14px;font-size:14px}
+.note strong{color:var(--amber)}
 .zone{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:0}
-footer{padding-block:40px 56px;color:var(--muted);font-size:13px}
+/* generation cards */
+.gen{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr);gap:22px;margin-top:18px}
+@media (max-width:760px){.gen{grid-template-columns:1fr}.gen .vid{max-width:260px}}
+.gen .vid video{width:100%;aspect-ratio:9/16;background:#000;border-radius:10px;object-fit:contain}
+.gen .vid p{font-size:12.5px;color:var(--muted);margin:6px 0 0}
+.gen h3{margin:2px 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.chips span{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:1px 9px;color:var(--muted);background:var(--bg)}
+.refs{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:8px;margin:10px 0}
+.refs figure{min-width:0;margin:0;display:grid;grid-template-columns:minmax(0,1fr);gap:3px;align-content:start}
+.refs .ph{aspect-ratio:9/16;border-radius:6px;overflow:hidden;background:var(--sunk);border:1px solid var(--line);display:grid;place-items:center;text-align:center;font-size:11px;color:var(--muted);padding:4px}
+.refs figure.wide{grid-column:span 2}
+.refs .ph.wide{aspect-ratio:16/9;padding:0}
+.refs img{width:100%;height:100%;object-fit:cover;cursor:zoom-in}
+.refs figcaption{font-size:11.5px;line-height:1.35;color:var(--muted)}
+.refs figcaption code{display:block;font-size:11.5px;color:var(--red);background:none;padding:0}
+.verdict{font-size:14px;border-left:3px solid var(--teal);padding:4px 0 4px 12px;margin:8px 0}
+.verdict.warn{border-color:var(--amber)}
+/* audio */
+.alist{display:grid;gap:6px;margin-top:10px}
+.arow{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:7px 10px}
+.arow.final{border-color:var(--teal);background:color-mix(in srgb,var(--teal-soft) 60%,var(--surface))}
+.arow .id{font:500 13px var(--f-mono);color:var(--red);min-width:2.6em}
+.arow .meta{min-width:0;font-size:14px}
+.arow .meta span{color:var(--muted);font-size:12.5px;margin-left:6px}
+.play{width:36px;height:36px;border:none;border-radius:50%;background:var(--teal);color:var(--teal-ink);display:grid;place-items:center;cursor:pointer}
+.play svg{width:14px;height:14px;fill:currentColor}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px}
+.cmp .panel{display:grid;gap:8px;align-content:start}
+.cmp audio{width:100%}
+.cmp .panel p{margin:0;font-size:13.5px;color:var(--muted)}
+.layers{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:12px}
+.layers figure{margin:0;display:grid;grid-template-columns:minmax(0,1fr);gap:4px;min-width:0}
+.layers .ph{min-width:0;overflow:hidden}
+.layers .ph{aspect-ratio:1;border-radius:8px;border:1px solid var(--line);display:grid;place-items:center;padding:8px;background:repeating-conic-gradient(#cfd6d3 0 25%,#eef1f0 0 50%) 0 0/16px 16px}
+.layers img{width:100%;height:100%;min-width:0;object-fit:contain}
+.layers figcaption{font-size:12px;color:var(--muted)}
+.tree{font:12.5px/1.75 var(--f-mono);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:14px;overflow-x:auto;white-space:pre}
+/* kling */
+.ksum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}
+@media (max-width:860px){.ksum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.ksum{grid-template-columns:1fr}}
+.ksum a{display:grid;gap:6px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;color:inherit;text-decoration:none;min-width:0}
+.ksum a.win{border-color:var(--teal);border-width:2px}
+.ksum b{font-size:15px}.ksum p{margin:0;font-size:13px;color:var(--muted)}
+.kshot{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:18px;display:grid;gap:14px}
+.kshot .head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.kshot .head .meta{font:12.5px var(--f-mono);color:var(--muted)}
+.kctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:13px;color:var(--muted)}
+.kctl button{font:inherit;font-size:13px;border:none;border-radius:999px;background:var(--teal);color:var(--teal-ink);padding:5px 14px;cursor:pointer}
+.kctl select{font:inherit;font-size:13px;padding:3px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.reel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:560px){.reel{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}}
+.reel figure{margin:0;display:grid;gap:4px;min-width:0}
+.reel video{width:100%;aspect-ratio:9/16;background:#000;border-radius:8px;object-fit:contain}
+.reel figcaption{font-size:12.5px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+.reel figure.win video{outline:3px solid var(--teal);outline-offset:-1px}
+.knotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 24px}
+.knotes h3{font-size:14px;font-family:var(--f-body)}
+.knotes ul{margin:4px 0 0;padding-left:1.15em;font-size:14px}
+footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
 /* lightbox */
 .lb{position:fixed;inset:0;background:rgba(0,0,0,.86);display:grid;place-items:center;z-index:50;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
 .lb img{max-height:100%;max-width:100%;border-radius:8px}
@@ -132,116 +231,174 @@ footer{padding-block:40px 56px;color:var(--muted);font-size:13px}
 </style>
 </head>
 <body>
-<nav class="top" aria-label="章節"><div class="wrap">
-  <span class="brand">阿母的客兄</span>
-  <div class="links">
-    <a href="#overview">總覽</a><a href="#story">分鏡</a><a href="#lines">台詞</a><a href="#voice">配音</a><a href="#cast">角色</a><a href="#sets">場景</a><a href="#spec">白模規格</a><a href="#notes">製作提醒</a>
-  </div>
-</div></nav>
+<header class="top"><div class="wrap">
+  <span class="brand">阿母的客兄<small>安親活力褲｜製作紀錄</small></span>
+  <nav class="tabs" role="tablist" aria-label="製作階段">
+    <a role="tab" href="#overview" id="tab-overview" aria-controls="overview"><span class="n">0</span>總覽</a>
+    <a role="tab" href="#stage1" id="tab-stage1" aria-controls="stage1"><span class="n">1</span>白模與定格</a>
+    <a role="tab" href="#stage2" id="tab-stage2" aria-controls="stage2"><span class="n">2</span>台語配音</a>
+    <a role="tab" href="#stage3" id="tab-stage3" aria-controls="stage3"><span class="n">3</span>影片生成</a>
+    <a role="tab" href="#stage4" id="tab-stage4" aria-controls="stage4"><span class="n">4</span>後期與交付</a>
+    <a role="tab" href="#stage5" id="tab-stage5" aria-controls="stage5"><span class="n">5</span>Kling 對照</a>
+  </nav>
+</div></header>
 
 <main class="wrap">
-<section id="overview" class="hero">
+
+<!-- ============ 0 總覽 ============ -->
+<div role="tabpanel" id="overview" aria-labelledby="tab-overview">
+<section class="hero">
   <div>
     <img class="showlogo" src="assets/img/logo_anqin_shijia.png" alt="安親世家" width="500" height="173">
-    <div class="eyebrow">安親活力褲｜15 秒鄉土劇短片</div>
+    <div class="eyebrow">安親活力褲｜台語鄉土劇短片</div>
     <h1>阿母的客兄</h1>
     <p class="logline">阿公懷疑阿嬤最近天天一早出門，是去「討客兄」，拉著女兒一路跟蹤到公園，結果發現阿嬤穿著活力褲，在漫步機上踩得比誰都有自信。</p>
-    <p class="lead">笑點只放在阿公和女兒的誤會上；阿嬤要拍得健康、開心、帥氣。產品包裝與文案在最後 1.5 秒由後期壓在畫面右下。</p>
+    <p class="lead">笑點只放在阿公和女兒的誤會上，阿嬤要拍得健康、開心、帥氣。這一頁是給接手同事的製作紀錄：每個階段做了什麼、用了哪些素材和 prompt、踩過哪些坑、檔案放在哪裡。</p>
     <div class="facts">
-      <div class="fact"><b>規格</b><span>9:16 直式・15 秒・24 fps</span></div>
+      <div class="fact"><b>目前版本</b><span>v9 成片（10/21）</span></div>
+      <div class="fact"><b>規格</b><span>9:16・1080×1920・24 fps</span></div>
+      <div class="fact"><b>片長</b><span>16.5 秒（企劃 15 秒）</span></div>
       <div class="fact"><b>主打品項</b><span>安親活力褲</span></div>
-      <div class="fact"><b>情緒主軸</b><span>穿安親，更自信</span></div>
-      <div class="fact"><b>定版標語（暫定）</b><span>選對褲，穿出自信</span></div>
-      <div class="fact"><b>劇名 LOGO</b><span>安親世家（左上角）</span></div>
-      <div class="fact"><b>預演版本</b><span>白模 v7・定格版 v1</span></div>
+      <div class="fact"><b>定版文案</b><span>簡單安心・活力不受限</span></div>
+      <div class="fact"><b>影片模型</b><span>鏡 1 Kling・其餘 Seedance</span></div>
     </div>
-    <div class="tl" aria-label="15 秒時間軸"><a href="#shot-1" style="grid-column:span 51" title="鏡 1">1</a><a href="#shot-2" style="grid-column:span 14" title="鏡 2">2</a><a href="#shot-3" style="grid-column:span 13" title="鏡 3">3</a><a href="#shot-4" style="grid-column:span 20" title="鏡 4">4</a><a href="#shot-5" style="grid-column:span 52" title="鏡 5">5</a></div>
-    <div class="tlnote"><span>0s</span><span>5s</span><span>10s</span><span>15s</span></div>
   </div>
   <div class="side">
-    <div class="player"><video id="pv" controls playsinline preload="metadata" poster="assets/video/poster.jpg" src="assets/video/previz_v7_guide.mp4"></video></div>
+    <div class="player"><video id="pv" controls playsinline preload="metadata" poster="assets/video/final_v9_poster.jpg" src="assets/video/final_v9_720p.mp4"></video></div>
     <div class="vtabs" role="group" aria-label="影片版本">
-      <button class="chip" type="button" data-src="assets/video/previz_v7_guide.mp4" aria-pressed="true">對稿版</button>
-      <button class="chip" type="button" data-src="assets/video/previz_keyframes.mp4" aria-pressed="false">定格版</button>
+      <button class="chip" type="button" data-src="assets/video/final_v9_720p.mp4" data-poster="assets/video/final_v9_poster.jpg" aria-pressed="true">成片 v9</button>
+      <button class="chip" type="button" data-src="assets/video/final_v8_720p.mp4" data-poster="assets/video/final_v8_poster.jpg" aria-pressed="false">v8（全 Seedance）</button>
+      <button class="chip" type="button" data-src="assets/video/previz_v7_guide.mp4" data-poster="assets/video/poster.jpg" aria-pressed="false">白模對稿版</button>
+      <button class="chip" type="button" data-src="assets/video/previz_keyframes.mp4" data-poster="assets/video/poster.jpg" aria-pressed="false">定格版</button>
     </div>
-    <p class="legend" id="legend"><span class="zone" style="background:#e5484d"></span>平台介面區 <span class="zone" style="background:#e5c100;margin-left:8px"></span>LOGO <span class="zone" style="background:#22b5c4;margin-left:8px"></span>字幕 <span class="zone" style="background:#46c45a;margin-left:8px"></span>產品</p>
+    <p class="legend" id="legend" hidden><span class="zone" style="background:#e5484d"></span>平台介面區 <span class="zone" style="background:#e5c100;margin-left:8px"></span>LOGO <span class="zone" style="background:#22b5c4;margin-left:8px"></span>字幕 <span class="zone" style="background:#46c45a;margin-left:8px"></span>產品</p>
+    <p class="legend">網頁版為 720p 壓縮檔，原檔見「後期與交付」。</p>
   </div>
 </section>
+
+<section>
+  <div class="eyebrow">Pipeline</div>
+  <h2>製作流程</h2>
+  <p class="lead">前四個階段依序完成，前一階段的產出就是下一階段的輸入；第五階段是事後用 Kling 重做比較。點卡片可以直接跳到該階段。</p>
+  <div class="pipe five">
+    <a href="#stage1"><span class="k">STAGE 1｜10/17–10/20</span><b>白模與定格</b><span>Blender 白模定好機位、時間與走位；Nano Banana Pro 生成角色、場景與每一鏡的定格。</span><span class="done">完成</span></a>
+    <a href="#stage2"><span class="k">STAGE 2｜10/17–10/18</span><b>台語配音</b><span>Gemini 3.8 Flash TTS 試聽選聲，替阿公做專屬沙啞聲線；錄好的台詞給影片模型對嘴。</span><span class="done">完成</span></a>
+    <a href="#stage3"><span class="k">STAGE 3｜10/20</span><b>影片生成</b><span>Higgsfield 上的 Seedance 2.0，拆成四支生成；附完整 prompt、參考素材與試錯紀錄。</span><span class="done">完成</span></a>
+    <a href="#stage4"><span class="k">STAGE 4｜10/20–10/21</span><b>後期與交付</b><span>剪接、「討客兄」換音、配樂、Topaz 升 1080p、LOGO 與產品文案合成。</span><span class="done">v9 已交付</span></a>
+    <a href="#stage5"><span class="k">STAGE 5｜10/21</span><b>Kling 對照</b><span>同樣素材改用 Kling 4.0 Omni 生成四段，和 Seedance 逐鏡比較；鏡 1 改用 Kling 版本。</span><span class="done">鏡 1 已換入 v9</span></a>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Edit</div>
+  <h2>成片時間軸（v9）</h2>
+  <p class="lead">鏡 1 來自 Kling，其餘來自 Seedance。生成時每支都多留了秒數，剪接後全片 16.5 秒。若要剪回 15 秒，見「後期與交付」的建議。</p>
+  <div class="tl" id="tl-final" aria-label="v9 時間軸"></div>
+  <div class="tlnote"><span>0s</span><span>16.5s</span></div>
+</section>
+
+<section>
+  <div class="eyebrow">Handoff</div>
+  <h2>接手須知</h2>
+  <div class="grid2">
+    <div class="panel"><h3>關鍵決定（和企劃不同的地方）</h3><ul class="clean">
+      <li><b>影片模型：</b>鏡 2–5 用 Seedance 2.0（Higgsfield）；鏡 1 在 v9 換成 Kling 4.0 Omni 的 K1 v1，表演更完整、台詞更準。兩邊的寫法都是「台詞寫進 prompt＋上傳錄音」，規則見階段 3。</li>
+      <li><b>聲音：</b>鏡 1 用 Kling 原聲，它直接照我們的 E3 錄音對嘴，「討客兄」不必再換音。鏡 2–3 阿公那句仍換成 E3；女兒、阿嬤保留 Seedance 原聲。</li>
+      <li><b>產品入鏡：</b>客廳茶几上加了活力褲包裝，鏡 1、鏡 2 的定格因此重做（定格 15–18）。</li>
+      <li><b>片長：</b>16.5 秒。鏡 2–3 合成一支生成，鏡 4 偷看保留驚嚇、剪掉女兒笑的段落。</li>
+      <li><b>LOGO：</b>前段是「安親世家」劇名，阿嬤鏡頭推近時淡換成安親 Feelfree 品牌 LOGO。</li>
+    </ul></div>
+    <div class="panel"><h3>檔案在哪裡</h3>
+      <p class="path">C:\Users\wayne\Desktop\ann-ching\</p>
+      <ul class="clean" style="font-size:14px">
+        <li><code>previz\</code> 白模 .blend、Nano Banana 素材（01–18）</li>
+        <li><code>previz\audio\</code> 台語配音與 E3 對齊檔</li>
+        <li><code>previz\seedance\upload\</code> 每一次生成上傳的素材，一次一個資料夾</li>
+        <li><code>previz\seedance\output\</code> 所有生成結果與粗剪</li>
+        <li><code>previz\seedance\final_roughcut_v4_素材\</code> 剪接用素材包（影片、聲音、配樂、README）</li>
+        <li><code>previz\seedance\final_1080p_交付\</code> 成片、圖層、合成腳本、Kling 比較用 md</li>
+        <li><code>previz\kling\</code> Kling 上傳素材、prompt、生成結果</li>
+        <li><code>site\</code> 這個網頁</li>
+      </ul>
+    </div>
+    <div class="panel"><h3>還沒定案的事</h3><ul class="clean">
+      <li>客戶確認「討客兄」笑點；備案台詞：「敢是去交男朋友？」（Kám-sī khì kau lâm-pîng-iú?）</li>
+      <li>是否要剪回 15 秒。</li>
+      <li>鏡 1 茶几上包裝的商標與小字是模型生成的假字，對外前要用真實包裝貼回（產品不動，追蹤容易）。</li>
+      <li>中文字幕尚未依新時間軸重做。</li>
+      <li>鏡 1 Kling 版的包裝字同樣要檢查（Kling 也可能重畫小字）。</li>
+    </ul></div>
+  </div>
+</section>
+</div>
+
+<!-- ============ 1 白模與定格 ============ -->
+<div role="tabpanel" id="stage1" aria-labelledby="tab-stage1" hidden>
+<div class="panelhead">
+  <div class="eyebrow">Stage 1｜Greybox &amp; Keyframes</div>
+  <h1>白模與定格</h1>
+  <p class="lead">先用 Blender 白模把空間、機位、走位和秒數定死，再用 Nano Banana Pro 照白模生成寫實的角色、場景與每一鏡的定格。這些定格後來就是影片模型的首尾畫面參考。</p>
+  <div class="handoff">
+    <div><h4>產出</h4><ul><li>白模 v7（灰）與 v8（角色色碼版）</li><li>角色三視表 3 張、場景 4 張</li><li>定格 07–18（15–18 是產品入鏡後的修正版）</li></ul></div>
+    <div><h4>工具</h4><ul><li>Blender 5.2＋IK Rig，Workbench 渲染</li><li>Nano Banana Pro（Gemini 3 Pro Image）</li></ul></div>
+    <div><h4>檔案</h4><p class="path">previz\anqin_mom_lover_previz_v8_colorcoded.blend<br>previz\nano_banana\01_… 到 18_…（每個資料夾附 prompt.txt）</p></div>
+    <div><h4>交接注意</h4><ul><li>下方分鏡的秒數是 15 秒企劃版；成片時間以總覽的 v8 時間軸為準。</li><li>標「已替換」的定格不要再拿去生成影片。</li></ul></div>
+  </div>
+  <nav class="subnav" aria-label="本頁段落"><a href="#story">分鏡與定格</a><a href="#nb2">產品入鏡修正</a><a href="#cast">角色</a><a href="#sets">場景</a><a href="#spec">白模規格</a></nav>
+</div>
 
 <section id="story">
   <div class="eyebrow">Storyboard</div>
   <h2>分鏡與定格</h2>
-  <p class="lead">時間、機位與台詞都以白模 v7 為準。每一鏡並排白模參考與 Nano Banana Pro 生成的定格；展開「定格 prompt」可以直接複製。</p>
+  <p class="lead">每一鏡並排白模參考與 Nano Banana Pro 生成的定格；綠框是後來實際交給 Seedance 的版本。展開「定格 prompt」可以直接複製。</p>
+  <div class="tl" id="tl-plan" aria-label="15 秒企劃時間軸"></div>
+  <div class="tlnote"><span>0s</span><span>5s</span><span>10s</span><span>15s</span></div>
   <div class="shots" id="shots"></div>
 </section>
 
-<section id="lines">
-  <div class="eyebrow">Script</div>
-  <h2>台語台詞</h2>
-  <p class="lead">拼音依教育部台語辭典用字整理，正式錄音前請母語配音員順過一次，尤其「討客兄」「綴去看覓」的口語語氣與連讀變調。</p>
+<section id="nb2">
+  <div class="eyebrow">Revision｜10/20</div>
+  <h2>產品入鏡修正（定格 15–18）</h2>
+  <p class="lead">客廳茶几加上活力褲包裝後，客廳圖與鏡 1、鏡 2 的定格都跟著重做。同時對照白模的站位：阿公在茶几左邊，女兒坐在沙發右端紅月曆下。原本鏡 1 首格沙發是空的，和鏡 2 的正反打對不上，所以把女兒補進鏡 1 背景。</p>
   <div class="tblwrap"><table>
-    <thead><tr><th>時間</th><th>角色</th><th>台語漢字</th><th>台羅拼音</th><th>中文</th></tr></thead>
-    <tbody id="linerows"></tbody>
+    <thead><tr><th class="nowrap">編號</th><th>改了什麼</th><th>上傳順序</th><th>前後對照</th></tr></thead>
+    <tbody id="nbrows"></tbody>
   </table></div>
-  <h3 style="margin-top:28px">阿嬤台詞三案</h3>
-  <p class="lead">三案都押台語韻，<b class="rh">紅字</b>是押韻的字。目前採用 C 案，A、B 留給團隊參考。</p>
-  <div class="tblwrap"><table>
-    <thead><tr><th>案</th><th>台語台詞</th><th>台羅拼音</th><th>中文</th><th>特色</th></tr></thead>
-    <tbody>
-      <tr><td>A</td><td><span class="tw">安<b class="rh">親</b>活力褲穿上<b class="rh">身</b>，阿嬤行路有自<b class="rh">信</b>！</span></td><td class="mono">An-tshin ua̍h-li̍k-khòo tshīng-tsiūnn sin, a-má kiânn-lōo ū tsū-sìn!</td><td>安親活力褲穿上身，阿嬤走路有自信！</td><td>押 -in 韻；品牌名也押到，扣「自信」主軸，適合當系列 slogan。</td></tr>
-      <tr><td>B</td><td><span class="tw">穿安親，免驚<b class="rh">漏</b>，想行就行，想<b class="rh">走</b>就<b class="rh">走</b>！</span></td><td class="mono">Tshīng An-tshin, bián kiann lāu, siūnn kiânn tō kiânn, siūnn tsáu tō tsáu!</td><td>穿安親，不怕漏，想走就走，想跑就跑！</td><td>押 -au 韻，最有念謠感；「免驚漏」屬功效說法，需客戶確認。</td></tr>
-      <tr><td>C<span class="pick">採用</span></td><td><span class="tw">安親活力褲，穿起來輕<b class="rh">鬆</b>，阿嬤袂輸少年<b class="rh">人</b>！</span></td><td class="mono">An-tshin ua̍h-li̍k-khòo, tshīng--khí-lâi khin-sang, a-má bē-su siàu-liân-lâng!</td><td>安親活力褲，穿起來輕鬆，阿嬤不輸年輕人！</td><td>押 -ang 韻，「袂輸少年人」喜感最強；「自信」由定版字卡補足。</td></tr>
-    </tbody>
-  </table></div>
-</section>
-
-<section id="voice">
-  <div class="eyebrow">Voice</div>
-  <h2>配音（Gemini 3.8 Flash TTS）</h2>
-  <p class="lead">官方支援清單沒有台語，但只送台羅拼音、不加任何指示時，三個角色都能念出台語。加上語氣指示，模型會連指示一起念出來。</p>
-  <div class="tblwrap"><table>
-    <thead><tr><th>角色</th><th>聲音</th><th>輸入方式</th><th>處理</th><th>時間</th></tr></thead>
-    <tbody>
-      <tr><td>阿公</td><td>Algenib</td><td>台羅（試聽 B1）：「kám-sī teh... thó-kheh-hiann?!」用刪節號製造停頓</td><td>前半句加速 1.2 倍；「討客兄」原速、音量 +20%，前面停 0.35 秒</td><td class="mono">0.1–4.6s<br>討客兄 3.5–4.6s</td></tr>
-      <tr><td>女兒</td><td>Callirrhoe</td><td>漢字（試聽 D5）：「阿爸，伊是……」</td><td>保留「阿爸」與「伊是」之間的遲疑停頓</td><td class="mono">5.0–6.6s</td></tr>
-      <tr><td>阿公</td><td>Algenib</td><td>台羅：「Kiânn! Tuè--khì khuànn-māi!」</td><td>加速 1.1 倍，接在女兒話尾打斷她</td><td class="mono">6.55–7.85s</td></tr>
-      <tr><td>阿嬤</td><td>Gacrux</td><td>台羅：C 案</td><td>原速</td><td class="mono">10.0–14.8s</td></tr>
-    </tbody>
-  </table></div>
-  <p class="lead" style="margin-top:10px">外國腔最容易出在「把詞拆成單一音節」的寫法（例如 thó — kheh — hiann）；漢字與台羅混寫則常把「兄」念成文讀音 hiong。品牌名「安親」的發音仍需親耳確認。</p>
+  <div class="note"><strong>包裝字是假字：</strong>位置、黃色提把與版面都對，但 Feelfree 商標、「貼身舒適」等小字被模型重畫。對外前要用真實包裝貼回（定格用 Photoshop，影片用後期追蹤貼圖）。</div>
+  <details><summary>15–18 的 prompt</summary><div id="nbprompts"></div></details>
 </section>
 
 <section id="cast">
   <div class="eyebrow">Cast</div>
   <h2>角色三視表</h2>
-  <p class="lead">出圖後把每一格裁成單張，再拿去影片工具註冊角色。阿公戴帽那一格要單獨保留，鏡 3、鏡 4 會用到。</p>
+  <p class="lead">影片生成時直接上傳整張三視表當角色參考，並在 prompt 寫明「同一個人的多個角度，不是多個人」。阿公第 4 格是戴帽造型，鏡 3 之後用。</p>
   <div class="cards" id="g-char"></div>
 </section>
 
 <section id="sets">
   <div class="eyebrow">Sets</div>
   <h2>場景空景</h2>
-  <p class="lead">05、06a、06b 都附上白模空景當輸入圖 1，用來鎖住機位；場景圖只參考裝潢、材質與光線。</p>
+  <p class="lead">05、06a、06b 都附上白模空景當輸入圖 1，用來鎖住機位；場景圖只參考裝潢、材質與光線。鏡 3 門口後來另外做了一張固定格局的空景（見階段 3 的 A2）。</p>
   <div class="cards" id="g-scene"></div>
 </section>
 
 <section id="spec">
   <div class="eyebrow">Greybox</div>
   <h2>白模規格</h2>
-  <p class="lead">Blender 5.2 + IK Rig（KneeElbow BodyChan/BodyKun），Workbench 渲染。白模只交代空間、機位與速度；材質、光線與長相交給 AI。</p>
+  <p class="lead">Blender 5.2＋IK Rig（KneeElbow BodyChan/BodyKun），Workbench 渲染。白模只交代空間、機位與速度；材質、光線與長相交給 AI。v8 把角色上色（阿公橙、女兒藍、阿嬤青綠），讓影片模型分得出誰是誰。</p>
   <div class="grid2">
     <div class="panel"><h3>共用設定</h3><ul class="clean">
       <li>單位公尺、Z 向上；客廳在原點，公園在 X +100。</li>
       <li>24 fps，全片 360 格；渲染 1080×1920 的 67%，輸出 720×1280。</li>
       <li>攝影機 Sensor Fit = Vertical、24 mm；用 Track To 對準目標點。</li>
       <li>角色縮放：阿公 0.93、女兒 0.96、阿嬤 0.93。</li>
-      <li>交給 AI 時 negative prompt 加上：greybox, low-poly, blockout geometry, clay render, grey untextured mannequin, faceless figure。</li>
+      <li>交給 AI 時 negative prompt 加上：greybox, low-poly, blockout geometry, clay render, untextured mannequin, faceless figure。</li>
     </ul></div>
     <div class="panel"><h3>畫面安全區（1080×1920）</h3><ul class="clean">
       <li><span class="zone" style="background:#e5484d"></span>上方 0–250 px、下方 1600–1920 px：平台介面區</li>
-      <li><span class="zone" style="background:#e5c100"></span>左上 60–400 px 寬、260–420 px 高：安親世家 LOGO</li>
-      <li><span class="zone" style="background:#22b5c4"></span>1350–1600 px 高：雙語字幕</li>
-      <li><span class="zone" style="background:#46c45a"></span>13.5–15 秒右下：產品包裝與文案（後期）</li>
+      <li><span class="zone" style="background:#e5c100"></span>左上 60–400 px 寬、260–420 px 高：LOGO</li>
+      <li><span class="zone" style="background:#22b5c4"></span>1350–1600 px 高：字幕</li>
+      <li><span class="zone" style="background:#46c45a"></span>片尾下方：產品包裝與文案（後期）</li>
     </ul></div>
   </div>
   <div class="tblwrap"><table>
@@ -250,7 +407,7 @@ footer{padding-block:40px 56px;color:var(--muted);font-size:13px}
       <tr><td>1</td><td class="mono">1–122</td><td class="mono">(−0.1, −1.0, 1.5)</td><td class="mono">30 → 75 mm</td><td>固定機位；第 82–90 格（3.42–3.75 秒）一次推到臉部特寫，對準「討」字</td></tr>
       <tr><td>2</td><td class="mono">123–156</td><td class="mono">(0.1, 0.3, 1.15)</td><td class="mono">50 mm</td><td>阿公的反打鏡頭，幾乎固定</td></tr>
       <tr><td>3</td><td class="mono">157–188</td><td class="mono">(0.6, −1.3, 1.45)</td><td class="mono">24 mm</td><td>原地搖鏡，跟著阿公走向門口</td></tr>
-      <tr><td>4</td><td class="mono">189–236</td><td class="mono">(100.25, 2.3, 1.4)</td><td class="mono">28 → 50 mm</td><td>牆角偷看；第 212–220 格急推（無音效）</td></tr>
+      <tr><td>4</td><td class="mono">189–236</td><td class="mono">(100.25, 2.3, 1.4)</td><td class="mono">28 → 50 mm</td><td>牆角偷看；第 212–220 格急推</td></tr>
       <tr><td>5</td><td class="mono">237–360</td><td class="mono">(103.5, 3.6, 0.6) → (103.85, 4.53, 1.73)</td><td class="mono">24 → 55 mm</td><td>低角度仰拍；第 262–338 格繞到右前方並推近，停在臉朝畫面左 30°</td></tr>
     </tbody>
   </table></div>
@@ -268,27 +425,346 @@ footer{padding-block:40px 56px;color:var(--muted);font-size:13px}
     </ul></div>
   </div>
 </section>
+</div>
 
-<section id="notes">
-  <div class="eyebrow">Notes</div>
-  <h2>製作提醒與待確認</h2>
+<!-- ============ 2 台語配音 ============ -->
+<div role="tabpanel" id="stage2" aria-labelledby="tab-stage2" hidden>
+<div class="panelhead">
+  <div class="eyebrow">Stage 2｜Taiwanese Voice</div>
+  <h1>台語配音</h1>
+  <p class="lead">Gemini 3.8 Flash TTS 官方沒有列台語，但送台羅拼音或漢字時，三個角色都念得出台語。這個階段的錄音有兩個用途：一是給影片模型當對嘴參考（@Audio），二是後期替換阿公的聲音。</p>
+  <div class="handoff">
+    <div><h4>定案聲音</h4><ul><li>阿公：E3 專屬沙啞阿公（語音設計）</li><li>女兒：Callirrhoe（D5，漢字輸入）</li><li>阿嬤：Gacrux（台羅輸入）</li></ul></div>
+    <div><h4>重要設定</h4><ul><li>阿公聲線 ID：<code>voice_q3ydtkg94ekp</code></li><li>語氣寫在 TTS 的 style／annotations 欄位，不要寫在台詞裡，否則會被念出來。</li></ul></div>
+    <div><h4>檔案</h4><p class="path">previz\audio\（試聽、正式台詞）<br>previz\audio\a1_retime\（E3 依影片嘴型對齊的版本）</p></div>
+    <div><h4>交接注意</h4><ul><li>成片裡阿嬤、女兒用的是 Seedance 原聲，不是這裡的錄音；這裡的錄音決定了她們的語氣與節奏。</li></ul></div>
+  </div>
+  <nav class="subnav" aria-label="本頁段落"><a href="#lines">台詞</a><a href="#voice">定案配音</a><a href="#audition">試聽紀錄</a></nav>
+</div>
+
+<section id="lines">
+  <div class="eyebrow">Script</div>
+  <h2>台語台詞</h2>
+  <p class="lead">拼音依教育部台語辭典用字整理。時間是 15 秒企劃版。</p>
+  <div class="tblwrap"><table id="linetbl">
+    <thead><tr><th>時間</th><th>角色</th><th>台語漢字</th><th>台羅拼音</th><th>中文</th></tr></thead>
+    <tbody id="linerows"></tbody>
+  </table></div>
+  <h3 style="margin-top:28px">阿嬤台詞三案</h3>
+  <p class="lead">三案都押台語韻，<b class="rh">紅字</b>是押韻的字。採用 C 案。</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>案</th><th>台語台詞</th><th>台羅拼音</th><th>中文</th><th>特色</th></tr></thead>
+    <tbody>
+      <tr><td>A</td><td><span class="tw">安<b class="rh">親</b>活力褲穿上<b class="rh">身</b>，阿嬤行路有自<b class="rh">信</b>！</span></td><td class="mono">An-tshin ua̍h-li̍k-khòo tshīng-tsiūnn sin, a-má kiânn-lōo ū tsū-sìn!</td><td>安親活力褲穿上身，阿嬤走路有自信！</td><td>押 -in 韻；品牌名也押到，適合當系列 slogan。</td></tr>
+      <tr><td>B</td><td><span class="tw">穿安親，免驚<b class="rh">漏</b>，想行就行，想<b class="rh">走</b>就<b class="rh">走</b>！</span></td><td class="mono">Tshīng An-tshin, bián kiann lāu, siūnn kiânn tō kiânn, siūnn tsáu tō tsáu!</td><td>穿安親，不怕漏，想走就走，想跑就跑！</td><td>押 -au 韻，最有念謠感；「免驚漏」屬功效說法，需客戶確認。</td></tr>
+      <tr><td class="nowrap">C<span class="pick">採用</span></td><td><span class="tw">安親活力褲，穿起來輕<b class="rh">鬆</b>，阿嬤袂輸少年<b class="rh">人</b>！</span></td><td class="mono">An-tshin ua̍h-li̍k-khòo, tshīng--khí-lâi khin-sang, a-má bē-su siàu-liân-lâng!</td><td>安親活力褲，穿起來輕鬆，阿嬤不輸年輕人！</td><td>押 -ang 韻，「袂輸少年人」喜感最強。</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="voice">
+  <div class="eyebrow">Voice</div>
+  <h2>定案配音</h2>
+  <div class="tblwrap"><table>
+    <thead><tr><th>角色</th><th>聲音</th><th>輸入方式</th><th>處理</th><th>成片怎麼用</th></tr></thead>
+    <tbody>
+      <tr><td>阿公</td><td>E3 專屬沙啞阿公<br><code>voice_q3ydtkg94ekp</code></td><td>台羅；「kám-sī teh... thó-kheh-hiann?!」用刪節號製造停頓</td><td>語氣寫在 annotations 欄位（不會被念出來）</td><td>兩句都用；後期依 Seedance 的嘴型逐句拉伸對齊（見階段 4）</td></tr>
+      <tr><td>女兒</td><td>Callirrhoe（D5）</td><td>漢字：「阿爸，伊是……」</td><td>保留「阿爸」與「伊是」之間的遲疑停頓</td><td>只當對嘴參考；成片用 Seedance 原聲</td></tr>
+      <tr><td>阿嬤</td><td>Gacrux</td><td>台羅：C 案</td><td>原速</td><td>只當對嘴參考；成片用 Seedance 原聲</td></tr>
+    </tbody>
+  </table></div>
   <div class="grid2">
-    <div class="panel"><h3>待客戶確認</h3><ul class="clean">
-      <li>「討客兄」的笑點建立在懷疑長輩外遇上；備案台詞：「敢是去交男朋友？」（Kám-sī khì kau lâm-pîng-iú?）</li>
-      <li>品牌名「安親」（An-tshin）的發音需親耳確認。</li>
-      <li>「輕鬆」屬使用感受，可以用；若改用 B 案，「免驚漏」需規格依據。</li>
-      <li>「安親世家」劇名 LOGO 目前是 AI 生成版；正式上片前建議請設計師用書法字型重製。</li>
+    <div class="panel"><h3>試出來的規律</h3><ul class="clean">
+      <li>只送台羅、不加任何指示時，台語最自然。</li>
+      <li>語氣指示寫進台詞裡，模型會把指示一起念出來。</li>
+      <li>外國腔最容易出在「把詞拆成單一音節」（例如 thó — kheh — hiann）。</li>
+      <li>漢字與台羅混寫，常把「兄」念成文讀音 hiong。</li>
     </ul></div>
-    <div class="panel"><h3>製作</h3><ul class="clean">
-      <li>阿嬤要有尊嚴：笑點只放在阿公和女兒的誤會上。</li>
-      <li>產品包裝、LOGO、字卡一律後期合成，不交給生成模型。</li>
-      <li>定格 01–14 都已生成；鏡 2 採用 B 版過肩鏡頭。定格版影片是把八張定格依 v7 時間點排好，配上台語配音、左上角「安親世家」LOGO 與中文字幕。</li>
-      <li>白模是輸入資料：prompt 要註明灰白材質、無臉人偶、方塊道具不得出現在成品。</li>
+    <div class="panel"><h3>為什麼阿公要做專屬聲音</h3><ul class="clean">
+      <li>內建男聲（Algenib 等）念台語都偏年輕、偏字正腔圓。</li>
+      <li>用語音設計做了「沙啞」與「高亢」兩種台語阿公，E3（沙啞、語氣 B）最像鄉土劇裡的阿公。</li>
     </ul></div>
   </div>
 </section>
+
+<section id="audition">
+  <div class="eyebrow">Audition</div>
+  <h2>試聽紀錄</h2>
+  <p class="lead">當時挑聲音的完整試聽，綠底是定案。按圓形鍵播放，再按一次停止。</p>
+  <div id="aud"></div>
+</section>
+</div>
+
+<!-- ============ 3 影片生成 ============ -->
+<div role="tabpanel" id="stage3" aria-labelledby="tab-stage3" hidden>
+<div class="panelhead">
+  <div class="eyebrow">Stage 3｜Video Generation</div>
+  <h1>影片生成（Seedance 2.0）</h1>
+  <p class="lead">透過 Higgsfield 的 MCP 呼叫 Seedance 2.0，把角色三視表、定格、白模影片和台語錄音一起當參考上傳。全片拆成四支生成，每支 4–5 秒，壞了只重跑那一支。</p>
+  <div class="handoff">
+    <div><h4>設定（四支共用）</h4><ul><li>Seedance 2.0、std、720p、9:16、24 fps</li><li><code>genre: comedy</code>、<code>generate_audio: true</code></li><li>約 4.5 點／秒（5 秒 ≈ 22.5 點）</li></ul></div>
+    <div><h4>參考素材怎麼放</h4><ul><li>全部當「參考」上傳（omni reference），依上傳順序對應 prompt 裡的 @Image1、@Video1、@Audio1…</li><li><b>不要</b>設首格／尾格欄位，否則錄音會被忽略。</li></ul></div>
+    <div><h4>檔案</h4><p class="path">previz\seedance\upload\（一次生成一個資料夾，檔名 01、02… 就是上傳順序）<br>previz\seedance\output\</p></div>
+    <div><h4>交接注意</h4><ul><li>先讀下面的「生成規則」再改 prompt；每一條都是失敗換來的。</li><li>prompt 一律英文；Seedance 沒有負向欄位，要避免的寫在最後的 Avoid。</li><li>v9 起鏡 1 改用 Kling 版本，這頁的 A1 保留作紀錄；比較見階段 5。</li></ul></div>
+  </div>
+  <nav class="subnav" aria-label="本頁段落"><a href="#rules">生成規則</a><a href="#gens">採用的四支</a><a href="#trials">試錯紀錄</a><a href="#greybox">白模參考影片</a></nav>
+</div>
+
+<section id="rules">
+  <div class="eyebrow">Rules</div>
+  <h2>生成規則：台語對嘴要成功的寫法</h2>
+  <p class="lead">Seedance 不會直接播放上傳的錄音。講出來的字來自 prompt，錄音只控制語氣、節奏與開口時間。所以 prompt 和錄音兩邊都要給。</p>
+  <ol class="rules">
+    <li><b>全部素材當參考上傳，不設首格／尾格</b><span>設了首尾格會切換成首尾幀模式，錄音直接被忽略。開場與結尾畫面改用文字指定：「@Image3 is the opening frame… @Image4 is the closing frame」。</span></li>
+    <li><b>台詞寫出「漢字＋台羅」兩行，並寫明念一次、只念這些</b><span>只給錄音，模型會自己編台詞（第一次測試冒出「溫馨活力卡真健康」）；只寫台羅也不夠穩。固定句型：<code>Dialogue, in Taiwanese Hokkien (Taiwanese, not Mandarin), spoken by … exactly once from Xs to Ys, word for word</code>，接 <code>No other words, no other speech, no narration.</code></span></li>
+    <li><b>寫明對嘴對象</b><span><code>@Audio1 is Grandpa's recorded line. Lip-sync dialogue to @Audio1. Follow the voice, tone, pacing and timing of @Audio1 exactly.</code> 最後再加一行 <code>Sound: only … No music.</code></span></li>
+    <li><b>一支只讓一個人說話；兩個人就各給一個錄音</b><span>兩個人、三句台詞混在同一個錄音檔時，聲音整個被重新生成。多人時用 @Audio1、@Audio2，每句寫明是誰、幾秒、用哪個錄音。</span></li>
+    <li><b>講話時嘴巴只念台詞，表情放在眼睛、眉毛和頭</b><span>寫了吸鼻子、嘆氣、抿嘴，模型會加氣音，嘴型就跑掉。固定加 Acting rule，Avoid 寫 sniffing, sighing, gasping, heavy breathing。講話時鏡頭要在中近景以內，嘴型才看得清楚。</span></li>
+    <li><b>方向性效果寫明方向，Avoid 寫相反方向</b><span>阿嬤的風一開始吹反了。改成「迎面吹向她、頭髮往後飄、落葉從前方飛來再往後掠過」，Avoid 寫 hair blowing forward、leaves blowing away from her。</span></li>
+    <li><b>有門、櫃子的場景要給空景當固定格局</b><span>第一版出現牆變成門、櫃子飛走。加上門口空景，逐一寫明物件位置並寫 never move / appear / change shape，鏡頭也不要推進強光。</span></li>
+    <li><b>三視表要說明是「同一個人」</b><span><code>a turnaround sheet of ONE person (several views of the same character side by side, not several people)</code>，否則可能多生出人。白模的色碼也要說明「顏色只是身分標籤」。</span></li>
+  </ol>
+  <div class="note"><strong>做不到的事：</strong>「討客兄」怎麼加發音提示都念不對（聽起來像「頭客烘」）。最後在後期換成 E3 聲線解決，見階段 4。</div>
+</section>
+
+<section id="gens">
+  <div class="eyebrow">Selected Takes</div>
+  <h2>採用的四支</h2>
+  <p class="lead">依成片順序排列。每支附生成結果、上傳素材（照上傳順序）、實際送出的 prompt，以及剪進成片的片段。A1 用在 v8，v9 起由 Kling 取代；其餘三支 v8、v9 都在用。</p>
+  <div id="genlist"></div>
+</section>
+
+<section id="trials">
+  <div class="eyebrow">Trials</div>
+  <h2>試錯紀錄</h2>
+  <p class="lead">沒採用的版本也留著，接手時可以對照，不要重踩。</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>版本</th><th>內容</th><th>結果</th><th>學到什麼</th></tr></thead>
+    <tbody>
+      <tr><td class="nowrap">R0 v1<span class="pick no">失敗</span></td><td>鏡 5 阿嬤；首尾格＋白模＋錄音</td><td>聲音與嘴型全是模型自己生成的</td><td>設了首尾格就走首尾幀模式，錄音被忽略 → 規則 1</td></tr>
+      <tr><td class="nowrap">R0 v2<span class="pick no">失敗</span></td><td>改成全部當參考，prompt 寫「照錄音對嘴」</td><td>台詞被改成「溫馨活力卡真健康」；風向也反了</td><td>講出來的字來自 prompt，不是錄音 → 規則 2、6</td></tr>
+      <tr><td class="nowrap">R0 v3<span class="pick">採用</span></td><td>台詞漢字＋台羅寫進 prompt，風向寫死</td><td>台詞正確、嘴型對上、逆風方向正確</td><td>這版的寫法成為後面所有 prompt 的範本</td></tr>
+      <tr><td class="nowrap">R1A v1<span class="pick no">失敗</span></td><td>客廳鏡 1–3 一次生成 8 秒，三句台詞同一個錄音</td><td>聲音又被重新生成；門口出現牆變門、櫃子飛走</td><td>→ 規則 4、5、7；拆成 A1（鏡 1）與 A2（鏡 2–3）</td></tr>
+      <tr><td class="nowrap">R1A1<span class="pick">採用</span></td><td>客廳鏡 1，5 秒</td><td>畫面、表情、推鏡都對；「討客兄」發音錯</td><td>畫面採用，聲音後期換</td></tr>
+      <tr><td class="nowrap">R1A2<span class="pick">採用</span></td><td>客廳鏡 2–3，4 秒，兩個錄音</td><td>硬切與開門都穩定</td><td>門口空景有效</td></tr>
+      <tr><td class="nowrap">R1B<span class="pick">採用</span></td><td>公園牆角鏡 4，4 秒，無台詞</td><td>兩人反應清楚，有一聲「啊」</td><td>剪掉後段女兒笑的部分</td></tr>
+      <tr><td class="nowrap">鏡 1 重跑<span class="pick no">失敗</span></td><td>加發音提示，想修正「討客兄」</td><td>還是念錯，且語速和原版不同</td><td>發音問題改在後期處理</td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid2">
+    <div class="panel"><h3>R0 v1：錄音被忽略</h3><video controls playsinline preload="none" poster="assets/sd/video/fail_r0v1.jpg" src="assets/sd/video/fail_r0v1.mp4" style="max-width:240px;aspect-ratio:9/16;background:#000;border-radius:10px"></video></div>
+    <div class="panel"><h3>R1A v1：門口變形、聲音重生成</h3><video controls playsinline preload="none" poster="assets/sd/video/fail_r1a_v1.jpg" src="assets/sd/video/fail_r1a_v1.mp4" style="max-width:240px;aspect-ratio:9/16;background:#000;border-radius:10px"></video></div>
+  </div>
+</section>
+
+<section id="greybox">
+  <div class="eyebrow">Previz Reference</div>
+  <h2>白模參考影片（v8 色碼版）</h2>
+  <p class="lead">每支生成都附上對應秒數的白模當 @Video1，只拿來參考機位、運鏡與時間。prompt 必須寫明不要照抄白模的材質和無臉人偶，並說明顏色只是身分標籤：阿公橙、女兒藍、阿嬤青綠。鏡 2–3 的白模不到 2 秒（低於參考影片下限），所以 A2 沒有附白模。</p>
+  <div class="grid2"><div class="panel"><video controls playsinline preload="none" poster="assets/sd/video/greybox_color_15s.jpg" src="assets/sd/video/greybox_color_15s.mp4" style="max-width:260px;aspect-ratio:9/16;background:#000;border-radius:10px"></video></div>
+  <div class="panel"><h3>Seedance 2.0 在 Higgsfield 的限制</h3><ul class="clean">
+    <li>片長 4–15 秒；單支最短 4 秒，生成後再剪。</li>
+    <li>參考檔：圖片 9、影片 3、音訊 3，合計最多 12 個。</li>
+    <li>參考影片合計 2–15 秒，最高約 720p。</li>
+    <li>參考音訊合計 15 秒以內，mp3 最穩。</li>
+    <li>真人照片會被擋；我們的角色都是 AI 生成，沒有被擋。</li>
+  </ul></div></div>
+</section>
+</div>
+
+<!-- ============ 4 後期與交付 ============ -->
+<div role="tabpanel" id="stage4" aria-labelledby="tab-stage4" hidden>
+<div class="panelhead">
+  <div class="eyebrow">Stage 4｜Post &amp; Delivery</div>
+  <h1>後期與交付</h1>
+  <p class="lead">把四支生成片剪成 16.5 秒，修正「討客兄」的發音，鋪 MiniMax 配樂，用 Topaz 升到 1080p，最後合成 LOGO、產品與文案。v9 只把鏡 1 換成 Kling 版本，其餘沿用 v8。</p>
+  <div class="handoff">
+    <div><h4>產出</h4><ul><li>v9：鏡 1 換 Kling，1080p 含 LOGO、產品、文案（目前版本）</li><li>v8：全 Seedance 版</li><li>v7／v9 無合成版、剪接素材包、合成圖層、合成腳本</li></ul></div>
+    <div><h4>工具</h4><ul><li>ffmpeg（剪接、混音、對齊）</li><li>Gemini 3.8 Flash TTS（換音）</li><li>MiniMax（配樂）、Topaz（Higgsfield 升解析度）</li><li>Python＋PIL 逐格合成</li></ul></div>
+    <div><h4>檔案</h4><p class="path">previz\seedance\final_1080p_交付\<br>previz\seedance\final_roughcut_v4_素材\</p></div>
+    <div><h4>交接注意</h4><ul><li>要用自己的剪接軟體重剪，從素材包開始，裡面的 README 有完整對照。</li><li>Topaz 輸出是 HEVC，部分軟體要用 H.264 版。</li></ul></div>
+  </div>
+  <nav class="subnav" aria-label="本頁段落"><a href="#edit">剪接</a><a href="#fixvoice">討客兄換音</a><a href="#music">配樂</a><a href="#comp">LOGO 與產品合成</a><a href="#deliver">交付檔案</a></nav>
+</div>
+
+<section id="edit">
+  <div class="eyebrow">Edit</div>
+  <h2>剪接時間軸（v9）</h2>
+  <div class="tblwrap"><table>
+    <thead><tr><th>成片時間</th><th>鏡頭</th><th>生成片</th><th>取用片段</th><th>聲音</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">0.00–5.04</td><td>鏡 1 阿公質問<span class="pick">v9 換</span></td><td class="mono">kling\output\K1_鏡1_v1（Topaz 1080p）</td><td class="mono">0.00–5.04（全部 121 格）</td><td>Kling 原聲（就是我們的 E3 錄音）<br><span class="use">v8：r1a1_c0787adc，阿公換 E3 對齊版</span></td></tr>
+      <tr><td class="mono">5.04–8.79</td><td>鏡 2–3 女兒、阿公出門</td><td class="mono">r1a2_客廳鏡2-3_e5bb803f</td><td class="mono">0.00–3.75</td><td>女兒原聲；阿公 1.75–3.05 秒換 E3</td></tr>
+      <tr><td class="mono">8.79–11.49</td><td>鏡 4 牆角偷看</td><td class="mono">r1b_牆角鏡4_b2690e84</td><td class="mono">0.30–3.00</td><td>原聲（保留「啊」）；剪掉女兒笑</td></tr>
+      <tr><td class="mono">11.49–16.53</td><td>鏡 5 阿嬤</td><td class="mono">r0_v3_b92ef43f</td><td class="mono">0.00–5.04</td><td>原聲</td></tr>
+    </tbody>
+  </table></div>
+  <p class="lead" style="margin-top:10px">要剪回 15 秒：可修鏡 4 開頭強光約 0.3 秒、鏡 2–3 開門後約 0.5 秒、阿嬤開頭全景約 1 秒。</p>
+</section>
+
+<section id="fixvoice">
+  <div class="eyebrow">Voice Fix</div>
+  <h2>「討客兄」換音</h2>
+  <div class="note" style="margin-top:6px"><strong>v9 更新：</strong>鏡 1 改用 Kling 後不需要這段處理。Kling 直接拿我們上傳的 E3 錄音對嘴，原聲和錄音對齊後的波形相關 0.95（只早了 0.08 秒），「討、客、兄」分別在 4.00／4.16／4.40 秒。下方是 v8 的做法，鏡 2–3 的阿公仍沿用。</div>
+  <div class="cmp"><div class="panel"><h3>鏡 1 Kling 原聲（v9 使用）</h3><audio controls preload="none" src="assets/sd/audio/shot1_kling_native.mp3"></audio><p>K1 v1 的聲音，未加工。</p></div></div>
+  <p class="lead" style="margin-top:14px">以下為 v8：Seedance 的鏡 1 畫面和語氣都好，但把「討客兄」念錯。直接把我們原本的錄音貼回去會對不上嘴，因為兩邊語速不同。最後的做法是：用 E3 聲線把台詞一段一段重新生成，再逐段拉伸，對齊 Seedance 原本每個字開口的時間。</p>
+  <div class="cmp">
+    <div class="panel"><h3>原本上傳的錄音</h3><audio controls preload="none" src="assets/sd/audio/shot1_input.mp3"></audio><p>給 Seedance 當對嘴參考的 E3 錄音。語速和生成片不同，貼回去會對不上。</p></div>
+    <div class="panel"><h3>Seedance 原聲</h3><audio controls preload="none" src="assets/sd/audio/shot1_seedance_native.mp3"></audio><p>語氣好，但最後「討客兄」（約 4.2 秒）念成類似「頭客烘」。</p></div>
+    <div class="panel"><h3>E3 對齊版（成片使用）</h3><audio controls preload="none" src="assets/sd/audio/shot1_e3_retimed.mp3"></audio><p>四段分開生成、去頭尾靜音，再拉伸到 Seedance 的開口時間。</p></div>
+  </div>
+  <div class="tblwrap"><table>
+    <thead><tr><th>片段</th><th>拉伸倍率</th><th>放置起點</th><th>對齊依據（Seedance 開口）</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tw">恁阿母較早攏毋出門</span></td><td class="mono">1.117</td><td class="mono">0.130 s</td><td class="mono">0.13 s</td></tr>
+      <tr><td><span class="tw">這馬透早就走出去</span></td><td class="mono">0.9403</td><td class="mono">1.620 s</td><td class="mono">1.62 s</td></tr>
+      <tr><td><span class="tw">敢是咧</span></td><td class="mono">1.382</td><td class="mono">3.220 s</td><td class="mono">3.29 s（kám-sī teh）</td></tr>
+      <tr><td><span class="tw">討客兄</span></td><td class="mono">1.1532</td><td class="mono">4.200 s</td><td class="mono">4.23／4.29／4.44 s（討／客／兄）</td></tr>
+      <tr><td><span class="tw">行！綴去看覓！</span>（鏡 2–3）</td><td class="mono">0.8966</td><td class="mono">1.770 s</td><td class="mono">原聲 1.75–3.05 s 靜音後放入</td></tr>
+    </tbody>
+  </table></div>
+  <div class="cmp">
+    <div class="panel"><h3>鏡 2–3 Seedance 原聲</h3><audio controls preload="none" src="assets/sd/audio/shot23_seedance_native.mp3"></audio></div>
+    <div class="panel"><h3>鏡 2–3 成片（女兒原聲＋阿公 E3）</h3><audio controls preload="none" src="assets/sd/audio/shot23_e3_mixed.mp3"></audio></div>
+    <div class="panel"><h3>全片對白（v7 起使用）</h3><audio controls preload="none" src="assets/sd/audio/dialogue_v7.mp3"></audio></div>
+  </div>
+  <div class="note"><strong>技術細節：</strong>TTS 走 Gemini Interactions API（模型 <code>gemini-3.8-flash-tts</code>，<code>speech_config</code> 指定 <code>voice_q3ydtkg94ekp</code>，語氣寫在 <code>annotations</code>），輸出 24 kHz WAV。拉伸用 ffmpeg <code>rubberband=tempo</code>，放置用 <code>adelay=delays=…:all=1</code>。換別的影片模型時，嘴型時間不同，這張表要重新量。</div>
+</section>
+
+<section id="music">
+  <div class="eyebrow">Music</div>
+  <h2>配樂（MiniMax）</h2>
+  <p class="lead">四段配樂分別對應懸疑、重音、偷看、自信。對白出現時用側鏈壓低配樂，總音量 −14 LUFS，片尾 0.48 秒淡出。v9 只把重音往前移 0.23 秒，對準 Kling 版的「討」；5.04 秒之後的混音和 v8 完全相同。</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>段落</th><th>試聽</th><th>取用</th><th>放在成片</th></tr></thead>
+    <tbody>
+      <tr><td>A 懸疑（鏡 1）</td><td><audio controls preload="none" src="assets/sd/audio/music_A_suspense.mp3"></audio></td><td class="mono">1.33–8.12 s，6.2 s 起淡出</td><td class="mono">0.00 s</td></tr>
+      <tr><td>S 重音（討客兄）</td><td><audio controls preload="none" src="assets/sd/audio/music_S_stinger.mp3"></audio></td><td class="mono">2.95–3.99 s，音量 70%</td><td class="mono">v9：3.87 s／v8：4.10 s<br>（都比「討」早 0.13 秒）</td></tr>
+      <tr><td>B 偷看（鏡 3–4）</td><td><audio controls preload="none" src="assets/sd/audio/music_B_sneaky.mp3"></audio></td><td class="mono">0.10–4.85 s</td><td class="mono">6.79 s（鏡 3 開始）</td></tr>
+      <tr><td>C 自信（鏡 5）</td><td><audio controls preload="none" src="assets/sd/audio/music_C_confident.mp3"></audio></td><td class="mono">0.50–4.35＋8.55–10.00 s</td><td class="mono">11.49 s</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="comp">
+  <div class="eyebrow">Composite</div>
+  <h2>LOGO 與產品合成（v8、v9 相同）</h2>
+  <p class="lead">先用 Topaz 把 720p 粗剪升到 1080p，再用 Python 逐格合成。淡入淡出用 easeInOutSine，上升與縮放用 easeOutCubic，動起來比較自然。去背圖層由團隊手動完成。</p>
+  <div class="layers">
+    <figure><div class="ph"><img src="assets/post/logo_shijia.png" alt="安親世家 LOGO" data-zoom></div><figcaption>安親世家（片頭–13.7 s）</figcaption></figure>
+    <figure><div class="ph"><img src="assets/post/logo_feelfree.png" alt="安親 Feelfree LOGO" data-zoom></div><figcaption>安親 Feelfree（13.1 s 起）</figcaption></figure>
+    <figure><div class="ph"><img src="assets/post/slogan_1_ribbon.png" alt="紅色飄帶" data-zoom></div><figcaption>文案 1｜飄帶</figcaption></figure>
+    <figure><div class="ph"><img src="assets/post/slogan_2_line1.png" alt="簡單安心" data-zoom></div><figcaption>文案 2｜簡單安心</figcaption></figure>
+    <figure><div class="ph"><img src="assets/post/slogan_3_line2.png" alt="活力不受限" data-zoom></div><figcaption>文案 3｜活力不受限</figcaption></figure>
+    <figure><div class="ph"><img src="assets/post/product.png" alt="活力褲包裝" data-zoom></div><figcaption>產品包裝</figcaption></figure>
+  </div>
+  <div class="tblwrap"><table>
+    <thead><tr><th>圖層</th><th>位置與大小（1080×1920）</th><th>出現時間</th><th>動態</th></tr></thead>
+    <tbody>
+      <tr><td>安親世家 LOGO</td><td class="mono">寬 340，(60, 270)</td><td class="mono">0 – 13.7 s</td><td>13.1–13.7 s 淡出（easeInOutSine）</td></tr>
+      <tr><td>安親 Feelfree LOGO</td><td class="mono">高 165，(60, 255)</td><td class="mono">13.1 s – 片尾</td><td>與上一個交叉淡化</td></tr>
+      <tr><td>文案三層</td><td class="mono">寬 580，(40, 1030)</td><td class="mono">飄帶 14.50／第一行 14.68／第二行 14.86 s</td><td>0.65 秒淡入＋上升 36 px（easeOutCubic）</td></tr>
+      <tr><td>產品</td><td class="mono">高 440，(726, 1150)</td><td class="mono">14.62 s</td><td>0.7 秒淡入＋縮放 0.95→1</td></tr>
+    </tbody>
+  </table></div>
+  <p class="lead" style="margin-top:10px">LOGO 在阿嬤鏡頭開始推近時換成品牌 LOGO；文案與產品排在下方安全區，人物臉留在上半部。</p>
+</section>
+
+<section id="deliver">
+  <div class="eyebrow">Delivery</div>
+  <h2>交付檔案</h2>
+  <div class="tree">previz\seedance\final_1080p_交付\
+├─ 阿母的客兄_v9_1080p_鏡1Kling_LOGO_產品文案.mp4 ← 目前版本
+├─ 阿母的客兄_v9_1080p_無合成.mp4           ← v9 底片（含混音）
+├─ 阿母的客兄_v8_1080p_LOGO_產品文案.mp4    ← 全 Seedance 版
+├─ 阿母的客兄_v7_1080p_無合成.mp4           ← 要自己合成時用（H.264）
+├─ 阿母的客兄_v7_1080p_無合成_HEVC原檔.mp4  ← Topaz 原始輸出
+├─ v8圖層_含陰影\                            ← 六個合成圖層（PNG，含陰影）
+├─ v8合成腳本_comp.py                        ← 逐格合成腳本，位置與時間參數都在裡面
+├─ new\                                     ← 團隊去背的原始圖
+├─ 去背與重繪_prompt.txt                     ← Nano Banana / GPT Image 去背與重繪 prompt
+└─ 阿母的客兄_v8_Seedance生成紀錄_給Kling比較.md ← 四支生成的 prompt＋素材路徑
+
+previz\seedance\final_roughcut_v4_素材\
+├─ 01_影片\   四支生成片（已依鏡頭命名）
+├─ 02_聲音\   原聲、E3 對齊檔、各版對白串接（10_v9 為鏡 1 Kling 版）
+├─ 03_配樂\   A／B／C／S 四段配樂與排好的配樂床（03_v9 重音在 3.87 秒）
+├─ 04_參考與圖素\  各版粗剪、舊字幕、v9 完整混音
+├─ 05_合成圖層_1080p\
+└─ README_剪接對照.txt
+
+previz\kling\
+├─ output\   K1–K4 各兩版原檔，K1_鏡1_v1_Topaz1080p.mp4 為 v9 使用
+├─ upload\   已轉成 Kling 規格的上傳素材
+├─ prompts\  實際送出的 prompt
+└─ jobs.tsv  任務 ID 與點數</div>
+</section>
+</div>
+
+<!-- ============ 5 Kling 對照 ============ -->
+<div role="tabpanel" id="stage5" aria-labelledby="tab-stage5" hidden>
+<div class="panelhead">
+  <div class="eyebrow">Stage 5｜Kling Comparison</div>
+  <h1>Kling 對照</h1>
+  <p class="lead">四個鏡頭用和 Seedance 相同的素材與 prompt 結構，改在 Kling 4.0 Omni（全能參考）各生成兩版，逐鏡比較。結論：鏡 1 的 Kling v1 表演更完整、台詞更準，已換進 v9；其餘三鏡 Seedance 比較好，維持不變。</p>
+  <div class="handoff">
+    <div><h4>設定</h4><ul><li>Kling 4.0 Omni、720p、9:16</li><li>由 Claude Code CLI 串接 Kling MCP 生成（10/21）</li><li>每秒 9 點，8 支共 342 點</li></ul></div>
+    <div><h4>和 Seedance 寫法的差別</h4><ul><li>參考標記改成 <code>图片1</code>、<code>视频1</code>、<code>音频1</code>，編號對應不變。</li><li>單鏡頭要寫 “ONE single shot: no cuts”，否則智慧分鏡可能自己切鏡。</li></ul></div>
+    <div><h4>檔案</h4><p class="path">previz\kling\output\（原檔）<br>previz\kling\prompts\（實際送出的 prompt）<br>previz\kling\upload\（轉成 Kling 規格的素材）</p></div>
+    <div><h4>交接注意</h4><ul><li>白模人偶過不了 Kling 的內容審查，四段都沒帶白模，運鏡全寫在 prompt。</li><li>參考音檔最短 5 秒，短台詞要補靜音。</li></ul></div>
+  </div>
+  <nav class="subnav" aria-label="本頁段落"><a href="#k-sum">結論</a><a href="#k-shot1">逐鏡對照</a><a href="#k-adj">規格調整</a><a href="#k-cost">成本</a></nav>
+</div>
+
+<section id="k-sum">
+  <div class="eyebrow">Verdict</div>
+  <h2>逐鏡結論</h2>
+  <div class="ksum" id="ksum"></div>
+</section>
+
+<section>
+  <div class="eyebrow">Side by Side</div>
+  <h2>逐鏡對照</h2>
+  <p class="lead">每一鏡左欄是 Seedance（採用版、原聲未換音），右兩欄是 Kling 兩版。按「三欄同步從頭播」一起播，聲音只開選定的那一欄。</p>
+  <div id="klist"></div>
+</section>
+
+<section id="k-adj">
+  <div class="eyebrow">Spec</div>
+  <h2>為了符合 Kling 規格做的調整</h2>
+  <p class="lead">Kling 4.0 Omni 的參考音檔最短 5 秒、參考影片最短 3 秒且最短邊 720px。</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>鏡頭</th><th>問題</th><th>處理</th></tr></thead>
+    <tbody>
+      <tr><td>全部</td><td>prompt 標記語法不同</td><td><code>@Image1／@Video1／@Audio1</code> 改成 <code>图片1／视频1／音频1</code></td></tr>
+      <tr><td>鏡 1、鏡 4</td><td>帶白模送出後立即失敗（點數已退）</td><td>拿掉白模，prompt 補上機位與急推時間點</td></tr>
+      <tr><td>鏡 5</td><td>阿嬤白模上傳被判違規；轉成線稿後生成時仍被擋</td><td>拿掉白模，prompt 補上「低角度起、弧形繞到右前方、推到胸上特寫」</td></tr>
+      <tr><td>鏡 1</td><td>錄音剛好 5.00 秒，卡在下限</td><td>結尾補靜音到 5.2 秒</td></tr>
+      <tr><td>鏡 2–3</td><td>女兒 1.59 秒、阿公 1.04 秒，都低於 5 秒</td><td>各補靜音到 5 秒，台詞放在原本時間點（女兒 0.1 秒、阿公 1.8 秒起）；生成長度 4 → 5 秒</td></tr>
+      <tr><td>單鏡頭三段</td><td>智慧分鏡固定開啟，可能自己切鏡</td><td>prompt 加 “ONE single shot: no cuts”，Avoid 加 cuts, multiple shots</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="k-cost">
+  <div class="eyebrow">Cost</div>
+  <h2>成本</h2>
+  <div class="tblwrap"><table>
+    <thead><tr><th>鏡頭</th><th>長度</th><th>支數</th><th>Kling 點數</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td>鏡 1</td><td class="mono">5 s</td><td class="mono">2</td><td class="mono">90</td><td>第一次帶白模送出立即失敗，已退點</td></tr>
+      <tr><td>鏡 2–3</td><td class="mono">5 s</td><td class="mono">2</td><td class="mono">90</td><td></td></tr>
+      <tr><td>鏡 4</td><td class="mono">4 s</td><td class="mono">2</td><td class="mono">72</td><td>第一次帶白模送出立即失敗，已退點</td></tr>
+      <tr><td>鏡 5</td><td class="mono">5 s</td><td class="mono">2</td><td class="mono">90</td><td>帶線稿白模那次送出時就被擋，沒有扣點</td></tr>
+      <tr><td><b>合計</b></td><td class="mono">19 s</td><td class="mono">8</td><td class="mono"><b>342</b></td><td>每秒 9 點</td></tr>
+    </tbody>
+  </table></div>
+  <p class="lead" style="margin-top:10px">Seedance 在 Higgsfield 約 4.5 credits／秒，和 Kling 點數是不同的計價單位，不能直接比大小。v9 另外用 Higgsfield Topaz 把 K1 v1 升到 1080p。</p>
+</section>
+</div>
+
 </main>
-<footer class="wrap">安親活力褲｜「阿母的客兄」15 秒鄉土劇短片製作頁。素材以 Nano Banana Pro 生成，白模以 Blender 製作。</footer>
+<footer class="wrap">安親活力褲｜「阿母的客兄」製作紀錄。白模以 Blender 製作，定格以 Nano Banana Pro 生成，台語配音以 Gemini 3.8 Flash TTS 生成，影片以 Seedance 2.0 生成，配樂以 MiniMax 生成。</footer>
 
 <script>
 const NOAI="No text, no logos, no lettering anywhere.";
@@ -425,24 +901,42 @@ const IMG={
  "12":["assets/img/key12_peek_wide.jpg"],"13":["assets/img/key13_peek_close.jpg"],"14":["assets/img/key14_ama_confident.jpg"]};
 const REF={"05":"assets/gb/plate_05.jpg","06a":"assets/gb/plate_06a.jpg","06b":"assets/gb/plate_06b.jpg"};
 const A={};for(const a of ASSETS){a.images=IMG[a.id]||[];A[a.id]=a;}
+
+const GENS=[{"anchor": "g-a1", "tag": "A1｜R1A1", "final": "0.00–5.04 s", "title": "鏡 1｜客廳・阿公質問", "len": 5, "video": "assets/sd/video/r1a1_shot1.mp4", "poster": "assets/sd/video/r1a1_shot1.jpg", "folder": "R1A1_客廳_鏡1_5秒", "chips": ["5 秒", "720p", "全能參考", "1 個說話者", "job c0787adc"], "verdicts": [{"t": "v9 起由 Kling K1 v1 取代（見階段 5）；v8 使用這支。", "warn": true}, {"t": "畫面、表情與推鏡都採用：阿公碎念、壓低聲音、喊出時一次推到特寫。"}, {"t": "「討客兄」被念成類似「頭客烘」，成片的阿公聲音整段換成 E3 對齊版（階段 4）。", "warn": true}], "refs": [{"tag": "@Image1", "label": "阿公三視表", "img": "assets/sd/img/sheet_agong.jpg", "kind": null, "wide": true}, {"tag": "@Image2", "label": "女兒三視表", "img": "assets/sd/img/sheet_daughter.jpg", "kind": null, "wide": true}, {"tag": "@Image3", "label": "開場：定格 16", "img": "assets/sd/img/key16_shot1_first.jpg", "kind": null, "wide": false}, {"tag": "@Image4", "label": "結尾：定格 17", "img": "assets/sd/img/key17_shot1_closeup.jpg", "kind": null, "wide": false}, {"tag": "@Video1", "label": "白模 0–5.1 s", "img": null, "kind": "白模影片", "wide": false}, {"tag": "@Audio1", "label": "阿公台詞錄音（E3）", "img": null, "kind": "錄音", "wide": false}], "prompt": "A 5-second vertical 9:16 shot from a Taiwanese prime-time TV drama comedy, live-action, photorealistic, with big, readable facial acting.\n\nReferences:\n- @Image1 is Grandpa and @Image2 is the daughter. Each is a turnaround sheet of ONE person (several views of the same character side by side, not several people). Keep faces, body shapes and wardrobe exactly. Grandpa is bare-headed in this shot.\n- @Image3 is the opening frame: match its set, light and composition. @Image4 is the closing frame: end on this close-up.\n- @Video1 is a 3D previz. Use it ONLY for camera position and the single push-in and their timing. Never copy its untextured materials or colored mannequins (orange = Grandpa, blue = the daughter; the colors are labels only).\n- @Audio1 is Grandpa's recorded line. Lip-sync dialogue to @Audio1. Follow the voice, tone, pacing and timing of @Audio1 exactly.\n\nDialogue, in Taiwanese Hokkien (Taiwanese, not Mandarin), spoken by Grandpa exactly once from 0.3s to 4.9s, word for word:\n\"恁阿母較早攏毋出門，這馬透早就走出去……敢是咧……討客兄？！\"\nRomanized: \"Lín a-bú khah-tsá lóng m̄ tshut-mn̂g, tsit-má thàu-tsá tō tsáu--tshut-khì... kám-sī teh... thó-kheh-hiann?!\"\nNo other words, no other speech, no narration. The daughter does not speak.\n\nGrandpa, 72: bald with a thin grey horseshoe of hair, deep wrinkles, white ribbed sleeveless undershirt, high-waisted grey-brown slacks with a thin black belt. Daughter, 48: shoulder-length straight black hair, oatmeal knit cardigan over a light-blue top.\n\nSpatial anchors: older Taiwanese apartment living room. Grandpa stands left of the coffee table nearer the camera, one hand on his hip; behind him the beige sofa, the landscape painting, the round clock and the red calendar on the back wall, the barred window on the right wall. The daughter sits small and slightly soft on the right end of the sofa, under the red calendar. The product pack stands upright on the right end of the coffee table exactly as in @Image3; it never moves and its printed design never changes.\n\n30mm, standing eye level, locked-off camera.\nActing rule: while Grandpa speaks, his mouth only forms the words of @Audio1; the acting lives in his eyes, eyebrows and head. No sniffs, sighs, gasps, breaths or other vocal sounds.\n  0.0-2.2s Grandpa grumbles, half to himself: brows knotted, eyes squinting sideways at his daughter, a small disapproving shake of the head; at one point his eyes roll up to the ceiling as if replaying the evidence. In the background the daughter glances at him, then looks away with a guilty, awkward little smile, mouth closed.\n  2.2-3.4s he leans forward and lowers his voice like a gossiping neighbor: eyes narrowing, one eyebrow creeping up, head tilted, eyes darting left and right.\n  3.4-3.8s on \"thó-kheh-hiann\" the camera snaps in fast, once, to a 75mm close-up matching @Image4: eyes popping wide, both eyebrows shooting up, forehead folding into deep ridges — scandalized and outraged at his own idea.\n  3.8-5.0s holds the close-up: when the line ends his mouth stays slightly open in an indignant, frozen stare, eyebrows still high. No zoom back out.\n\nWarm, slightly faded Taiwanese TV-drama color, soft morning daylight from the window, light film grain, 24 fps.\n\nSound: only Grandpa's voice following @Audio1. No music, no other voices.\n\nAvoid: greybox, low-poly, blockout geometry, clay render, colored or untextured mannequin, faceless figure, text, subtitles, captions, logo, watermark, extra product packs, redrawn or garbled text on the product pack, signage, extra people, deformed hands, extra fingers, extra limbs, face morphing, identity change, wardrobe change, wearing a cap, blank expressions, sniffing, sighing, gasping, heavy breathing, cartoon, CGI look, plastic skin, beauty filter, slow motion, background music, Mandarin or English speech, extra words, the daughter speaking, zooming back out, a second push-in.", "why": ["第一版把鏡 1–3 放在同一支、三句台詞在同一個錄音裡，聲音被重新生成；這版拆成只有阿公一個人說話。", "台詞漢字＋台羅兩行都寫；表情只放在眼睛、眉毛和頭，禁止吸鼻子、嘆氣等聲音。", "推鏡綁在說出 thó-kheh-hiann 的那一刻，且只推一次、不拉回。", "產品包裝寫明不動、不改字，避免包裝跑掉。"]}, {"anchor": "g-a2", "tag": "A2｜R1A2", "final": "5.04–8.79 s", "title": "鏡 2–3｜女兒欲言又止、阿公戴帽出門", "len": 4, "video": "assets/sd/video/r1a2_shot2-3.mp4", "poster": "assets/sd/video/r1a2_shot2-3.jpg", "folder": "R1A2_客廳_鏡2-3_4秒", "chips": ["4 秒", "720p", "全能參考", "2 個說話者・各一個錄音", "1.7 秒硬切", "job e5bb803f"], "verdicts": [{"t": "硬切位置正確，門、鞋櫃、衣帽架都沒有變形；剪接取 0–3.75 秒。"}, {"t": "女兒用原聲；阿公「行！綴去看覓！」換成 E3。", "warn": true}], "refs": [{"tag": "@Image1", "label": "阿公三視表（第 4 格帽子）", "img": "assets/sd/img/sheet_agong.jpg", "kind": null, "wide": true}, {"tag": "@Image2", "label": "女兒三視表", "img": "assets/sd/img/sheet_daughter.jpg", "kind": null, "wide": true}, {"tag": "@Image3", "label": "鏡 2：定格 18", "img": "assets/sd/img/key18_shot2.jpg", "kind": null, "wide": false}, {"tag": "@Image4", "label": "門口空景（固定格局）", "img": "assets/sd/img/plate_door.jpg", "kind": null, "wide": false}, {"tag": "@Image5", "label": "鏡 3 結尾：定格 11", "img": "assets/sd/img/key11_shot3_door.jpg", "kind": null, "wide": false}, {"tag": "@Audio1", "label": "女兒錄音", "img": null, "kind": "錄音", "wide": false}, {"tag": "@Audio2", "label": "阿公錄音", "img": null, "kind": "錄音", "wide": false}], "prompt": "A 4-second vertical 9:16 scene from a Taiwanese prime-time TV drama comedy, live-action, photorealistic, with big, readable facial acting. Two shots joined by one clear hard cut at 1.7s.\n\nReferences:\n- @Image1 is Grandpa and @Image2 is the daughter. Each is a turnaround sheet of ONE person (several views of the same character side by side, not several people). Keep faces, body shapes and wardrobe exactly. Panel 4 of @Image1 is the navy baseball cap Grandpa puts on in shot B.\n- @Image3 is shot A: match its set, light and composition.\n- @Image4 is the entrance corner of the same apartment, empty: this is the exact, fixed layout for shot B. @Image5 shows the end of shot B: Grandpa at the door with the cap on.\n- @Audio1 is the daughter's recorded line. @Audio2 is Grandpa's recorded line. Lip-sync each line to its own audio. Follow the voice, tone, pacing and timing of each audio exactly.\n\nDialogue, in Taiwanese Hokkien (Taiwanese, not Mandarin), word for word, each line spoken exactly once:\n  The daughter, 0.1s to 1.6s, voice from @Audio1:\n  \"阿爸，伊是……\"\n  Romanized: \"A-pah, i sī...\"\n  Grandpa, 1.8s to 2.8s, voice from @Audio2:\n  \"行！綴去看覓！\"\n  Romanized: \"Kiânn! Tuè--khì khuànn-māi!\"\nNo other words, no other speech, no narration.\n\nGrandpa, 72: bald with a thin grey horseshoe of hair, white ribbed sleeveless undershirt, high-waisted grey-brown slacks with a thin black belt, blue rubber slippers. Daughter, 48: shoulder-length straight black hair, oatmeal knit cardigan over a light-blue top.\n\nSHOT A - 0.0 to 1.7s - matches @Image3\n50mm over Grandpa's bare shoulder, the back of his bald head soft in the left foreground, camera almost still. Behind her: the beige sofa, the landscape painting up to her left, the red paper calendar to her right.\nActing rule: while someone speaks, the mouth only forms the words of their audio; the acting lives in the eyes, eyebrows and head. No sniffs, sighs, gasps, breaths or other vocal sounds.\n  0.0-1.6s she looks up at him, eyebrows lifting, palms half-raised, and starts to explain; her eyes are embarrassed and amused, and on the trailing \"i sī...\" her gaze flicks down and to the side.\n  1.6-1.7s she closes her mouth into a small, knowing half-smile.\n\nSHOT B - 1.7 to 4.0s - hard cut - the apartment entrance, fixed layout exactly as @Image4\nFixed architecture, never changing: the wooden front door with a small transom window above it is set in the left part of the back wall; a low wooden shoe cabinet with shoes stands to the left of the door; a dark wooden coat rack with the navy cap hanging on it stands in the corner to the right of the door; plain off-white walls, terrazzo floor. Walls, door, cabinet and coat rack never move, never appear or disappear, never change shape.\n24mm, standing eye level, camera fixed with only a slight pan to keep Grandpa in frame.\n  1.7-2.8s Grandpa strides into frame from the right toward the coat rack, saying his line with a sharp wave of the hand; eyes narrowed with comic, mission-like determination, like a TV detective who has cracked the case.\n  2.8-3.4s mouth closed now, jaw set, he snatches the cap from the coat rack and tugs the brim down hard with a decisive nod, matching @Image5.\n  3.4-4.0s he pulls the door open on its hinges and steps out; bright morning daylight spills in through the doorway. The camera does not move into the light.\n\nWarm, slightly faded Taiwanese TV-drama color, soft daylight, light film grain, 24 fps.\n\nSound: only the two voices following @Audio1 and @Audio2, plus the creak of the door. No music.\n\nAvoid: one continuous take, greybox, colored or untextured mannequin, faceless figure, text, subtitles, logo, watermark, signage, extra people, Grandma, deformed hands, extra fingers, extra limbs, face morphing, identity change, wardrobe change, Grandpa wearing the cap before he takes it from the rack, a wall turning into a door, a second door, furniture moving, sliding, flying or disappearing, the room layout changing, the camera whipping or washing out into glare, blank expressions, sniffing, sighing, gasping, heavy breathing, cartoon, CGI look, plastic skin, beauty filter, slow motion, background music, Mandarin or English speech, extra words.", "why": ["兩個人各用一個錄音（@Audio1 女兒、@Audio2 阿公），每句寫明是誰、哪幾秒、用哪個錄音。", "上一版門口出錯（牆變門、櫃子飛走），這版加門口空景當固定格局，逐一寫明門、鞋櫃、衣帽架的位置且不可移動。", "鏡頭不推進門外強光；換到公園的轉場改在後期處理。", "鏡 2–3 白模不到 2 秒，低於參考影片下限，所以不附白模，運鏡用文字寫。"]}, {"anchor": "g-b", "tag": "B｜R1B", "final": "8.79–11.49 s", "title": "鏡 4｜公園牆角偷看", "len": 4, "video": "assets/sd/video/r1b_shot4.mp4", "poster": "assets/sd/video/r1b_shot4.jpg", "folder": "R1B_主生成_牆角_鏡4_4秒", "chips": ["4 秒", "720p", "全能參考", "無台詞", "job b2690e84"], "verdicts": [{"t": "兩顆頭一上一下、不重疊；阿公不敢置信、女兒憋笑。取 0.3–3.0 秒，保留驚嚇與「啊」，剪掉女兒笑的段落。"}], "refs": [{"tag": "@Image1", "label": "阿公三視表（戴帽）", "img": "assets/sd/img/sheet_agong.jpg", "kind": null, "wide": true}, {"tag": "@Image2", "label": "女兒三視表", "img": "assets/sd/img/sheet_daughter.jpg", "kind": null, "wide": true}, {"tag": "@Image3", "label": "開場：定格 12", "img": "assets/sd/img/key12_shot4_first.jpg", "kind": null, "wide": false}, {"tag": "@Image4", "label": "結尾：定格 13", "img": "assets/sd/img/key13_shot4_last.jpg", "kind": null, "wide": false}, {"tag": "@Image5", "label": "俯視走位圖", "img": "assets/sd/img/map_shot4.jpg", "kind": null, "wide": false}, {"tag": "@Video1", "label": "白模 7.8–9.8 s", "img": null, "kind": "白模影片", "wide": false}], "prompt": "A 4-second vertical 9:16 comedy shot in the style of a Taiwanese prime-time TV drama, live-action, photorealistic, with big, readable facial acting. One shot, no dialogue.\n\nReferences:\n- @Image1 is Grandpa and @Image2 is the daughter. Each is a turnaround sheet of ONE person (several views of the same character side by side, not several people). Keep faces and wardrobe exactly. Grandpa wears the navy baseball cap from panel 4 of @Image1.\n- @Image3 is the opening frame and @Image4 is the closing frame. Match their set, light and composition.\n- @Image5 is a top-down blocking map with the same color code: orange = Grandpa, blue = the daughter, red cone = camera. Both hide behind the end of the wall; Grandma is off-screen to frame left, behind the camera. Colors are labels only.\n- @Video1 is a 3D previz. Use it ONLY for the camera push-in and its timing. Never copy its untextured materials or colored mannequins.\n\nA park in soft morning haze, palm trees; a weathered concrete wall fills the right of frame, a park path and fitness bars behind. The shot opens out of bright glare that settles into the morning light within the first few frames.\nGrandpa (navy cap, white sleeveless undershirt) and the daughter (oatmeal cardigan) peek out from behind the wall's edge, one head above the other: Grandpa's head on top, the daughter's below. Only their heads and shoulders show; their bodies stay hidden behind the wall and never overlap. Their hands stay hidden.\n  0.0-1.6s they lean out slowly, inch by inch, scanning the park. Grandpa: a suspicious detective squint, brows pinched together, lips pressed thin, eyes sweeping left and right under the cap brim. The daughter: cautious and curious, eyebrows slightly raised, biting her lower lip, glancing up at her father as if to say \"really?\".\n  1.6-2.0s fast push-in to 50mm.\n  2.0-3.2s both stare past the camera toward frame left, two different reactions at once. Grandpa: eyes bulging, eyebrows flying to the top of his forehead, jaw dropping open in total disbelief, his head jerking back a little so the cap brim tips up. The daughter: eyes going wide, mouth opening into a round silent \"oh\", then the corners of her lips curling up as she tries hard not to laugh, shoulders shaking slightly.\n  3.2-4.0s they hold those faces, barely moving: Grandpa frozen in stunned disbelief, the daughter fighting a grin.\nSilent: no dialogue, no talking. Warm, slightly faded Taiwanese TV-drama color, light film grain, 24 fps.\n\nAvoid: greybox, low-poly, blockout geometry, clay render, colored mannequin, faceless figure, text, subtitles, logo, watermark, signage, a third person, Grandma in frame, merged heads, overlapping bodies, hands on the wall with extra fingers, deformed hands, face morphing, identity change, wardrobe change, Grandpa without the cap, blank expressions, talking, speech, cartoon, CGI look, plastic skin, beauty filter, slow motion, background music.", "why": ["白模這段只有 2 秒，生成 4 秒再挑最好的段落。", "兩人疊在牆邊最容易糊成一團或多長手，所以寫明兩顆頭一上一下、身體藏在牆後、手不入鏡。", "俯視走位圖用同樣色碼，紅色圓錐是攝影機，鎖住兩人與阿嬤的相對位置。", "開頭從強光淡入，接上一鏡門口的亮光。"]}, {"anchor": "g-r0", "tag": "R0 v3", "final": "11.49–16.53 s", "title": "鏡 5｜阿嬤漫步機", "len": 5, "video": "assets/sd/video/r0v3_ama.mp4", "poster": "assets/sd/video/r0v3_ama.jpg", "folder": "R0_測試_鏡5阿嬤", "chips": ["5 秒", "720p", "全能參考", "1 個說話者", "job b92ef43f"], "verdicts": [{"t": "第一支照錄音對嘴成功的版本，聲音直接用原聲。逆風方向正確，結尾風不停，表現阿嬤的自信。"}], "refs": [{"tag": "@Image1", "label": "開場：定格 07", "img": "assets/sd/img/key07_shot5_first.jpg", "kind": null, "wide": false}, {"tag": "@Image2", "label": "結尾：定格 14", "img": "assets/sd/img/key14_shot5_last.jpg", "kind": null, "wide": false}, {"tag": "@Image3", "label": "阿嬤三視表", "img": "assets/sd/img/sheet_ama.jpg", "kind": null, "wide": true}, {"tag": "@Video1", "label": "白模 9.8–15 s", "img": null, "kind": "白模影片", "wide": false}, {"tag": "@Audio1", "label": "阿嬤台詞錄音", "img": null, "kind": "錄音", "wide": false}], "prompt": "A 5-second vertical 9:16 shot from a Taiwanese prime-time TV drama comedy, live-action, photorealistic, playfully exaggerated.\n\nReferences:\n- @Image1 is the opening frame: match its set, light and composition. @Image2 is the closing frame: end on this framing.\n- @Image3 is Grandma: a turnaround sheet of ONE person (several views of the same woman side by side, not several people). Keep her face, hair, age, body shape and wardrobe exactly.\n- @Video1 is a 3D previz. Use it ONLY for camera position and camera path. Never copy its untextured materials, colored mannequin or block props. The teal mannequin is Grandma; the color is only a label.\n- @Audio1 is Grandma's recorded line. Lip-sync dialogue to @Audio1. Follow the voice, tone, pacing and timing of @Audio1 exactly.\n\nDialogue, in Taiwanese Hokkien (Taiwanese, not Mandarin), spoken by Grandma exactly once from 0.2s to 5.0s, word for word:\n\"安親活力褲，穿起來輕鬆，阿嬤袂輸少年人！\"\nRomanized: \"An-tshin ua̍h-li̍k-khòo, tshīng--khí-lâi khin-sang, a-má bē-su siàu-liân-lâng!\"\nNo other words, no other speech, no narration.\n\nGrandma (A-ma), 68, short dark-brown permed curls, teal zip-up tracksuit with white side stripes, white T-shirt, white towel around her neck, white sneakers.\n\nSpatial anchors: the outdoor air-walker exercise machine (green steel posts, yellow curved handlebar, two yellow pendulum footplates) stands on rubber safety tiles in a park, tall trees left and right, open sky behind her head.\n\nWIND DIRECTION (important): a strong headwind blows INTO Grandma's face from in front of her, as if she were racing forward at high speed. Her permed curls and the towel ends stream BACKWARD behind her head and shoulders, her tracksuit fabric presses against her front and flaps behind her. Fallen leaves fly TOWARD her from in front, rush past her on both sides and disappear behind her. Never blow her hair forward over her face; never send leaves flying away from her toward the front.\n\n0.0-0.8s: low-angle 24mm looking up, as in @Image1. Grandma strides briskly on the air-walker, one foot on each footplate, hands gripping the handlebar; the headwind is already rising.\n0.8-4.0s: the camera arcs to her front-right and pushes in to a medium close-up so her mouth is clearly readable while she speaks. She strides faster and faster, legs swinging in big powerful arcs, as if racing; the headwind grows into a comic gale, leaves streaking toward her and past her, branches thrashing behind her. She delivers the line with a proud, cheeky grin, eyes bright, totally in control.\n4.0-5.0s: settles on a 55mm chest-up close-up matching @Image2: face turned about 30 degrees to frame left, into the wind, chin raised, triumphant confident smile. The wind does NOT stop: her curls and towel keep streaming backward and leaves keep flying past to the end of the shot, showing off her confidence. Leave the lower-right of the frame clean.\n\nThe exaggeration is joyful and heroic: she is strong, fast and dignified, never clumsy or mocked. Warm, slightly faded Taiwanese TV-drama color, golden morning backlight, light film grain, 24 fps.\n\nSound: only Grandma's voice following @Audio1, plus rushing wind and rustling leaves. No music.\n\nAvoid: greybox, low-poly, blockout geometry, clay render, colored untextured mannequin, faceless figure, text, subtitles, captions, logo, watermark, brand name, packaging, signage, extra people, crowd, deformed hands, hands merging with the handlebar, extra fingers, extra limbs, face morphing, identity change, wardrobe change, cartoon, CGI look, plastic skin, beauty filter, slow motion, background music, Mandarin or English speech, extra words, hair blowing forward over her face, leaves blowing away from her, wind dying down at the end, Grandma falling or wobbling, legs bending unnaturally, the machine changing shape.", "why": ["這支先拿來當測試：人臉會不會被擋、嘴型跟不跟得上台語、白模的繞拍有沒有照做。", "台詞原文（漢字＋台羅）寫進 prompt，並寫 Lip-sync dialogue to @Audio1，這是成功的關鍵。", "風向寫成迎面吹向阿嬤：頭髮和毛巾往後飄、落葉從前方飛來；Avoid 寫相反方向。", "誇張但有尊嚴：她強壯、快、帥氣，不能被拍得笨拙或被取笑。"]}];
+const NB=[{"id": "15", "what": "客廳 A 的灰盒子換成活力褲包裝", "upload": "圖1 客廳 A 原圖、圖2 產品照", "before": "assets/sd/img/nb15_before.jpg", "after": "assets/sd/img/nb15_living_product.jpg", "prompt": "Image 1 is a photograph of a living room in an older Taiwanese apartment. Image 2 is a product photo showing three packs of the same product.\n\nReplace the plain light-grey box standing on the right end of the coffee table in image 1 with ONE pack of the product from the product photo: the middle pack (yellow top band with carry handle, \"L-XL 9\" size, white-and-blue front label with the red-and-blue logo and the large Chinese name 活力褲).\n- Copy the pack exactly from image 2: same shape, colors, logo, illustrations, and every printed character. Do not redraw, translate, invent or blur any text.\n- Stand it upright on the tabletop in the same spot as the grey box, front label facing the camera, turned about 15 degrees toward the sofa.\n- Real-world scale: about 30 cm tall, 25 cm wide, 12 cm deep, handle on top, so it reads as a real pack sitting on the table.\n- Light it like the room: soft morning daylight from the barred window on the right, warm slightly faded color, a soft contact shadow on the table.\n\nChange nothing else in image 1: same camera, framing, furniture, painting, clock, red calendar, plants, fruit and tea set, light and color.\nNo other products, no extra packs, no new text anywhere, no people."}, {"id": "16", "what": "鏡 1 首格：客廳對齊 15、茶几右端放產品、沙發右端補上女兒", "upload": "圖1 鏡 1 首格原圖、圖2 15 的結果、圖3 阿公三視表、圖4 女兒三視表、圖5 產品照", "before": "assets/sd/img/nb16_before.jpg", "after": "assets/sd/img/key16_shot1_first.jpg", "prompt": "Image 1 is the current first frame of shot 1. Image 2 is the living room with the product on the coffee table. Image 3 is Grandpa and image 4 is the daughter: each is a turnaround sheet of ONE person (several views of the same character side by side, not several people). Image 5 is the product photo.\n\nCreate a new vertical 9:16 photograph of the same moment as image 1.\n- Keep Grandpa exactly as in image 1: same position on the left, same pose with one hand on his hip, same suspicious glare toward frame right, same face, bald head with grey horseshoe hair, white ribbed sleeveless undershirt, high-waisted grey-brown slacks, thin black belt. He is bare-headed.\n- The room must match image 2 exactly: the same beige three-seat sofa against the back wall, the landscape painting above it, the round wall clock, the red paper calendar, the barred window on the right, the low wooden coffee table with the glass top, fruit and tea set.\n- The product pack stands upright on the right end of the coffee table exactly as in image 2, front label facing the camera, small in frame but clearly readable as the pack in image 5. Copy its printed design exactly; do not invent or blur text.\n- Add the daughter from image 4, seated on the RIGHT end of the sofa behind the coffee table, under the red calendar, hands resting in her lap, looking up at her father with a worried, knowing look. She is small in the frame and slightly out of focus; Grandpa stays the main subject. Shoulder-length straight black hair, oatmeal knit cardigan over a light-blue top, dark navy trousers.\n- Grandpa stands to the LEFT of the coffee table, nearer the camera; the daughter is behind the table on the right. Their bodies never overlap.\n\nCamera: standing eye level, about 1.5 m high, 30mm lens, f/4, focus on Grandpa. Soft morning daylight from the window, warm slightly faded Taiwanese TV-drama color, natural skin texture, light film grain.\nNo text other than the product's own printed label, no extra people, no logos added, no CGI look."}, {"id": "17", "what": "鏡 1 尾格：阿公特寫不動，背景對齊 16", "upload": "圖1 鏡 1 尾格原圖、圖2 16 的結果", "before": "assets/sd/img/nb17_before.jpg", "after": "assets/sd/img/key17_shot1_closeup.jpg", "prompt": "Image 1 is the current last frame of shot 1: a 75mm close-up of Grandpa's shocked face. Image 2 is the new first frame of the same shot, taken from the same camera position.\n\nKeep Grandpa exactly as in image 1: same framing, same shocked expression with eyes wide and eyebrows shooting up, same open mouth, same face, skin, bald head and white sleeveless undershirt.\nUpdate only the background so it is the room behind him in image 2, seen through a 75mm lens with shallow depth of field: soft, out-of-focus shapes of the back wall, the landscape painting and the barred window, matching image 2's colors and daylight.\nThe daughter and the product pack are out of frame or only an unreadable soft blur at the far right edge.\n\nVertical 9:16, warm slightly faded Taiwanese TV-drama color, natural skin texture, light film grain.\nNo text, no logos, no extra people, no CGI look."}, {"id": "18", "what": "鏡 2：構圖不動，沙發、山水畫、紅月曆對齊 15；產品不入鏡", "upload": "圖1 鏡 2 原圖、圖2 15 的結果、圖3 女兒三視表", "before": "assets/sd/img/nb18_before.jpg", "after": "assets/sd/img/key18_shot2.jpg", "prompt": "Image 1 is the current frame of shot 2. Image 2 is the living room. Image 3 is the daughter: a turnaround sheet of ONE person (several views of the same woman side by side, not several people).\n\nKeep image 1's composition exactly: a 50mm over-the-shoulder shot, the back of Grandpa's bald head and bare shoulder soft in the left foreground, the daughter seated on the sofa looking up at him, starting to speak and then hesitating.\nMake the room behind her match image 2 exactly: the same beige three-seat sofa, the landscape painting on the back wall up and to her left, the red paper calendar to her right, the same wall color and daylight.\nKeep the daughter's face, hair and wardrobe exactly as in image 3: shoulder-length straight black hair, oatmeal knit cardigan over a light-blue top.\nThe coffee table and the product pack are out of frame in this shot.\n\nVertical 9:16, warm slightly faded Taiwanese TV-drama color, natural skin texture, light film grain.\nNo text, no logos, no extra people, no CGI look."}];
+const AUD=[{"title": "阿公專屬聲音 E1–E9", "desc": "用語音設計做的兩個台語阿公（沙啞、高亢），語氣寫在獨立的 style 欄位。E1 是原本內建聲音 Algenib 的對照組；E8、E9 是建立聲音時自動產生的試聽。", "items": [{"id": "E1", "voice": "Algenib（當時定案）", "mode": "第一句｜對照組", "src": "e/current_B1.mp3"}, {"id": "E2", "voice": "專屬：沙啞阿公", "mode": "第一句｜語氣 A", "src": "e/l1_raspy.mp3"}, {"id": "E3", "voice": "專屬：沙啞阿公", "mode": "第一句｜語氣 B", "src": "e/l1b_raspy.mp3", "final": "阿公定案"}, {"id": "E4", "voice": "專屬：高亢阿公", "mode": "第一句｜語氣 A", "src": "e/l1_shrill.mp3"}, {"id": "E5", "voice": "專屬：高亢阿公", "mode": "第一句｜語氣 B", "src": "e/l1b_shrill.mp3"}, {"id": "E6", "voice": "專屬：沙啞阿公", "mode": "第二句「行！綴去看覓！」", "src": "e/l2_raspy.mp3", "final": "阿公第二句聲線"}, {"id": "E7", "voice": "專屬：高亢阿公", "mode": "第二句「行！綴去看覓！」", "src": "e/l2_shrill.mp3"}, {"id": "E8", "voice": "專屬：沙啞阿公", "mode": "聲音設計試聽（自動生成台詞）", "src": "e/agong_raspy_sample.mp3"}, {"id": "E9", "voice": "專屬：高亢阿公", "mode": "聲音設計試聽（自動生成台詞）", "src": "e/agong_shrill_sample.mp3"}]}, {"title": "阿公 Algenib 整句 B1–B12", "desc": "同一個聲音，用六種寫法（台羅、漢字、混寫、白話字、「偷客兄」）各生成兩次。結論：只送台羅最自然。", "items": [{"id": "B1", "voice": "Algenib A", "mode": "台羅｜討客兄，前面加停頓", "src": "b/v1tl_a.mp3"}, {"id": "B2", "voice": "Algenib B", "mode": "台羅｜討客兄，前面加停頓", "src": "b/v1tl_b.mp3"}, {"id": "B3", "voice": "Algenib A", "mode": "漢字｜討客兄", "src": "b/v2han_a.mp3"}, {"id": "B4", "voice": "Algenib B", "mode": "漢字｜討客兄", "src": "b/v2han_b.mp3"}, {"id": "B5", "voice": "Algenib A", "mode": "台羅＋漢字｜討客兄", "src": "b/v3mix_a.mp3"}, {"id": "B6", "voice": "Algenib B", "mode": "台羅＋漢字｜討客兄", "src": "b/v3mix_b.mp3"}, {"id": "B7", "voice": "Algenib A", "mode": "白話字｜討客兄", "src": "b/v4poj_a.mp3"}, {"id": "B8", "voice": "Algenib B", "mode": "白話字｜討客兄", "src": "b/v4poj_b.mp3"}, {"id": "B9", "voice": "Algenib A", "mode": "漢字｜偷客兄", "src": "b/v5hanthau_a.mp3"}, {"id": "B10", "voice": "Algenib B", "mode": "漢字｜偷客兄", "src": "b/v5hanthau_b.mp3"}, {"id": "B11", "voice": "Algenib A", "mode": "台羅｜偷客兄 thau", "src": "b/v6tlthau_a.mp3"}, {"id": "B12", "voice": "Algenib B", "mode": "台羅｜偷客兄 thau", "src": "b/v6tlthau_b.mp3"}]}, {"title": "阿公五種男聲 A1–A15", "desc": "「敢是咧——討——客兄？！」五種內建男聲，各用台羅、白話字、漢字輸入。", "items": [{"id": "A1", "voice": "Algenib", "mode": "漢字", "src": "a/agong_Algenib_han.mp3"}, {"id": "A2", "voice": "Algenib", "mode": "白話字", "src": "a/agong_Algenib_poj.mp3"}, {"id": "A3", "voice": "Algenib", "mode": "台羅", "src": "a/agong_Algenib_tl.mp3"}, {"id": "A4", "voice": "Charon", "mode": "漢字", "src": "a/agong_Charon_han.mp3"}, {"id": "A5", "voice": "Charon", "mode": "白話字", "src": "a/agong_Charon_poj.mp3"}, {"id": "A6", "voice": "Charon", "mode": "台羅", "src": "a/agong_Charon_tl.mp3"}, {"id": "A7", "voice": "Iapetus", "mode": "漢字", "src": "a/agong_Iapetus_han.mp3"}, {"id": "A8", "voice": "Iapetus", "mode": "白話字", "src": "a/agong_Iapetus_poj.mp3"}, {"id": "A9", "voice": "Iapetus", "mode": "台羅", "src": "a/agong_Iapetus_tl.mp3"}, {"id": "A10", "voice": "Orus", "mode": "漢字", "src": "a/agong_Orus_han.mp3"}, {"id": "A11", "voice": "Orus", "mode": "白話字", "src": "a/agong_Orus_poj.mp3"}, {"id": "A12", "voice": "Orus", "mode": "台羅", "src": "a/agong_Orus_tl.mp3"}, {"id": "A13", "voice": "Rasalgethi", "mode": "漢字", "src": "a/agong_Rasalgethi_han.mp3"}, {"id": "A14", "voice": "Rasalgethi", "mode": "白話字", "src": "a/agong_Rasalgethi_poj.mp3"}, {"id": "A15", "voice": "Rasalgethi", "mode": "台羅", "src": "a/agong_Rasalgethi_tl.mp3"}]}, {"title": "女兒 D1–D22", "desc": "「阿爸，伊是……」十一種內建女聲，各用台羅、漢字輸入。", "items": [{"id": "D1", "voice": "Achernar", "mode": "漢字", "src": "a/nv_Achernar_han.mp3"}, {"id": "D2", "voice": "Achernar", "mode": "台羅", "src": "a/nv_Achernar_tl.mp3"}, {"id": "D3", "voice": "Autonoe", "mode": "漢字", "src": "a/nv_Autonoe_han.mp3"}, {"id": "D4", "voice": "Autonoe", "mode": "台羅", "src": "a/nv_Autonoe_tl.mp3"}, {"id": "D5", "voice": "Callirrhoe", "mode": "漢字", "src": "a/nv_Callirrhoe_han.mp3", "final": "女兒定案"}, {"id": "D6", "voice": "Callirrhoe", "mode": "台羅", "src": "a/nv_Callirrhoe_tl.mp3"}, {"id": "D7", "voice": "Despina", "mode": "漢字", "src": "a/nv_Despina_han.mp3"}, {"id": "D8", "voice": "Despina", "mode": "台羅", "src": "a/nv_Despina_tl.mp3"}, {"id": "D9", "voice": "Erinome", "mode": "漢字", "src": "a/nv_Erinome_han.mp3"}, {"id": "D10", "voice": "Erinome", "mode": "台羅", "src": "a/nv_Erinome_tl.mp3"}, {"id": "D11", "voice": "Gacrux", "mode": "漢字", "src": "a/nv_Gacrux_han.mp3"}, {"id": "D12", "voice": "Gacrux", "mode": "台羅", "src": "a/nv_Gacrux_tl.mp3"}, {"id": "D13", "voice": "Kore", "mode": "漢字", "src": "a/nv_Kore_han.mp3"}, {"id": "D14", "voice": "Kore", "mode": "台羅", "src": "a/nv_Kore_tl.mp3"}, {"id": "D15", "voice": "Laomedeia", "mode": "漢字", "src": "a/nv_Laomedeia_han.mp3"}, {"id": "D16", "voice": "Laomedeia", "mode": "台羅", "src": "a/nv_Laomedeia_tl.mp3"}, {"id": "D17", "voice": "Pulcherrima", "mode": "漢字", "src": "a/nv_Pulcherrima_han.mp3"}, {"id": "D18", "voice": "Pulcherrima", "mode": "台羅", "src": "a/nv_Pulcherrima_tl.mp3"}, {"id": "D19", "voice": "Vindemiatrix", "mode": "漢字", "src": "a/nv_Vindemiatrix_han.mp3"}, {"id": "D20", "voice": "Vindemiatrix", "mode": "台羅", "src": "a/nv_Vindemiatrix_tl.mp3"}, {"id": "D21", "voice": "Zephyr", "mode": "漢字", "src": "a/nv_Zephyr_han.mp3"}, {"id": "D22", "voice": "Zephyr", "mode": "台羅", "src": "a/nv_Zephyr_tl.mp3"}]}];
+const KL=[{"id": "shot1", "title": "鏡 1｜客廳・阿公質問", "meta": "5 秒・4 張圖＋1 音檔・90 點／2 支", "winner": "k", "badge": "採用 Kling v1", "snd": 1, "sum": "表演更完整、台詞更準，直接照我們的錄音對嘴，「討客兄」不用再換音。已換進 v9。", "cols": [{"name": "Seedance", "src": "assets/sd/video/r1a1_shot1.mp4", "poster": "assets/sd/video/r1a1_shot1.jpg", "win": ""}, {"name": "Kling v1", "src": "assets/kling/k1v1.mp4", "poster": "assets/kling/k1v1.jpg", "win": "v9 使用"}, {"name": "Kling v2", "src": "assets/kling/k1v2.mp4", "poster": "assets/kling/k1v2.jpg", "win": ""}], "verdict": "採用 Kling v1：阿公的碎念、壓低聲音到爆氣更完整；聲音就是我們的 E3 錄音，發音正確。推鏡在約 3.0 秒以跳切完成，比指定的 3.4 秒早。", "good": ["阿公長相、客廳陳設（山水畫、圓鐘、紅日曆、鐵窗）和首格一致，女兒也在沙發右端。", "茶几上的活力褲包裝沒有移動。", "v1 的聲音和我們的錄音對齊後波形相關 0.95，只早 0.08 秒，等於直接拿錄音對嘴；v2 為 0.96。Seedance 原聲只有 0.26，是模型重配的，所以「討客兄」才念錯。"], "bad": ["推鏡約在 3.0 秒，prompt 指定 3.4 秒。", "v1 的推鏡接近跳切；v2 先有中景過渡，比較像真的推鏡。"], "prompt": "A 5-second vertical 9:16 shot from a Taiwanese prime-time TV drama comedy, live-action, photorealistic, with big, readable facial acting. This is ONE single shot: no cuts, no scene changes, no extra shots.\n\nReferences:\n- 图片1 is Grandpa and 图片2 is the daughter. Each is a turnaround sheet of ONE person (several views of the same character side by side, not several people). Keep faces, body shapes and wardrobe exactly. Grandpa is bare-headed in this shot.\n- 图片3 is the opening frame: match its set, light and composition. 图片4 is the closing frame: end on this close-up.\n- 音频1 is Grandpa's recorded line. Lip-sync dialogue to 音频1. Follow the voice, tone, pacing and timing of 音频1 exactly.\n\nDialogue, in Taiwanese Hokkien (Taiwanese, not Mandarin), spoken by Grandpa exactly once from 0.3s to 4.9s, word for word:\n\"恁阿母較早攏毋出門，這馬透早就走出去……敢是咧……討客兄？！\"\nRomanized: \"Lín a-bú khah-tsá lóng m̄ tshut-mn̂g, tsit-má thàu-tsá tō tsáu--tshut-khì... kám-sī teh... thó-kheh-hiann?!\"\nNo other words, no other speech, no narration. The daughter does not speak.\n\nGrandpa, 72: bald with a thin grey horseshoe of hair, deep wrinkles, white ribbed sleeveless undershirt, high-waisted grey-brown slacks with a thin black belt. Daughter, 48: shoulder-length straight black hair, oatmeal knit cardigan over a light-blue top.\n\nSpatial anchors: older Taiwanese apartment living room. Grandpa stands left of the coffee table nearer the camera, one hand on his hip; behind him the beige sofa, the landscape painting, the round clock and the red calendar on the back wall, the barred window on the right wall. The daughter sits small and slightly soft on the right end of the sofa, under the red calendar. The product pack stands upright on the right end of the coffee table exactly as in 图片3; it never moves and its printed design never changes.\n\nCamera: 30mm, standing eye level, about 1 m in front of Grandpa, locked-off; the only camera move in the whole shot is one fast snap push-in at 3.4s.\nActing rule: while Grandpa speaks, his mouth only forms the words of 音频1; the acting lives in his eyes, eyebrows and head. No sniffs, sighs, gasps, breaths or other vocal sounds.\n  0.0-2.2s Grandpa grumbles, half to himself: brows knotted, eyes squinting sideways at his daughter, a small disapproving shake of the head; at one point his eyes roll up to the ceiling as if replaying the evidence. In the background the daughter glances at him, then looks away with a guilty, awkward little smile, mouth closed.\n  2.2-3.4s he leans forward and lowers his voice like a gossiping neighbor: eyes narrowing, one eyebrow creeping up, head tilted, eyes darting left and right.\n  3.4-3.8s on \"thó-kheh-hiann\" the camera snaps in fast, once, to a 75mm close-up matching 图片4: eyes popping wide, both eyebrows shooting up, forehead folding into deep ridges — scandalized and outraged at his own idea.\n  3.8-5.0s holds the close-up: when the line ends his mouth stays slightly open in an indignant, frozen stare, eyebrows still high. No zoom back out.\n\nWarm, slightly faded Taiwanese TV-drama color, soft morning daylight from the window, light film grain, 24 fps.\n\nSound: only Grandpa's voice following 音频1. No music, no other voices.\n\nAvoid: cuts, multiple shots, text, subtitles, captions, logo, watermark, extra product packs, redrawn or garbled text on the product pack, signage, extra people, deformed hands, extra fingers, extra limbs, face morphing, identity change, wardrobe change, wearing a cap, blank expressions, sniffing, sighing, gasping, heavy breathing, cartoon, CGI look, plastic skin, beauty filter, slow motion, background music, Mandarin or English speech, extra words, the daughter speaking, zooming back out, a second push-in."}, {"id": "shot2", "title": "鏡 2–3｜女兒解釋＋阿公出門", "meta": "5 秒（原 4 秒）・5 張圖＋2 音檔・90 點／2 支", "winner": "s", "badge": "維持 Seedance", "snd": 0, "sum": "硬切與玄關格局都穩，但硬切與阿公台詞都晚了；整體不如 Seedance。", "cols": [{"name": "Seedance（採用）", "src": "assets/sd/video/r1a2_shot2-3.mp4", "poster": "assets/sd/video/r1a2_shot2-3.jpg", "win": "v9 使用"}, {"name": "Kling v1", "src": "assets/kling/k2v1.mp4", "poster": "assets/kling/k2v1.jpg", "win": ""}, {"name": "Kling v2", "src": "assets/kling/k2v2.mp4", "poster": "assets/kling/k2v2.jpg", "win": ""}], "verdict": "維持 Seedance：硬切位置與台詞時間都比較準，剪接取 0–3.75 秒剛好。", "good": ["過肩看女兒，接一個明確的硬切到玄關，只有兩個鏡頭。", "門、鞋櫃、衣帽架從頭到尾沒有移動或變形。", "拿帽、戴上、開門出去，順序正確，開門後光線沒有過曝。"], "bad": ["硬切落在約 2.0 秒，prompt 指定 1.7 秒。", "阿公「行！綴去看覓！」落在約 2.3–3.6 秒，比錄音晚 0.5 秒左右。", "聲音和錄音不吻合，像是依兩段補靜音的錄音重新配音。"], "prompt": "A 5-second vertical 9:16 scene from a Taiwanese prime-time TV drama comedy, live-action, photorealistic, with big, readable facial acting. Two shots joined by one clear hard cut at 1.7s.\n\nReferences:\n- 图片1 is Grandpa and 图片2 is the daughter. Each is a turnaround sheet of ONE person (several views of the same character side by side, not several people). Keep faces, body shapes and wardrobe exactly. Panel 4 of 图片1 is the navy baseball cap Grandpa puts on in shot B.\n- 图片3 is shot A: match its set, light and composition.\n- 图片4 is the entrance corner of the same apartment, empty: this is the exact, fixed layout for shot B. 图片5 shows the end of shot B: Grandpa at the door with the cap on.\n- 音频1 is the daughter's recorded line. 音频2 is Grandpa's recorded line. 音频1 holds the daughter's line at 0.1-1.6s and silence elsewhere; 音频2 holds Grandpa's line at 1.8-2.8s and silence elsewhere. Lip-sync each line to its own audio. Follow the voice, tone, pacing and timing of each audio exactly.\n\nDialogue, in Taiwanese Hokkien (Taiwanese, not Mandarin), word for word, each line spoken exactly once:\n  The daughter, 0.1s to 1.6s, voice from 音频1:\n  \"阿爸，伊是……\"\n  Romanized: \"A-pah, i sī...\"\n  Grandpa, 1.8s to 2.8s, voice from 音频2:\n  \"行！綴去看覓！\"\n  Romanized: \"Kiânn! Tuè--khì khuànn-māi!\"\nNo other words, no other speech, no narration.\n\nGrandpa, 72: bald with a thin grey horseshoe of hair, white ribbed sleeveless undershirt, high-waisted grey-brown slacks with a thin black belt, blue rubber slippers. Daughter, 48: shoulder-length straight black hair, oatmeal knit cardigan over a light-blue top.\n\nSHOT A - 0.0 to 1.7s - matches 图片3\n50mm over Grandpa's bare shoulder, the back of his bald head soft in the left foreground, camera almost still. Behind her: the beige sofa, the landscape painting up to her left, the red paper calendar to her right.\nActing rule: while someone speaks, the mouth only forms the words of their audio; the acting lives in the eyes, eyebrows and head. No sniffs, sighs, gasps, breaths or other vocal sounds.\n  0.0-1.6s she looks up at him, eyebrows lifting, palms half-raised, and starts to explain; her eyes are embarrassed and amused, and on the trailing \"i sī...\" her gaze flicks down and to the side.\n  1.6-1.7s she closes her mouth into a small, knowing half-smile.\n\nSHOT B - 1.7 to 5.0s - hard cut - the apartment entrance, fixed layout exactly as 图片4\nFixed architecture, never changing: the wooden front door with a small transom window above it is set in the left part of the back wall; a low wooden shoe cabinet with shoes stands to the left of the door; a dark wooden coat rack with the navy cap hanging on it stands in the corner to the right of the door; plain off-white walls, terrazzo floor. Walls, door, cabinet and coat rack never move, never appear or disappear, never change shape.\n24mm, standing eye level, camera fixed with only a slight pan to keep Grandpa in frame.\n  1.7-2.8s Grandpa strides into frame from the right toward the coat rack, saying his line with a sharp wave of the hand; eyes narrowed with comic, mission-like determination, like a TV detective who has cracked the case.\n  2.8-3.4s mouth closed now, jaw set, he snatches the cap from the coat rack and tugs the brim down hard with a decisive nod, matching 图片5.\n  3.4-4.4s he pulls the door open on its hinges and steps out; bright morning daylight spills in through the doorway. The camera does not move into the light.\n  4.4-5.0s hold on the doorway: the door stays ajar, daylight on the terrazzo floor, the entrance corner unchanged.\n\nWarm, slightly faded Taiwanese TV-drama color, soft daylight, light film grain, 24 fps.\n\nSound: only the two voices following 音频1 and 音频2, plus the creak of the door. No music.\n\nAvoid: one continuous take, more than two shots, a third shot, greybox, colored or untextured mannequin, faceless figure, text, subtitles, logo, watermark, signage, extra people, Grandma, deformed hands, extra fingers, extra limbs, face morphing, identity change, wardrobe change, Grandpa wearing the cap before he takes it from the rack, a wall turning into a door, a second door, furniture moving, sliding, flying or disappearing, the room layout changing, the camera whipping or washing out into glare, blank expressions, sniffing, sighing, gasping, heavy breathing, cartoon, CGI look, plastic skin, beauty filter, slow motion, background music, Mandarin or English speech, extra words."}, {"id": "shot3", "title": "鏡 4｜公園牆角偷看", "meta": "4 秒・5 張圖（含俯視走位圖）・72 點／2 支", "winner": "s", "badge": "維持 Seedance", "snd": 0, "sum": "構圖與反應都到位，但沒有白模，推鏡時間比 Seedance 鬆。", "cols": [{"name": "Seedance（採用）", "src": "assets/sd/video/r1b_shot4.mp4", "poster": "assets/sd/video/r1b_shot4.jpg", "win": "v9 使用"}, {"name": "Kling v1", "src": "assets/kling/k3v1.mp4", "poster": "assets/kling/k3v1.jpg", "win": ""}, {"name": "Kling v2", "src": "assets/kling/k3v2.mp4", "poster": "assets/kling/k3v2.jpg", "win": ""}], "verdict": "維持 Seedance：推鏡時間與「啊」的反應更好剪。", "good": ["強光開場，幾格後回到晨光。", "阿公在上、女兒在下，只露頭肩，身體不重疊，手沒有入鏡。", "推鏡後兩人反應不同：阿公瞪眼張嘴，女兒驚訝後忍笑。"], "bad": ["v1 推鏡約在 1.5 秒、接近跳切；v2 在 2.0–2.5 秒慢慢推近。", "沒有帶白模影片，推鏡時間完全靠文字。"], "prompt": "A 4-second vertical 9:16 comedy shot in the style of a Taiwanese prime-time TV drama, live-action, photorealistic, with big, readable facial acting. One shot, no dialogue. This is ONE single shot: no cuts, no scene changes, no extra shots.\n\nReferences:\n- 图片1 is Grandpa and 图片2 is the daughter. Each is a turnaround sheet of ONE person (several views of the same character side by side, not several people). Keep faces and wardrobe exactly. Grandpa wears the navy baseball cap from panel 4 of 图片1.\n- 图片3 is the opening frame and 图片4 is the closing frame. Match their set, light and composition.\n- 图片5 is a top-down blocking map with the same color code: orange = Grandpa, blue = the daughter, red cone = camera. Both hide behind the end of the wall; Grandma is off-screen to frame left, behind the camera. Colors are labels only.\n\nA park in soft morning haze, palm trees; a weathered concrete wall fills the right of frame, a park path and fitness bars behind. The shot opens out of bright glare that settles into the morning light within the first few frames.\nGrandpa (navy cap, white sleeveless undershirt) and the daughter (oatmeal cardigan) peek out from behind the wall's edge, one head above the other: Grandpa's head on top, the daughter's below. Only their heads and shoulders show; their bodies stay hidden behind the wall and never overlap. Their hands stay hidden.\n  0.0-1.6s they lean out slowly, inch by inch, scanning the park. Grandpa: a suspicious detective squint, brows pinched together, lips pressed thin, eyes sweeping left and right under the cap brim. The daughter: cautious and curious, eyebrows slightly raised, biting her lower lip, glancing up at her father as if to say \"really?\".\n  1.6-2.0s the camera, until now still on a 28mm at head height on the open side of the wall, does one fast push-in to 50mm, framing both heads.\n  2.0-3.2s both stare past the camera toward frame left, two different reactions at once. Grandpa: eyes bulging, eyebrows flying to the top of his forehead, jaw dropping open in total disbelief, his head jerking back a little so the cap brim tips up. The daughter: eyes going wide, mouth opening into a round silent \"oh\", then the corners of her lips curling up as she tries hard not to laugh, shoulders shaking slightly.\n  3.2-4.0s they hold those faces, barely moving: Grandpa frozen in stunned disbelief, the daughter fighting a grin.\nSilent: no dialogue, no talking. Warm, slightly faded Taiwanese TV-drama color, light film grain, 24 fps.\n\nAvoid: cuts, multiple shots, text, subtitles, logo, watermark, signage, a third person, Grandma in frame, merged heads, overlapping bodies, hands on the wall with extra fingers, deformed hands, face morphing, identity change, wardrobe change, Grandpa without the cap, blank expressions, talking, speech, cartoon, CGI look, plastic skin, beauty filter, slow motion, background music."}, {"id": "shot4", "title": "鏡 5｜阿嬤漫步機", "meta": "5 秒・3 張圖＋1 音檔・90 點／2 支", "winner": "s", "badge": "維持 Seedance", "snd": 0, "sum": "對嘴與一致性都好，但進入特寫後風變弱，少了「風不停」的自信感。", "cols": [{"name": "Seedance（採用）", "src": "assets/sd/video/r0v3_ama.mp4", "poster": "assets/sd/video/r0v3_ama.jpg", "win": "v9 使用"}, {"name": "Kling v1", "src": "assets/kling/k4v1.mp4", "poster": "assets/kling/k4v1.jpg", "win": ""}, {"name": "Kling v2", "src": "assets/kling/k4v2.mp4", "poster": "assets/kling/k4v2.jpg", "win": ""}], "verdict": "維持 Seedance：逆風一路吹到結尾，阿嬤的自信表現更完整。", "good": ["阿嬤的捲髮、運動服、毛巾和設定圖一致，漫步機形狀沒變。", "沒有白模也走出了低角度仰拍、繞到右前方、推到胸上特寫的運鏡。", "兩支的台詞時間都和錄音一致。"], "bad": ["前 2 秒逆風與落葉方向正確，進入特寫後風變弱、落葉幾乎沒了。"], "prompt": "A 5-second vertical 9:16 shot from a Taiwanese prime-time TV drama comedy, live-action, photorealistic, playfully exaggerated. This is ONE single shot: no cuts, no scene changes, no extra shots.\n\nReferences:\n- 图片1 is the opening frame: match its set, light and composition. 图片2 is the closing frame: end on this framing.\n- 图片3 is Grandma: a turnaround sheet of ONE person (several views of the same woman side by side, not several people). Keep her face, hair, age, body shape and wardrobe exactly.\n- 音频1 is Grandma's recorded line. Lip-sync dialogue to 音频1. Follow the voice, tone, pacing and timing of 音频1 exactly.\n\nDialogue, in Taiwanese Hokkien (Taiwanese, not Mandarin), spoken by Grandma exactly once from 0.2s to 5.0s, word for word:\n\"安親活力褲，穿起來輕鬆，阿嬤袂輸少年人！\"\nRomanized: \"An-tshin ua̍h-li̍k-khòo, tshīng--khí-lâi khin-sang, a-má bē-su siàu-liân-lâng!\"\nNo other words, no other speech, no narration.\n\nGrandma (A-ma), 68, short dark-brown permed curls, teal zip-up tracksuit with white side stripes, white T-shirt, white towel around her neck, white sneakers.\n\nSpatial anchors: the outdoor air-walker exercise machine (green steel posts, yellow curved handlebar, two yellow pendulum footplates) stands on rubber safety tiles in a park, tall trees left and right, open sky behind her head.\n\nWIND DIRECTION (important): a strong headwind blows INTO Grandma's face from in front of her, as if she were racing forward at high speed. Her permed curls and the towel ends stream BACKWARD behind her head and shoulders, her tracksuit fabric presses against her front and flaps behind her. Fallen leaves fly TOWARD her from in front, rush past her on both sides and disappear behind her. Never blow her hair forward over her face; never send leaves flying away from her toward the front.\n\nCamera path: one continuous smooth move. Starts low at about knee height on the 24mm, looking up at her; rises and arcs to her front-right while pushing in; ends at chest height on a 55mm close-up.\n0.0-0.8s: low-angle 24mm looking up, as in 图片1. Grandma strides briskly on the air-walker, one foot on each footplate, hands gripping the handlebar; the headwind is already rising.\n0.8-4.0s: the camera arcs to her front-right and pushes in to a medium close-up so her mouth is clearly readable while she speaks. She strides faster and faster, legs swinging in big powerful arcs, as if racing; the headwind grows into a comic gale, leaves streaking toward her and past her, branches thrashing behind her. She delivers the line with a proud, cheeky grin, eyes bright, totally in control.\n4.0-5.0s: settles on a 55mm chest-up close-up matching 图片2: face turned about 30 degrees to frame left, into the wind, chin raised, triumphant confident smile. The wind does NOT stop: her curls and towel keep streaming backward and leaves keep flying past to the end of the shot, showing off her confidence. Leave the lower-right of the frame clean.\n\nThe exaggeration is joyful and heroic: she is strong, fast and dignified, never clumsy or mocked. Warm, slightly faded Taiwanese TV-drama color, golden morning backlight, light film grain, 24 fps.\n\nSound: only Grandma's voice following 音频1, plus rushing wind and rustling leaves. No music.\n\nAvoid: cuts, multiple shots, text, subtitles, captions, logo, watermark, brand name, packaging, signage, extra people, crowd, deformed hands, hands merging with the handlebar, extra fingers, extra limbs, face morphing, identity change, wardrobe change, cartoon, CGI look, plastic skin, beauty filter, slow motion, background music, Mandarin or English speech, extra words, hair blowing forward over her face, leaves blowing away from her, wind dying down at the end, Grandma falling or wobbling, legs bending unnaturally, the machine changing shape."}];
 const LINES=[
  {t:"0.1–4.6s",who:"阿公",tw:"恁阿母較早攏毋出門，這馬透早就走出去……敢是咧……討客兄？！",tl:"Lín a-bú khah-tsá lóng m̄ tshut-mn̂g, tsit-má thàu-tsá tō tsáu--tshut-khì... kám-sī teh... thó-kheh-hiann?!",zh:"你媽以前都不出門，現在一大早就跑出去……該不會是……在偷人吧？！"},
  {t:"5.0–6.6s",who:"女兒",tw:"阿爸，伊是……",tl:"A-pah, i sī...",zh:"爸，她是……"},
  {t:"6.55–7.85s",who:"阿公",tw:"行！綴去看覓！",tl:"Kiânn! Tuè--khì khuànn-māi!",zh:"走！跟去看看！"},
  {t:"10.0–14.8s",who:"阿嬤",tw:"安親活力褲，穿起來輕鬆，阿嬤袂輸少年人！",tl:"An-tshin ua̍h-li̍k-khòo, tshīng--khí-lâi khin-sang, a-má bē-su siàu-liân-lâng!",zh:"安親活力褲，穿起來輕鬆，阿嬤不輸年輕人！"}];
+const SD="assets/sd/img/";
 const SHOTS=[
  {n:1,t0:0,t1:5.1,title:"阿公質問",place:"客廳",cam:"固定機位 30 mm；3.42 秒起一次推到 75 mm 臉部特寫",act:"阿公手扠腰、懷疑地看向畫面右邊的女兒；「討客兄」三個字出口時鏡頭推上去。",lines:[0],
-  frames:[{gb:"assets/gb/gb_08.jpg",key:"08",label:"首格｜0 秒"},{gb:"assets/gb/gb_09.jpg",key:"09",label:"尾格｜急推後"}]},
- {n:2,t0:5.1,t1:6.5,title:"女兒欲言又止",place:"客廳",cam:"阿公的反打鏡頭 50 mm；阿公站在鏡頭左邊、畫面外",act:"女兒坐在沙發上抬眼看爸爸，剛開口又把話吞回去，心裡知道是活力褲。",lines:[1],
-  frames:[{gb:"assets/gb/gb_10.jpg",key:"10",label:"定格｜A 單人／B 過肩"}]},
- {n:3,t0:6.5,t1:7.8,title:"阿公衝出門",place:"客廳門口",cam:"24 mm 原地搖鏡，跟著阿公",act:"阿公打斷女兒，抓起帽子戴上就往門口衝。",lines:[2],
-  frames:[{gb:"assets/gb/gb_11.jpg",key:"11",label:"定格"}]},
- {n:4,t0:7.8,t1:9.8,title:"牆角偷看",place:"公園牆角",cam:"28 mm，8.8 秒起急推到 50 mm",act:"兩顆頭從牆角一上一下探出來；急推後兩人同時瞪大眼睛。",lines:[],
-  frames:[{gb:"assets/gb/gb_12.jpg",key:"12",label:"首格｜探頭"},{gb:"assets/gb/gb_13.jpg",key:"13",label:"尾格｜驚訝特寫"}]},
- {n:5,t0:9.8,t1:15,title:"阿嬤自信時刻",place:"公園漫步機",cam:"低角度 24 mm 仰拍 → 繞到右前方推近 55 mm",act:"阿嬤在漫步機上越踩越快，說出台詞；最後停在胸上構圖，臉朝畫面左邊約 30 度、下巴微抬。13.5 秒起右下壓產品與文案。",lines:[3],
-  frames:[{gb:"assets/gb/gb_07.jpg",key:"07",label:"首格｜全身踩漫步機"},{gb:"assets/gb/gb_14.jpg",key:"14",label:"尾格｜自信特寫"}]}];
+  frames:[{gb:"assets/gb/gb_08.jpg",key:"08",label:"首格｜0 秒",old:1},{img:SD+"key16_shot1_first.jpg",label:"新首格 16｜含產品與女兒"},{gb:"assets/gb/gb_09.jpg",key:"09",label:"尾格｜急推後",old:1},{img:SD+"key17_shot1_closeup.jpg",label:"新尾格 17｜背景對齊"}]},
+ {n:2,t0:5.1,t1:6.5,title:"女兒欲言又止",place:"客廳",cam:"過阿公肩膀 50 mm",act:"女兒坐在沙發上抬眼看爸爸，剛開口又把話吞回去，心裡知道是活力褲。",lines:[1],
+  frames:[{gb:"assets/gb/gb_10.jpg",key:"10",label:"定格｜A 單人／B 過肩",old:1},{img:SD+"key18_shot2.jpg",label:"新定格 18｜客廳對齊"}]},
+ {n:3,t0:6.5,t1:7.8,title:"阿公衝出門",place:"客廳門口",cam:"24 mm，輕微搖鏡跟著阿公",act:"阿公打斷女兒，抓起帽子戴上就往門口衝。",lines:[2],
+  frames:[{gb:"assets/gb/gb_11.jpg",key:"11",label:"定格",use:1},{img:SD+"plate_door.jpg",label:"門口空景｜固定格局"}]},
+ {n:4,t0:7.8,t1:9.8,title:"牆角偷看",place:"公園牆角",cam:"28 mm，急推到 50 mm",act:"兩顆頭從牆角一上一下探出來；急推後兩人同時瞪大眼睛。",lines:[],
+  frames:[{gb:"assets/gb/gb_12.jpg",key:"12",label:"首格｜探頭",use:1},{gb:"assets/gb/gb_13.jpg",key:"13",label:"尾格｜驚訝特寫",use:1}]},
+ {n:5,t0:9.8,t1:15,title:"阿嬤自信時刻",place:"公園漫步機",cam:"低角度 24 mm 仰拍 → 繞到右前方推近 55 mm",act:"阿嬤在漫步機上越踩越快，說出台詞；最後停在胸上構圖，臉朝畫面左邊約 30 度、下巴微抬。",lines:[3],
+  frames:[{gb:"assets/gb/gb_07.jpg",key:"07",label:"首格｜全身踩漫步機",use:1},{gb:"assets/gb/gb_14.jpg",key:"14",label:"尾格｜自信特寫",use:1}]}];
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 function promptBox(text){return `<div class="promptbox"><pre>${esc(text)}</pre><button type="button" class="copy">複製</button></div>`}
+/* ---- tabs ---- */
+const TABS=[...document.querySelectorAll('[role="tab"]')];
+function panelOf(id){const el=document.getElementById(id);return el?(el.matches('[role="tabpanel"]')?el:el.closest('[role="tabpanel"]')):null}
+function activate(hash,scroll){const id=(hash||"").replace(/^#/,"")||"overview";const p=panelOf(id)||document.getElementById("overview");
+  document.querySelectorAll('[role="tabpanel"]').forEach(x=>x.hidden=x!==p);
+  TABS.forEach(t=>{const on=t.getAttribute("aria-controls")===p.id;t.setAttribute("aria-selected",String(on));t.tabIndex=on?0:-1;if(on)t.scrollIntoView({block:"nearest",inline:"nearest"})});
+  document.querySelectorAll("video,audio").forEach(m=>{if(!p.contains(m))m.pause()});
+  if(scroll!==false){const t=document.getElementById(id);if(t&&t!==p)requestAnimationFrame(()=>t.scrollIntoView());else window.scrollTo(0,0)}}
+window.addEventListener("hashchange",()=>activate(location.hash));
+document.querySelector(".tabs").addEventListener("keydown",e=>{const i=TABS.indexOf(document.activeElement);if(i<0)return;let j=null;
+  if(e.key==="ArrowRight")j=(i+1)%TABS.length;if(e.key==="ArrowLeft")j=(i-1+TABS.length)%TABS.length;if(j!==null){e.preventDefault();TABS[j].focus();TABS[j].click()}});
+/* ---- click helpers ---- */
 document.addEventListener("click",e=>{
   const b=e.target.closest(".copy");if(b){const pre=b.parentElement.querySelector("pre");const txt=pre.textContent;
     const done=()=>{b.textContent="已複製";setTimeout(()=>b.textContent="複製",1400)};
@@ -452,32 +946,73 @@ document.addEventListener("click",e=>{
 function openLB(src,alt){const d=document.createElement("div");d.className="lb";d.innerHTML=`<img src="${src}" alt="${esc(alt||"")}"><button type="button">關閉</button>`;
   const close=()=>{d.remove();document.removeEventListener("keydown",k)};const k=ev=>{if(ev.key==="Escape")close()};
   d.addEventListener("click",ev=>{if(ev.target===d||ev.target.tagName==="BUTTON")close()});document.addEventListener("keydown",k);document.body.appendChild(d);d.querySelector("button").focus();}
-// lines table
-document.getElementById("linerows").innerHTML=LINES.map(l=>`<tr><td class="mono">${l.t}</td><td>${l.who}</td><td><span class="tw">${l.tw}</span></td><td class="mono">${l.tl}</td><td>${l.zh}</td></tr>`).join("");
-// shots
+/* ---- timelines ---- */
+function tlbar(el,total,segs){el.style.gridTemplateColumns=segs.map(s=>`${(s.d/total*100).toFixed(2)}fr`).join(" ");
+  el.innerHTML=segs.map(s=>s.href?`<a href="${s.href}" title="${s.title}">${s.label}<small>${s.sub||""}</small></a>`:`<div title="${s.title}">${s.label}<small>${s.sub||""}</small></div>`).join("")}
+tlbar(document.getElementById("tl-final"),16.53,[{d:5.04,label:"鏡 1・Kling",sub:"0–5.04",href:"#k-shot1",title:"阿公質問（Kling K1 v1）"},{d:3.75,label:"鏡 2–3",sub:"–8.79",href:"#g-a2",title:"女兒、阿公出門"},{d:2.7,label:"鏡 4",sub:"–11.49",href:"#g-b",title:"牆角偷看"},{d:5.04,label:"鏡 5",sub:"–16.53",href:"#g-r0",title:"阿嬤"}]);
+tlbar(document.getElementById("tl-plan"),15,SHOTS.map(s=>({d:s.t1-s.t0,label:String(s.n),href:"#shot-"+s.n,title:"鏡 "+s.n+" "+s.title})));
+/* ---- stage 2: lines + audition ---- */
+document.getElementById("linerows").innerHTML=LINES.map(l=>`<tr><td class="mono nowrap">${l.t}</td><td class="nowrap">${l.who}</td><td><span class="tw">${l.tw}</span></td><td class="mono">${l.tl}</td><td>${l.zh}</td></tr>`).join("");
+const PLAY='<svg viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg>',STOP='<svg viewBox="0 0 16 16"><rect x="3" y="3" width="10" height="10"/></svg>';
+const au=new Audio();let cur=null;
+document.getElementById("aud").innerHTML=AUD.map(g=>`<h3 style="margin-top:22px">${g.title}</h3><p class="lead">${g.desc}</p><div class="alist">${g.items.map(it=>`<div class="arow${it.final?" final":""}"><button class="play" type="button" data-src="assets/tts/${it.src}" data-id="${it.id}" aria-label="播放 ${it.id}">${PLAY}</button><span class="id">${it.id}</span><span class="meta"><b>${it.voice}</b><span>${it.mode}</span></span>${it.final?`<span class="pick">${it.final}</span>`:"<span></span>"}</div>`).join("")}</div>`).join("");
+document.getElementById("aud").addEventListener("click",e=>{const b=e.target.closest(".play");if(!b)return;
+  const reset=()=>{if(cur)cur.innerHTML=PLAY;cur=null};
+  if(cur===b&&!au.paused){au.pause();reset();return}reset();au.src=b.dataset.src;au.play().then(()=>{cur=b;b.innerHTML=STOP}).catch(()=>{})});
+au.onended=()=>{if(cur)cur.innerHTML=PLAY;cur=null};
+/* ---- stage 1: shots ---- */
 document.getElementById("shots").innerHTML=SHOTS.map(s=>{
   const ln=s.lines.map(i=>{const l=LINES[i];return `<div class="line"><div class="who">${l.who}｜${l.t}</div><div class="tw">${l.tw}</div><div class="tl8">${l.tl}</div><div class="zh">${l.zh}</div></div>`}).join("")||`<div class="line"><div class="who">無台詞</div><div class="zh">只有畫面與表情。</div></div>`;
-  const fr=s.frames.map(f=>{const a=A[f.key];const imgs=a.images;
+  const fr=s.frames.map(f=>{
+    if(f.img)return `<figure class="frame new"><div class="ph"><img src="${f.img}" alt="鏡 ${s.n} ${f.label}" data-zoom loading="lazy"></div><figcaption><b>${f.label}</b></figcaption></figure>`;
+    const a=A[f.key];const cls=f.old?"frame old":(f.use?"frame new":"frame");
     return `<figure class="frame"><div class="ph"><img src="${f.gb}" alt="鏡 ${s.n} ${f.label} 白模" data-zoom loading="lazy"></div><figcaption><b>白模</b>｜${f.label}</figcaption></figure>`+
-      (imgs.length?imgs.map(src=>`<figure class="frame"><div class="ph"><img src="${src}" alt="鏡 ${s.n} ${f.label} 生成" data-zoom loading="lazy"></div><figcaption><b>生成 ${a.id}</b>｜${f.label}</figcaption></figure>`).join("")
-        :`<figure class="frame"><div class="ph"><span class="wait">待生成<br>${a.id}</span></div><figcaption><b>生成 ${a.id}</b>｜${f.label}</figcaption></figure>`)}).join("");
-  const pr=s.frames.map(f=>{const a=A[f.key];return `<p class="ptitle">${a.id}｜${esc(a.name)}</p><p class="use">${esc(a.use)}</p>${promptBox(a.prompt)}`+(a.tips.length?`<ul class="tips">${a.tips.map(t=>`<li>${t}</li>`).join("")}</ul>`:"")}).join("");
-  return `<article class="shot" id="shot-${s.n}"><div><div class="time">鏡 ${s.n}｜${s.t0.toFixed(1)}–${s.t1.toFixed(1)} 秒</div><h3>${s.title}</h3>
+      a.images.map(src=>`<figure class="${cls}"><div class="ph"><img src="${src}" alt="鏡 ${s.n} ${f.label} 生成" data-zoom loading="lazy"></div><figcaption><b>定格 ${a.id}</b>｜${f.label}</figcaption></figure>`).join("")}).join("");
+  const pr=s.frames.filter(f=>f.key).map(f=>{const a=A[f.key];return `<p class="ptitle">${a.id}｜${esc(a.name)}</p><p class="use">${esc(a.use)}</p>${promptBox(a.prompt)}`+(a.tips.length?`<ul class="tips">${a.tips.map(t=>`<li>${t}</li>`).join("")}</ul>`:"")}).join("");
+  return `<article class="shot" id="shot-${s.n}"><div><div class="time">鏡 ${s.n}｜企劃 ${s.t0.toFixed(1)}–${s.t1.toFixed(1)} 秒</div><h3>${s.title}</h3>
    <dl class="kv"><dt>場景</dt><dd>${s.place}</dd><dt>鏡頭</dt><dd>${s.cam}</dd></dl><p>${s.act}</p>${ln}</div>
    <div><div class="frames">${fr}</div><details><summary>定格 prompt</summary>${pr}</details></div></article>`}).join("");
-// asset cards
+/* ---- stage 1: nb 15-18 ---- */
+document.getElementById("nbrows").innerHTML=NB.map(n=>`<tr><td class="mono">${n.id}</td><td>${n.what}</td><td style="font-size:13px">${n.upload}</td><td><div class="refs" style="grid-template-columns:repeat(2,72px);margin:0">${n.before?`<figure><div class="ph"><img src="${n.before}" alt="${n.id} 原圖" data-zoom loading="lazy"></div><figcaption>原圖</figcaption></figure>`:""}<figure><div class="ph"><img src="${n.after}" alt="${n.id} 結果" data-zoom loading="lazy"></div><figcaption>結果</figcaption></figure></div></td></tr>`).join("");
+document.getElementById("nbprompts").innerHTML=NB.map(n=>`<p class="ptitle">${n.id}｜${esc(n.what)}</p>${promptBox(n.prompt)}`).join("");
+/* ---- stage 1: asset cards ---- */
 let mode={};try{mode=JSON.parse(localStorage.getItem("acmode")||"{}")}catch(e){}
 function card(a,wide){const el=document.createElement("article");el.className="card"+(wide?" wide":"");el.id="asset-"+a.id;
   el.innerHTML=`<div class="chead"><span class="num">${a.id}</span><span class="cname">${esc(a.name)}</span><span class="seg" role="group" aria-label="切換顯示"><button type="button" data-m="img">圖片</button><button type="button" data-m="prompt">Prompt</button></span></div><div class="cbody"></div>`;
   const body=el.querySelector(".cbody");
   const draw=()=>{const m=mode[a.id]||"img";el.querySelectorAll(".seg button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.m===m)));
-    if(m==="img"){const ref=REF[a.id];body.innerHTML=`<p class="use">${esc(a.use)}</p><div class="cimgs">${ref?`<img src="${ref}" alt="${esc(a.name)} 白模空景" data-zoom loading="lazy">`:""}${a.images.map(s=>`<img src="${s}" alt="${esc(a.name)}" data-zoom loading="lazy">`).join("")||'<p class="use">待生成</p>'}</div>`+(ref?`<p class="use" style="font-size:12px">左：白模空景（輸入圖 1）</p>`:"");}
+    if(m==="img"){const ref=REF[a.id];body.innerHTML=`<p class="use">${esc(a.use)}</p><div class="cimgs">${ref?`<img src="${ref}" alt="${esc(a.name)} 白模空景" data-zoom loading="lazy">`:""}${a.images.map(s=>`<img src="${s}" alt="${esc(a.name)}" data-zoom loading="lazy">`).join("")}</div>`+(ref?`<p class="use" style="font-size:12px">左：白模空景（輸入圖 1）</p>`:"");}
     else{body.innerHTML=`<p class="use">${esc(a.use)}</p>${promptBox(a.prompt)}`+(a.tips.length?`<ul class="tips">${a.tips.map(t=>`<li>${t}</li>`).join("")}</ul>`:"");}};
   el.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{mode[a.id]=b.dataset.m;try{localStorage.setItem("acmode",JSON.stringify(mode))}catch(e){}draw()});
   draw();return el;}
 for(const a of ASSETS){if(a.g==="char")document.getElementById("g-char").appendChild(card(a,true));if(a.g==="scene")document.getElementById("g-scene").appendChild(card(a,false));}
-// video switch
-document.querySelectorAll(".vtabs .chip").forEach(b=>b.onclick=()=>{const v=document.getElementById("pv");const t=v.currentTime;v.src=b.dataset.src;v.currentTime=t;document.querySelectorAll(".vtabs .chip").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));document.getElementById("legend").hidden=!b.dataset.src.includes("guide")});
+/* ---- stage 3: generations ---- */
+document.getElementById("genlist").innerHTML=GENS.map(g=>`<article class="gen" id="${g.anchor}">
+  <div class="vid"><video controls playsinline preload="none" poster="${g.poster}" src="${g.video}"></video><p>生成原檔 ${g.len} 秒（未剪、Seedance 原聲）</p></div>
+  <div><div class="eyebrow">${g.tag}｜成片 ${g.final}</div><h3>${g.title}</h3>
+   <div class="chips">${g.chips.map(c=>`<span>${c}</span>`).join("")}</div>
+   ${g.verdicts.map(v=>`<p class="verdict${v.warn?" warn":""}">${v.t}</p>`).join("")}
+   <p class="path">上傳資料夾：previz\\seedance\\upload\\${g.folder}\\</p>
+   <div class="refs">${g.refs.map(r=>`<figure${r.wide?' class="wide"':""}><div class="ph${r.wide?" wide":""}">${r.img?`<img src="${r.img}" alt="${esc(r.label)}" data-zoom loading="lazy">`:esc(r.kind)}</div><figcaption><code>${r.tag}</code>${esc(r.label)}</figcaption></figure>`).join("")}</div>
+   <details><summary>Prompt（實際送出的英文原文）</summary>${promptBox(g.prompt)}</details>
+   <details><summary>為什麼這樣寫</summary><ul class="tips" style="margin-top:8px">${g.why.map(w=>`<li>${esc(w)}</li>`).join("")}</ul></details>
+  </div></article>`).join("");
+/* ---- stage 5: kling ---- */
+document.getElementById("ksum").innerHTML=KL.map(k=>`<a href="#k-${k.id}" class="${k.winner==="k"?"win":""}"><b>${k.title}</b><span class="pick${k.winner==="k"?"":" mid"}">${k.badge}</span><p>${k.sum}</p></a>`).join("");
+document.getElementById("klist").innerHTML=KL.map(k=>`<article class="kshot" id="k-${k.id}">
+ <div class="head"><h3>${k.title}</h3><span class="meta">${k.meta}</span></div>
+ <div class="kctl"><button type="button" data-sync>三欄同步從頭播</button><label>聲音來自 <select data-snd>${k.cols.map((c,i)=>`<option value="${i}"${i===k.snd?" selected":""}>${c.name}</option>`).join("")}</select></label></div>
+ <div class="reel">${k.cols.map(c=>`<figure class="${c.win?"win":""}"><video src="${c.src}" poster="${c.poster}" controls playsinline preload="none"></video><figcaption><b>${c.name}</b>${c.win?'<span class="pick">'+c.win+'</span>':""}</figcaption></figure>`).join("")}</div>
+ <p class="verdict${k.winner==="k"?"":" warn"}">${k.verdict}</p>
+ <div class="knotes"><div><h3>Kling 做到的</h3><ul>${k.good.map(x=>`<li>${x}</li>`).join("")}</ul></div><div><h3>Kling 的差異</h3><ul>${k.bad.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>
+ <details><summary>Kling prompt（實際送出）</summary>${promptBox(k.prompt)}</details>
+</article>`).join("");
+document.querySelectorAll(".kshot").forEach(sh=>{const vids=[...sh.querySelectorAll("video")];const sel=sh.querySelector("[data-snd]");
+  const apply=()=>vids.forEach((v,i)=>v.muted=i!==Number(sel.value));sel.onchange=apply;apply();
+  sh.querySelector("[data-sync]").onclick=()=>{apply();vids.forEach(v=>{v.pause();v.preload="auto";v.currentTime=0});vids.forEach(v=>{const p=v.play();if(p&&p.catch)p.catch(()=>{})})}});
+/* ---- hero video switch ---- */
+document.querySelectorAll(".vtabs .chip").forEach(b=>b.onclick=()=>{const v=document.getElementById("pv");v.poster=b.dataset.poster;v.src=b.dataset.src;document.querySelectorAll(".vtabs .chip").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));document.getElementById("legend").hidden=!b.dataset.src.includes("guide")});
+activate(location.hash,!!location.hash);
 </script>
 </body>
 </html>
