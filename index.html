@@ -255,7 +255,7 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
     <p class="logline">阿公懷疑阿嬤最近天天一早出門，是去「討客兄」，拉著女兒一路跟蹤到公園，結果發現阿嬤穿著活力褲，在漫步機上踩得比誰都有自信。</p>
     <p class="lead">笑點只放在阿公和女兒的誤會上，阿嬤要拍得健康、開心、帥氣。這一頁是給接手同事的製作紀錄：每個階段做了什麼、用了哪些素材和 prompt、踩過哪些坑、檔案放在哪裡。</p>
     <div class="facts">
-      <div class="fact"><b>目前版本</b><span>v9 成片（10/21）</span></div>
+      <div class="fact"><b>目前版本</b><span>v10 成片（10/21）</span></div>
       <div class="fact"><b>規格</b><span>9:16・1080×1920・24 fps</span></div>
       <div class="fact"><b>片長</b><span>16.5 秒（企劃 15 秒）</span></div>
       <div class="fact"><b>主打品項</b><span>安親活力褲</span></div>
@@ -264,9 +264,10 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
     </div>
   </div>
   <div class="side">
-    <div class="player"><video id="pv" controls playsinline preload="metadata" poster="assets/video/final_v9_poster.jpg" src="assets/video/final_v9_720p.mp4"></video></div>
+    <div class="player"><video id="pv" controls playsinline preload="metadata" poster="assets/video/final_v10_poster.jpg" src="assets/video/final_v10_720p.mp4"></video></div>
     <div class="vtabs" role="group" aria-label="影片版本">
-      <button class="chip" type="button" data-src="assets/video/final_v9_720p.mp4" data-poster="assets/video/final_v9_poster.jpg" aria-pressed="true">成片 v9</button>
+      <button class="chip" type="button" data-src="assets/video/final_v10_720p.mp4" data-poster="assets/video/final_v10_poster.jpg" aria-pressed="true">成片 v10</button>
+      <button class="chip" type="button" data-src="assets/video/final_v9_720p.mp4" data-poster="assets/video/final_v9_poster.jpg" aria-pressed="false">v9</button>
       <button class="chip" type="button" data-src="assets/video/final_v8_720p.mp4" data-poster="assets/video/final_v8_poster.jpg" aria-pressed="false">v8（全 Seedance）</button>
       <button class="chip" type="button" data-src="assets/video/previz_v7_guide.mp4" data-poster="assets/video/poster.jpg" aria-pressed="false">白模對稿版</button>
       <button class="chip" type="button" data-src="assets/video/previz_keyframes.mp4" data-poster="assets/video/poster.jpg" aria-pressed="false">定格版</button>
@@ -284,14 +285,14 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
     <a href="#stage1"><span class="k">STAGE 1｜10/17–10/20</span><b>白模與定格</b><span>Blender 白模定好機位、時間與走位；Nano Banana Pro 生成角色、場景與每一鏡的定格。</span><span class="done">完成</span></a>
     <a href="#stage2"><span class="k">STAGE 2｜10/17–10/18</span><b>台語配音</b><span>Gemini 3.8 Flash TTS 試聽選聲，替阿公做專屬沙啞聲線；錄好的台詞給影片模型對嘴。</span><span class="done">完成</span></a>
     <a href="#stage3"><span class="k">STAGE 3｜10/20</span><b>影片生成</b><span>Higgsfield 上的 Seedance 2.0，拆成四支生成；附完整 prompt、參考素材與試錯紀錄。</span><span class="done">完成</span></a>
-    <a href="#stage4"><span class="k">STAGE 4｜10/20–10/21</span><b>後期與交付</b><span>剪接、「討客兄」換音、配樂、Topaz 升 1080p、LOGO 與產品文案合成。</span><span class="done">v9 已交付</span></a>
+    <a href="#stage4"><span class="k">STAGE 4｜10/20–10/21</span><b>後期與交付</b><span>剪接、「討客兄」換音、配樂、Topaz 升 1080p、LOGO、字幕與產品文案合成。</span><span class="done">v10 已交付</span></a>
     <a href="#stage5"><span class="k">STAGE 5｜10/21</span><b>Kling 對照</b><span>同樣素材改用 Kling 4.0 Omni 生成四段，和 Seedance 逐鏡比較；鏡 1 改用 Kling 版本。</span><span class="done">鏡 1 已換入 v9</span></a>
   </div>
 </section>
 
 <section>
   <div class="eyebrow">Edit</div>
-  <h2>成片時間軸（v9）</h2>
+  <h2>成片時間軸（v10）</h2>
   <p class="lead">鏡 1 來自 Kling，其餘來自 Seedance。生成時每支都多留了秒數，剪接後全片 16.5 秒。若要剪回 15 秒，見「後期與交付」的建議。</p>
   <div class="tl" id="tl-final" aria-label="v9 時間軸"></div>
   <div class="tlnote"><span>0s</span><span>16.5s</span></div>
@@ -306,7 +307,8 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
       <li><b>聲音：</b>鏡 1 用 Kling 原聲，它直接照我們的 E3 錄音對嘴，「討客兄」不必再換音。鏡 2–3 阿公那句仍換成 E3；女兒、阿嬤保留 Seedance 原聲。</li>
       <li><b>產品入鏡：</b>客廳茶几上加了活力褲包裝，鏡 1、鏡 2 的定格因此重做（定格 15–18）。</li>
       <li><b>片長：</b>16.5 秒。鏡 2–3 合成一支生成，鏡 4 偷看保留驚嚇、剪掉女兒笑的段落。</li>
-      <li><b>LOGO：</b>前段是「安親世家」劇名，阿嬤鏡頭推近時淡換成安親 Feelfree 品牌 LOGO。</li>
+      <li><b>LOGO：</b>0–11.5 秒「安親世家」劇名右邊並排安親 Feelfree LOGO；切到阿嬤時劇名淡出，安親 LOGO 滑到劇名的位置並放大（v10）。</li>
+      <li><b>字幕：</b>中文字幕放在下方字幕區；最後一句「阿嬤不輸年輕人！」改放在片尾文案正上方，避開產品與文案（v10）。</li>
     </ul></div>
     <div class="panel"><h3>檔案在哪裡</h3>
       <p class="path">C:\Users\wayne\Desktop\ann-ching\</p>
@@ -325,8 +327,7 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
       <li>客戶確認「討客兄」笑點；備案台詞：「敢是去交男朋友？」（Kám-sī khì kau lâm-pîng-iú?）</li>
       <li>是否要剪回 15 秒。</li>
       <li>鏡 1 茶几上包裝的商標與小字是模型生成的假字，對外前要用真實包裝貼回（產品不動，追蹤容易）。</li>
-      <li>中文字幕尚未依新時間軸重做。</li>
-      <li>鏡 1 Kling 版的包裝字同樣要檢查（Kling 也可能重畫小字）。</li>
+            <li>鏡 1 Kling 版的包裝字同樣要檢查（Kling 也可能重畫小字）。</li>
     </ul></div>
   </div>
 </section>
@@ -579,12 +580,12 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
   <h1>後期與交付</h1>
   <p class="lead">把四支生成片剪成 16.5 秒，修正「討客兄」的發音，鋪 MiniMax 配樂，用 Topaz 升到 1080p，最後合成 LOGO、產品與文案。v9 只把鏡 1 換成 Kling 版本，其餘沿用 v8。</p>
   <div class="handoff">
-    <div><h4>產出</h4><ul><li>v9：鏡 1 換 Kling，1080p 含 LOGO、產品、文案（目前版本）</li><li>v8：全 Seedance 版</li><li>v7／v9 無合成版、剪接素材包、合成圖層、合成腳本</li></ul></div>
+    <div><h4>產出</h4><ul><li>v10：v9 加字幕、LOGO 新動態（目前版本，另有無字幕版與 SRT）</li><li>v9：鏡 1 換 Kling；v8：全 Seedance 版</li><li>v7／v9 無合成版、剪接素材包、合成圖層、合成腳本</li></ul></div>
     <div><h4>工具</h4><ul><li>ffmpeg（剪接、混音、對齊）</li><li>Gemini 3.8 Flash TTS（換音）</li><li>MiniMax（配樂）、Topaz（Higgsfield 升解析度）</li><li>Python＋PIL 逐格合成</li></ul></div>
     <div><h4>檔案</h4><p class="path">previz\seedance\final_1080p_交付\<br>previz\seedance\final_roughcut_v4_素材\</p></div>
     <div><h4>交接注意</h4><ul><li>要用自己的剪接軟體重剪，從素材包開始，裡面的 README 有完整對照。</li><li>Topaz 輸出是 HEVC，部分軟體要用 H.264 版。</li></ul></div>
   </div>
-  <nav class="subnav" aria-label="本頁段落"><a href="#edit">剪接</a><a href="#fixvoice">討客兄換音</a><a href="#music">配樂</a><a href="#comp">LOGO 與產品合成</a><a href="#deliver">交付檔案</a></nav>
+  <nav class="subnav" aria-label="本頁段落"><a href="#edit">剪接</a><a href="#fixvoice">討客兄換音</a><a href="#music">配樂</a><a href="#comp">LOGO 與產品合成</a><a href="#subs">字幕</a><a href="#deliver">交付檔案</a></nav>
 </div>
 
 <section id="edit">
@@ -648,11 +649,11 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
 
 <section id="comp">
   <div class="eyebrow">Composite</div>
-  <h2>LOGO 與產品合成（v8、v9 相同）</h2>
+  <h2>LOGO 與產品合成（v10）</h2>
   <p class="lead">先用 Topaz 把 720p 粗剪升到 1080p，再用 Python 逐格合成。淡入淡出用 easeInOutSine，上升與縮放用 easeOutCubic，動起來比較自然。去背圖層由團隊手動完成。</p>
   <div class="layers">
-    <figure><div class="ph"><img src="assets/post/logo_shijia.png" alt="安親世家 LOGO" data-zoom></div><figcaption>安親世家（片頭–13.7 s）</figcaption></figure>
-    <figure><div class="ph"><img src="assets/post/logo_feelfree.png" alt="安親 Feelfree LOGO" data-zoom></div><figcaption>安親 Feelfree（13.1 s 起）</figcaption></figure>
+    <figure><div class="ph"><img src="assets/post/logo_shijia.png" alt="安親世家 LOGO" data-zoom></div><figcaption>安親世家（0–12.1 s）</figcaption></figure>
+    <figure><div class="ph"><img src="assets/post/logo_feelfree.png" alt="安親 Feelfree LOGO" data-zoom></div><figcaption>安親 Feelfree（全片）</figcaption></figure>
     <figure><div class="ph"><img src="assets/post/slogan_1_ribbon.png" alt="紅色飄帶" data-zoom></div><figcaption>文案 1｜飄帶</figcaption></figure>
     <figure><div class="ph"><img src="assets/post/slogan_2_line1.png" alt="簡單安心" data-zoom></div><figcaption>文案 2｜簡單安心</figcaption></figure>
     <figure><div class="ph"><img src="assets/post/slogan_3_line2.png" alt="活力不受限" data-zoom></div><figcaption>文案 3｜活力不受限</figcaption></figure>
@@ -661,20 +662,44 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
   <div class="tblwrap"><table>
     <thead><tr><th>圖層</th><th>位置與大小（1080×1920）</th><th>出現時間</th><th>動態</th></tr></thead>
     <tbody>
-      <tr><td>安親世家 LOGO</td><td class="mono">寬 340，(60, 270)</td><td class="mono">0 – 13.7 s</td><td>13.1–13.7 s 淡出（easeInOutSine）</td></tr>
-      <tr><td>安親 Feelfree LOGO</td><td class="mono">高 165，(60, 255)</td><td class="mono">13.1 s – 片尾</td><td>與上一個交叉淡化</td></tr>
+      <tr><td>安親世家 LOGO</td><td class="mono">寬 340、高 114，(60, 270)</td><td class="mono">0 – 12.09 s</td><td>11.49–12.09 s 淡出（easeInOutSine）</td></tr>
+      <tr><td>安親 Feelfree LOGO</td><td class="mono">起：高 114，(428, 270)<br>終：高 165，(60, 255)</td><td class="mono">全片</td><td>11.64–12.44 s 移到劇名位置並放大（easeInOutCubic）</td></tr>
       <tr><td>文案三層</td><td class="mono">寬 580，(40, 1030)</td><td class="mono">飄帶 14.50／第一行 14.68／第二行 14.86 s</td><td>0.65 秒淡入＋上升 36 px（easeOutCubic）</td></tr>
       <tr><td>產品</td><td class="mono">高 440，(726, 1150)</td><td class="mono">14.62 s</td><td>0.7 秒淡入＋縮放 0.95→1</td></tr>
     </tbody>
   </table></div>
-  <p class="lead" style="margin-top:10px">LOGO 在阿嬤鏡頭開始推近時換成品牌 LOGO；文案與產品排在下方安全區，人物臉留在上半部。</p>
+  <p class="lead" style="margin-top:10px">v8／v9 的做法是 13.1 秒才把劇名交叉淡化成品牌 LOGO；v10 改成品牌 LOGO 從片頭就和劇名並排，切到阿嬤時接手。文案與產品排在下方安全區，人物臉留在上半部。</p>
+</section>
+
+<section id="subs">
+  <div class="eyebrow">Subtitles</div>
+  <h2>字幕（v10）</h2>
+  <p class="lead">中文字幕直接燒進畫面，另附 SRT 方便自己剪。字型 Noto Sans CJK TC Bold 64 px，白字黑邊加柔和陰影，每句前後 0.08 秒淡入淡出；時間依 v9 的聲音重新對過，鏡 4 的「啊」不上字幕。</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>時間</th><th>角色</th><th>字幕</th><th>位置</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">0.20–1.42</td><td>阿公</td><td>你媽以前都不出門，</td><td>字幕區</td></tr>
+      <tr><td class="mono">1.42–3.05</td><td>阿公</td><td>現在一大早就跑出去……</td><td>字幕區</td></tr>
+      <tr><td class="mono">3.38–4.95</td><td>阿公</td><td>該不會是……在偷人吧？！</td><td>字幕區</td></tr>
+      <tr><td class="mono">5.08–6.62</td><td>女兒</td><td>爸，她是……</td><td>字幕區</td></tr>
+      <tr><td class="mono">6.80–7.95</td><td>阿公</td><td>走！跟去看看！</td><td>字幕區</td></tr>
+      <tr><td class="mono">11.62–12.88</td><td>阿嬤</td><td>安親活力褲，</td><td>字幕區</td></tr>
+      <tr><td class="mono">13.12–14.44</td><td>阿嬤</td><td>穿起來輕鬆，</td><td>字幕區</td></tr>
+      <tr><td class="mono">14.74–16.50</td><td>阿嬤</td><td>阿嬤不輸年輕人！</td><td>文案正上方（底邊 y 1005）</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><strong>和片尾文案打架的解法：</strong>阿嬤的台詞照停頓拆成三句，前兩句在 14.44 秒結束、文案 14.5 秒才進場，真正重疊的只有最後一句。最後一句不放字幕區，改放在文案區塊正上方（阿嬤下巴下方），和文案疊成一組，不擋臉也不壓產品。備案：最後一句不上字幕讓文案接手，或片尾多停 1 秒讓台詞先講完。</div>
 </section>
 
 <section id="deliver">
   <div class="eyebrow">Delivery</div>
   <h2>交付檔案</h2>
   <div class="tree">previz\seedance\final_1080p_交付\
-├─ 阿母的客兄_v9_1080p_鏡1Kling_LOGO_產品文案.mp4 ← 目前版本
+├─ 阿母的客兄_v10_1080p_字幕.mp4             ← 目前版本
+├─ 阿母的客兄_v10_1080p_無字幕.mp4           ← v10 不含字幕
+├─ 阿母的客兄_v10_字幕.srt                   ← 字幕檔
+├─ v10合成腳本_comp.py                       ← v10 合成腳本（LOGO 動態＋字幕）
+├─ 阿母的客兄_v9_1080p_鏡1Kling_LOGO_產品文案.mp4
 ├─ 阿母的客兄_v9_1080p_無合成.mp4           ← v9 底片（含混音）
 ├─ 阿母的客兄_v8_1080p_LOGO_產品文案.mp4    ← 全 Seedance 版
 ├─ 阿母的客兄_v7_1080p_無合成.mp4           ← 要自己合成時用（H.264）
