@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>安親 5 秒短影音</title>
+<meta name="description" content="安親活力褲 5 秒社群短影音三支（媽媽、爸爸、子女）的製作紀錄：版位、圖文素材、首尾格生成、Kling 影片與合成交付。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* layout: production record — sticky header with stage tabs (one panel per stage); inside each panel: handoff summary box, then sections of cards, tables and prompt slabs */
+:root{
+  --bg:#f3f5f4; --surface:#ffffff; --sunk:#eaeeec; --ink:#1b2321; --muted:#5d6966; --line:#d9e0dd;
+  --teal:#0e7069; --teal-soft:#dcefec; --teal-ink:#ffffff; --red:#b3262d; --red-soft:#f8e3e3; --amber:#8a6514; --amber-soft:#f6ecd6;
+  --f-display:"Noto Serif TC","PMingLiU","MingLiU",serif; --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121615;--surface:#1a201e;--sunk:#151a19;--ink:#e6ecea;--muted:#9aa7a3;--line:#2c3533;--teal:#4fc0b4;--teal-soft:#16302d;--teal-ink:#0f1413;--red:#ec7b7f;--red-soft:#3a1d1f;--amber:#dcb35a;--amber-soft:#33291424;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121615;--surface:#1a201e;--sunk:#151a19;--ink:#e6ecea;--muted:#9aa7a3;--line:#2c3533;--teal:#4fc0b4;--teal-soft:#16302d;--teal-ink:#0f1413;--red:#ec7b7f;--red-soft:#3a1d1f;--amber:#dcb35a;--amber-soft:#332914;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:120px}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 var(--f-body);-webkit-text-size-adjust:100%}
+img,video,audio{max-width:100%;display:block}
+a{color:var(--teal)}
+code{font:12.5px var(--f-mono);background:var(--sunk);padding:1px 5px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surface);z-index:20}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:18px;min-height:58px}
+.brand{font:700 17px var(--f-display);white-space:nowrap}
+.brand small{display:block;font:500 11px var(--f-body);color:var(--muted);letter-spacing:.04em}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;min-width:0;padding-block:8px}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{display:flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:14px;padding:7px 12px;border-radius:999px;white-space:nowrap;border:1px solid transparent}
+.tabs a .n{font:500 11px var(--f-mono);width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:var(--sunk);color:var(--muted)}
+.tabs a:hover{background:var(--sunk);color:var(--ink)}
+.tabs a[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.tabs a[aria-selected="true"] .n{background:var(--bg);color:var(--ink)}
+.tabs a:focus-visible,.chip:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.subnav{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.subnav a{font-size:13px;color:var(--muted);text-decoration:none;border:1px solid var(--line);background:var(--surface);padding:3px 11px;border-radius:999px}
+.subnav a:hover{color:var(--ink)}
+[role="tabpanel"][hidden]{display:none}
+section{padding-block:40px 6px}
+.panelhead{padding-top:34px}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.15}
+h2{font-size:clamp(22px,3vw,28px);line-height:1.25;margin-bottom:6px}
+h3{font-size:18px;line-height:1.35}
+.lead{color:var(--muted);max-width:68ch;margin:6px 0 0}
+p{max-width:72ch}
+.eyebrow{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+/* handoff box */
+.handoff{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 24px}
+.handoff h4{margin:0 0 4px;font-size:12.5px;color:var(--teal);font-weight:700;letter-spacing:.04em}
+.handoff ul{margin:0;padding-left:1.1em;font-size:14px}
+.handoff p{margin:0;font-size:14px}
+.path{font:12.5px/1.6 var(--f-mono);color:var(--muted);word-break:break-all}
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,300px);gap:32px;align-items:start;padding-top:34px}
+.showlogo{width:min(240px,60%);height:auto;margin:0 0 14px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.18))}
+.hero p.logline{font-size:17px;max-width:46ch;margin:14px 0 0}
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:22px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.fact b{display:block;font-size:12px;color:var(--muted);font-weight:500}
+.fact span{font-weight:700}
+.player{background:#000;border-radius:14px;overflow:hidden;aspect-ratio:9/16;width:100%}
+.player video{width:100%;height:100%;object-fit:contain}
+.vtabs{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.chip{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.legend{font-size:12.5px;color:var(--muted);margin-top:8px}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.hero .side{max-width:320px}}
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:18px;counter-reset:st}
+@media (max-width:980px){.pipe{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.pipe{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.pipe{grid-template-columns:1fr}}
+.pipe a{display:grid;gap:4px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;color:inherit;text-decoration:none;position:relative}
+.pipe a:hover{border-color:var(--teal)}
+.pipe .k{font:500 12px var(--f-mono);color:var(--teal)}
+.pipe b{font-size:16px}
+.pipe span{font-size:13px;color:var(--muted)}
+.pipe .done{font-size:11.5px;color:var(--teal);background:var(--teal-soft);border-radius:999px;padding:1px 8px;justify-self:start;margin-top:4px}
+/* timeline bar */
+.tl{margin-top:16px;display:grid;height:40px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.tl a,.tl div{display:flex;flex-direction:column;align-items:center;justify-content:center;font:500 12px/1.2 var(--f-mono);color:var(--ink);text-decoration:none;border-right:1px solid var(--line);white-space:nowrap;overflow:hidden}
+.tl small{font-size:10.5px;color:var(--muted)}
+.tl > :last-child{border-right:none}
+.tl > :nth-child(odd){background:var(--sunk)}
+.tlnote{display:flex;justify-content:space-between;font:12px var(--f-mono);color:var(--muted);margin-top:4px}
+/* storyboard */
+.shots{display:grid;gap:18px;margin-top:20px}
+.shot{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:20px}
+@media (max-width:820px){.shot{grid-template-columns:1fr}}
+.shot .time{font:500 13px var(--f-mono);color:var(--teal)}
+.shot h3{margin:2px 0 8px}
+.shot p{margin:0 0 8px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:13.5px;margin:8px 0}
+.kv dt{color:var(--muted)} .kv dd{margin:0}
+.line{border-left:3px solid var(--red);padding:6px 0 6px 12px;margin:10px 0}
+.line .who{font-size:12px;color:var(--red);font-weight:700}
+.line .tw{font-family:var(--f-display);font-size:18px;line-height:1.5}
+.line .tl8{font:13px/1.5 var(--f-mono);color:var(--muted)}
+.line .zh{font-size:13.5px}
+.frames{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;align-content:start}
+.frame{margin:0;display:grid;gap:4px;align-content:start}
+.frame .ph{aspect-ratio:9/16;border-radius:8px;overflow:hidden;background:var(--sunk);border:1px solid var(--line);display:grid;place-items:center;position:relative}
+.frame img{width:100%;height:100%;object-fit:cover;cursor:zoom-in}
+.frame figcaption{font-size:12px;color:var(--muted);line-height:1.4}
+.frame figcaption b{color:var(--ink);font-weight:500}
+.frame.old .ph::after{content:"已替換";position:absolute;top:6px;left:6px;font-size:11px;background:rgba(0,0,0,.65);color:#fff;padding:1px 7px;border-radius:999px}
+.frame.new .ph{outline:2px solid var(--teal);outline-offset:-2px}
+.frame.new .ph::after{content:"影片用";position:absolute;top:6px;left:6px;font-size:11px;background:var(--teal);color:var(--teal-ink);padding:1px 7px;border-radius:999px}
+details{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+summary{cursor:pointer;font-size:13.5px;color:var(--teal);font-weight:500}
+.ptitle{font-size:13px;font-weight:700;margin:12px 0 4px}
+.promptbox{position:relative;margin-top:6px}
+pre{margin:0;background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:14px;font:12.5px/1.65 var(--f-mono);white-space:pre-wrap;word-break:break-word;max-height:360px;overflow:auto}
+.copy{position:absolute;top:8px;right:8px;font:inherit;font-size:12px;border:none;border-radius:999px;background:var(--teal);color:var(--teal-ink);padding:4px 12px;cursor:pointer}
+/* tables */
+.tblwrap{overflow-x:auto;margin-top:14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:620px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12.5px;color:var(--muted);font-weight:500;background:var(--sunk)}
+tr:last-child td{border-bottom:none}
+td.mono,.mono{font:12.5px/1.6 var(--f-mono)}
+td .tw{font-family:var(--f-display);font-size:16px}
+.nowrap{white-space:nowrap}
+.pick{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:999px;background:var(--teal);color:var(--teal-ink);margin-left:6px;vertical-align:2px;white-space:nowrap}
+.pick.no{background:var(--red)}
+.pick.mid{background:var(--amber);color:#fff}
+b.rh{color:var(--red)}
+#voice td:first-child,#voice th:first-child{white-space:nowrap}
+/* asset cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.card.wide{grid-column:1/-1}
+.chead{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.num{font:500 13px var(--f-mono);color:var(--teal)}
+.cname{font-weight:700;flex:1;min-width:8em}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:2px;background:var(--sunk)}
+.seg button{font:inherit;font-size:12.5px;border:none;background:transparent;color:var(--muted);padding:3px 12px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.cbody{padding:14px;display:grid;gap:10px}
+.use{font-size:13.5px;color:var(--muted);margin:0}
+.cimgs{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+.card.wide .cimgs{grid-template-columns:1fr}
+.cimgs img{border-radius:8px;width:100%;cursor:zoom-in;background:var(--sunk)}
+.tips{margin:0;padding-left:1.2em;font-size:13px;color:var(--muted)}
+/* panels */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:14px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.panel h3{font-size:17px;margin-bottom:8px}
+ul.clean{margin:0;padding-left:1.15em}
+ul.clean li+li{margin-top:5px}
+ol.rules{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:r}
+ol.rules li{counter-increment:r;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px 12px 52px;position:relative}
+ol.rules li::before{content:counter(r);position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:50%;background:var(--teal);color:var(--teal-ink);display:grid;place-items:center;font:500 13px var(--f-mono)}
+ol.rules b{display:block}
+ol.rules span{font-size:14px;color:var(--muted)}
+.note{background:var(--amber-soft);border-radius:12px;padding:14px 16px;margin-top:14px;font-size:14px}
+.note strong{color:var(--amber)}
+.zone{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:0}
+/* generation cards */
+.gen{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr);gap:22px;margin-top:18px}
+@media (max-width:760px){.gen{grid-template-columns:1fr}.gen .vid{max-width:260px}}
+.gen .vid video{width:100%;aspect-ratio:9/16;background:#000;border-radius:10px;object-fit:contain}
+.gen .vid p{font-size:12.5px;color:var(--muted);margin:6px 0 0}
+.gen h3{margin:2px 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.chips span{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:1px 9px;color:var(--muted);background:var(--bg)}
+.refs{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:8px;margin:10px 0}
+.refs figure{min-width:0;margin:0;display:grid;grid-template-columns:minmax(0,1fr);gap:3px;align-content:start}
+.refs .ph{aspect-ratio:9/16;border-radius:6px;overflow:hidden;background:var(--sunk);border:1px solid var(--line);display:grid;place-items:center;text-align:center;font-size:11px;color:var(--muted);padding:4px}
+.refs figure.wide{grid-column:span 2}
+.refs .ph.wide{aspect-ratio:16/9;padding:0}
+.refs img{width:100%;height:100%;object-fit:cover;cursor:zoom-in}
+.refs figcaption{font-size:11.5px;line-height:1.35;color:var(--muted)}
+.refs figcaption code{display:block;font-size:11.5px;color:var(--red);background:none;padding:0}
+.verdict{font-size:14px;border-left:3px solid var(--teal);padding:4px 0 4px 12px;margin:8px 0}
+.verdict.warn{border-color:var(--amber)}
+/* audio */
+.alist{display:grid;gap:6px;margin-top:10px}
+.arow{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:7px 10px}
+.arow.final{border-color:var(--teal);background:color-mix(in srgb,var(--teal-soft) 60%,var(--surface))}
+.arow .id{font:500 13px var(--f-mono);color:var(--red);min-width:2.6em}
+.arow .meta{min-width:0;font-size:14px}
+.arow .meta span{color:var(--muted);font-size:12.5px;margin-left:6px}
+.play{width:36px;height:36px;border:none;border-radius:50%;background:var(--teal);color:var(--teal-ink);display:grid;place-items:center;cursor:pointer}
+.play svg{width:14px;height:14px;fill:currentColor}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px}
+.cmp .panel{display:grid;gap:8px;align-content:start}
+.cmp audio{width:100%}
+.cmp .panel p{margin:0;font-size:13.5px;color:var(--muted)}
+.layers{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:12px}
+.layers figure{margin:0;display:grid;grid-template-columns:minmax(0,1fr);gap:4px;min-width:0}
+.layers .ph{min-width:0;overflow:hidden}
+.layers .ph{aspect-ratio:1;border-radius:8px;border:1px solid var(--line);display:grid;place-items:center;padding:8px;background:repeating-conic-gradient(#cfd6d3 0 25%,#eef1f0 0 50%) 0 0/16px 16px}
+.layers img{width:100%;height:100%;min-width:0;object-fit:contain}
+.layers figcaption{font-size:12px;color:var(--muted)}
+.tree{font:12.5px/1.75 var(--f-mono);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:14px;overflow-x:auto;white-space:pre}
+/* kling */
+.ksum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}
+@media (max-width:860px){.ksum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.ksum{grid-template-columns:1fr}}
+.ksum a{display:grid;gap:6px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;color:inherit;text-decoration:none;min-width:0}
+.ksum a.win{border-color:var(--teal);border-width:2px}
+.ksum b{font-size:15px}.ksum p{margin:0;font-size:13px;color:var(--muted)}
+.kshot{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:18px;display:grid;gap:14px}
+.kshot .head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.kshot .head .meta{font:12.5px var(--f-mono);color:var(--muted)}
+.kctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:13px;color:var(--muted)}
+.kctl button{font:inherit;font-size:13px;border:none;border-radius:999px;background:var(--teal);color:var(--teal-ink);padding:5px 14px;cursor:pointer}
+.kctl select{font:inherit;font-size:13px;padding:3px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.reel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:560px){.reel{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}}
+.reel figure{margin:0;display:grid;gap:4px;min-width:0}
+.reel video{width:100%;aspect-ratio:9/16;background:#000;border-radius:8px;object-fit:contain}
+.reel figcaption{font-size:12.5px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+.reel figure.win video{outline:3px solid var(--teal);outline-offset:-1px}
+.knotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 24px}
+.knotes h3{font-size:14px;font-family:var(--f-body)}
+.knotes ul{margin:4px 0 0;padding-left:1.15em;font-size:14px}
+footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
+/* lightbox */
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.86);display:grid;place-items:center;z-index:50;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lb img{max-height:100%;max-width:100%;border-radius:8px}
+.lb button{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px));font:inherit;border:none;border-radius:999px;padding:6px 14px;background:#fff;color:#000;cursor:pointer}
+
+.xlink{margin-left:auto;font-size:13px;white-space:nowrap;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--ink);background:var(--surface)}
+.xlink:hover{border-color:var(--teal);color:var(--teal)}
+@media (max-width:560px){.xlink{display:none}}
+.kshot .reel figcaption .pick{margin-left:0}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <span class="brand">簡單安心 活力不受限<small>安親活力褲｜5 秒短影音 ×3</small></span>
+  <nav class="tabs" role="tablist" aria-label="製作階段">
+    <a role="tab" href="#overview" id="tab-overview" aria-controls="overview"><span class="n">0</span>總覽</a>
+    <a role="tab" href="#stage1" id="tab-stage1" aria-controls="stage1"><span class="n">1</span>規格與版位</a>
+    <a role="tab" href="#stage2" id="tab-stage2" aria-controls="stage2"><span class="n">2</span>圖文素材</a>
+    <a role="tab" href="#stage3" id="tab-stage3" aria-controls="stage3"><span class="n">3</span>首尾格</a>
+    <a role="tab" href="#stage4" id="tab-stage4" aria-controls="stage4"><span class="n">4</span>Kling 影片</a>
+    <a role="tab" href="#stage5" id="tab-stage5" aria-controls="stage5"><span class="n">5</span>合成與交付</a>
+  </nav>
+  <a class="xlink" href="index.html">15 秒主片 →</a>
+</div></header>
+
+<main class="wrap">
+
+<!-- ============ 0 總覽 ============ -->
+<div role="tabpanel" id="overview" aria-labelledby="tab-overview">
+<section class="hero">
+  <div>
+    <div class="eyebrow">安親活力褲｜社群投放短影音</div>
+    <h1>5 秒短影音 ×3</h1>
+    <p class="logline">延伸 15 秒主片「阿母的客兄」的角色與場景，做三支 5 秒、無聲的直式廣告，分別對媽媽、爸爸、子女三種受眾說「簡單安心，活力不受限」。</p>
+    <p class="lead">每支都是同一個公式：一段 5 秒的生活動作，畫面上依序帶出安親 LOGO、標題飄帶、產品包裝與三個特色 icon。這一頁記錄每個階段做了什麼、用了哪些 prompt、試錯過程與檔案位置，給接手的同事看。</p>
+    <div class="facts">
+      <div class="fact"><b>目前版本</b><span>v1 交付（10/21）</span></div>
+      <div class="fact"><b>規格</b><span>9:16・1080×1920・24 fps</span></div>
+      <div class="fact"><b>片長</b><span>5.0 秒 ×3</span></div>
+      <div class="fact"><b>聲音</b><span>無（無配音、音效、配樂）</span></div>
+      <div class="fact"><b>版位</b><span>Motion 全螢幕、文中直式；符合 Meta 安全區</span></div>
+      <div class="fact"><b>模型</b><span>首尾格 Nano Banana Pro・影片 Kling 4.0</span></div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="player"><video id="pv" controls playsinline preload="metadata" poster="assets/5s/final_s1_poster.jpg" src="assets/5s/final_s1_720p.mp4"></video></div>
+    <div class="vtabs" role="group" aria-label="影片版本">
+      <button class="chip" type="button" data-src="assets/5s/final_s1_720p.mp4" data-poster="assets/5s/final_s1_poster.jpg" aria-pressed="true">S1 媽媽</button>
+      <button class="chip" type="button" data-src="assets/5s/final_s2_720p.mp4" data-poster="assets/5s/final_s2_poster.jpg" aria-pressed="false">S2 爸爸</button>
+      <button class="chip" type="button" data-src="assets/5s/final_s3_720p.mp4" data-poster="assets/5s/final_s3_poster.jpg" aria-pressed="false">S3 子女</button>
+    </div>
+    <p class="legend">網頁版為 720p 壓縮檔，原檔見「合成與交付」。</p>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Pipeline</div>
+  <h2>製作流程</h2>
+  <p class="lead">依序完成，每一步都先給製作人審核，通過才進下一步。點卡片可以直接跳到該階段。</p>
+  <div class="pipe">
+    <a href="#stage1"><span class="k">STAGE 1</span><b>規格與版位</b><span>Meta 安全區、圖文位置與進場時間；Blender 白模排出三張尾格確認不擁擠。</span><span class="done">完成</span></a>
+    <a href="#stage2"><span class="k">STAGE 2</span><b>圖文素材</b><span>三個特色 icon 重新生成（圓圖＋字），標題飄帶縮到寬 380。</span><span class="done">B 方案定案</span></a>
+    <a href="#stage3"><span class="k">STAGE 3</span><b>首尾格</b><span>Nano Banana Pro 生成每支的首格、尾格；疊圖文檢查臉不被擋。</span><span class="done">6 張定案</span></a>
+    <a href="#stage4"><span class="k">STAGE 4</span><b>Kling 影片</b><span>Claude Code CLI 用 Kling 4.0 首尾幀生成，每支 2 條，挑一條。</span><span class="done">完成</span></a>
+    <a href="#stage5"><span class="k">STAGE 5</span><b>合成與交付</b><span>升 1080×1920、去聲音，疊 LOGO／標題／產品／icon 動態。</span><span class="done">v1 已交付</span></a>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Spots</div>
+  <h2>三支內容</h2>
+  <div class="tblwrap"><table>
+    <thead><tr><th>支</th><th>受眾</th><th>5 秒內發生什麼</th><th>採用的影片</th></tr></thead>
+    <tbody>
+      <tr><td class="nowrap"><b>S1 媽媽</b></td><td>熟齡女性本人</td><td>阿嬤在公園漫步機上踩得起勁，鏡頭慢慢推近，她轉頭看鏡頭，自信又帶點得意地笑。延續 15 秒主片的結尾。</td><td class="mono">S1_媽媽_v2</td></tr>
+      <tr><td class="nowrap"><b>S2 爸爸</b></td><td>熟齡男性本人</td><td>阿公和阿嬤並排踩漫步機。阿公是主角，轉頭對鏡頭咧嘴笑、挑眉；阿嬤在旁邊笑他。阿公保留吊嘎＋高腰褲＋深藍帽。</td><td class="mono">S2_爸爸_v2</td></tr>
+      <tr><td class="nowrap"><b>S3 子女</b></td><td>替父母採買的子女</td><td>爸媽挽著手在棕櫚步道上走來；鏡頭往後退、往右繞，女兒的背影從右前景入鏡，轉成側臉，手放胸口，露出放心的微笑。</td><td class="mono">S3_子女_v3</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="eyebrow">Handoff</div>
+  <h2>接手須知</h2>
+  <div class="grid2">
+    <div class="panel"><h3>關鍵決定</h3><ul class="clean">
+      <li><b>圖文全部後製疊上：</b>生成的畫面裡不放任何字。版位固定，三支共用同一套位置與進場時間（階段 1）。</li>
+      <li><b>icon：</b>原本的 icon 圖邊緣被裁切，改成重新生成「圓圖＋文字」一體的 B 方案，字型比照標題字卡（階段 2）。</li>
+      <li><b>LOGO 右邊不放「活力褲」三個字</b>，只放安親 LOGO。</li>
+      <li><b>首尾格的臉一律避開圖文：</b>模型常把臉放太低，碰到產品包裝；解法是微放大後往上裁切，而不是一直改 prompt（階段 3）。</li>
+      <li><b>S3 改了腳本：</b>從「女兒看爸媽背影」改成「爸媽走近、女兒入鏡轉側臉」，首格是爸媽中景、女兒不在畫面中（階段 3）。</li>
+      <li><b>影片由 CLI 生成：</b>這個專案的 Kling 生成都交給 Claude Code CLI（已串 Kling MCP），用交接文件溝通（階段 4）。</li>
+    </ul></div>
+    <div class="panel"><h3>檔案在哪裡</h3>
+      <p class="path">C:\Users\wayne\Desktop\ann-ching\previz\</p>
+      <ul class="clean" style="font-size:14px">
+        <li><code>blocking_5s\</code> 三張尾格的 Blender 白模與標註圖</li>
+        <li><code>nano_banana_5s\</code> 每張圖一個資料夾：prompt、參考圖（圖1、圖2…）、所有結果；<code>採用_…</code> 是定案、<code>第N輪採用_…</code> 是被取代的舊版</li>
+        <li><code>kling_5s\HANDOFF_Kling_5秒x3.md</code> 給 CLI 的交接文件</li>
+        <li><code>kling_5s\input\</code> 送進 Kling 的首尾幀（1080×1920）</li>
+        <li><code>kling_5s\output\</code> Kling 生成的 8 條原檔；<code>jobs.tsv</code> 生成紀錄</li>
+        <li><code>kling_5s\final_交付\</code> 三支成片與合成腳本</li>
+      </ul>
+    </div>
+    <div class="panel"><h3>還沒定案的事</h3><ul class="clean">
+      <li><b>畫質：</b>Kling 只輸出 720p，成片是本機放大到 1080p。正式投放前建議和主片一樣過一次 Topaz 升 1080p（要用 Higgsfield 點數）。</li>
+      <li>產品包裝、icon 的文字是真實素材疊上的，不是生成的；但畫面裡若出現遠處招牌之類的假字，對外前仍要再看一次。</li>
+      <li>客戶尚未看過這三支。</li>
+    </ul></div>
+  </div>
+</section>
+</div>
+
+<!-- ============ 1 規格與版位 ============ -->
+<div role="tabpanel" id="stage1" aria-labelledby="tab-stage1" hidden>
+<div class="panelhead">
+  <div class="eyebrow">Stage 1｜Specs &amp; Layout</div>
+  <h1>規格與版位</h1>
+  <p class="lead">三支共用一套版面：左上 LOGO、左側標題飄帶與三個 icon、右側產品包裝，人物的臉放在右上。先用 Blender 白模把三張尾格排出來、標出圖文位置，確認不擁擠後才開始生圖。</p>
+  <div class="handoff">
+    <div><h4>產出</h4><ul><li>版位表與進場時間</li><li>三張尾格白模（含標註圖）</li></ul></div>
+    <div><h4>工具</h4><ul><li>Blender 5.2（沿用主片的角色 rig 與場景）</li></ul></div>
+    <div><h4>檔案</h4><p class="path">previz\blocking_5s\<br>previz\anqin_mom_lover_previz_v8_colorcoded.blend</p></div>
+    <div><h4>交接注意</h4><ul><li>改版位時，首尾格的「臉部區」也要跟著改，否則臉會被擋。</li></ul></div>
+  </div>
+  <nav class="subnav" aria-label="本頁段落"><a href="#safe">安全區</a><a href="#layout">圖文位置</a><a href="#timing">進場時間</a><a href="#greybox">白模尾格</a></nav>
+</div>
+
+<section id="safe">
+  <h2>Meta 安全區（1080×1920）</h2>
+  <p class="lead">Reels／限時動態的介面會蓋住上下兩塊。重要文字與人臉都不能放進紅色區。</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th>區域</th><th>範圍</th><th>規則</th></tr></thead>
+    <tbody>
+      <tr><td><span class="zone" style="background:#e5484d"></span>上方</td><td class="mono">0–270 px（14%）</td><td>只放天空、樹或頭髮</td></tr>
+      <tr><td><span class="zone" style="background:#e5484d"></span>下方</td><td class="mono">1250–1920 px（35%）</td><td>只放身體、地面、機器</td></tr>
+      <tr><td>左右</td><td class="mono">各 65 px（6%）</td><td>圖文不貼邊</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="layout">
+  <h2>圖文位置</h2>
+  <div class="tblwrap"><table>
+    <thead><tr><th>元素</th><th>x</th><th>y</th><th>說明</th></tr></thead>
+    <tbody>
+      <tr><td>安親 LOGO</td><td class="mono">80–270</td><td class="mono">290–410</td><td>高 120；右邊不放「活力褲」字樣</td></tr>
+      <tr><td>標題飄帶＋「簡單安心 活力不受限」</td><td class="mono">80–460</td><td class="mono">720–1087</td><td>保留紅色飄帶，整組縮到寬 380</td></tr>
+      <tr><td>三個 icon</td><td class="mono">80–660</td><td class="mono">1092–1252</td><td>高 160，中心 x = 150／365／580</td></tr>
+      <tr><td>產品包裝</td><td class="mono">700–1000</td><td class="mono">780–1240</td><td>高 460，右緣 1000</td></tr>
+      <tr><td><b>人物臉部區</b></td><td class="mono">520–960</td><td class="mono">300–700</td><td>主角的臉必須在這裡，下巴不能低於約 760</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="timing">
+  <h2>進場時間</h2>
+  <div class="tblwrap"><table>
+    <thead><tr><th>秒數</th><th>元素</th><th>動態</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">0.2</td><td>安親 LOGO</td><td>淡入，往上 24 px（0.5 秒，ease-out）</td></tr>
+      <tr><td class="mono">0.8</td><td>標題飄帶</td><td>由左滑入 60 px（0.55 秒）</td></tr>
+      <tr><td class="mono">1.2</td><td>產品包裝</td><td>淡入、從 90% 放大到 100%（0.6 秒）</td></tr>
+      <tr><td class="mono">1.8／2.0／2.2</td><td>三個 icon</td><td>依序彈出（ease-out-back，0.45 秒）</td></tr>
+      <tr><td class="mono">2.4–5.0</td><td>全部</td><td>定格</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="greybox">
+  <h2>白模尾格</h2>
+  <p class="lead">在主片的 Blender 檔裡加了三台尾格攝影機（<code>EC_M2</code>、<code>EC_F2</code>、<code>EC_D2</code>）和第二台漫步機，排出三支的尾格並疊上圖文位置，給製作人判斷是否擁擠。之後生圖就照這個版面寫 prompt。</p>
+  <div class="cimgs" style="grid-template-columns:1fr;margin-top:14px"><img src="assets/5s/greybox_layout.jpg" alt="三張尾格白模標註" data-zoom loading="lazy"></div>
+  <div class="note"><strong>踩過的坑：</strong>Blender 時間軸上的 marker 綁了攝影機，算圖時會蓋掉場景攝影機，算出錯的鏡頭。要先清掉 marker 上的攝影機綁定。</div>
+</section>
+</div>
+
+<!-- ============ 2 圖文素材 ============ -->
+<div role="tabpanel" id="stage2" aria-labelledby="tab-stage2" hidden>
+<div class="panelhead">
+  <div class="eyebrow">Stage 2｜Graphics</div>
+  <h1>圖文素材</h1>
+  <p class="lead">LOGO、標題飄帶、產品包裝沿用主片的素材。三個特色 icon 原圖的圓圈邊緣被裁切，所以重新生成，並一起把文字做進去。</p>
+  <div class="handoff">
+    <div><h4>產出</h4><ul><li>icon ×3（透明背景 PNG，B 方案）</li></ul></div>
+    <div><h4>工具</h4><ul><li>GPT Image 2.5（OpenRouter，透明背景、high 品質）</li></ul></div>
+    <div><h4>檔案</h4><p class="path">previz\nano_banana_5s\I1_icon360透氣\ 等 3 個資料夾<br>previz\seedance\final_1080p_交付\new\（LOGO、slogan、包裝）</p></div>
+    <div><h4>交接注意</h4><ul><li>透明背景要用 GPT Image 2.5；GPT Image 2 不支援透明。</li></ul></div>
+  </div>
+</div>
+
+<section>
+  <h2>icon：A 方案 vs B 方案</h2>
+  <p class="lead">A 只生圓圖，文字另外排；B 連文字一起生成，字型比照標題字卡（粗圓體、深藍字＋白邊）。製作人選 <b>B</b>。三個 icon 的文字確認為「360°透氣」「立體防漏側邊」「高分子吸收體」。</p>
+  <div class="layers" id="iconrows"></div>
+  <details><summary>原始特色卡（參考圖 1）</summary><div class="cimgs" style="grid-template-columns:minmax(0,420px);margin-top:10px"><img src="assets/5s/icon_src.jpg" alt="原始特色卡" data-zoom loading="lazy"></div></details>
+  <details><summary>B 方案 prompt（以 360°透氣 為例）</summary><div id="iconprompt"></div></details>
+</section>
+</div>
+
+<!-- ============ 3 首尾格 ============ -->
+<div role="tabpanel" id="stage3" aria-labelledby="tab-stage3" hidden>
+<div class="panelhead">
+  <div class="eyebrow">Stage 3｜First &amp; Last Frames</div>
+  <h1>首尾格</h1>
+  <p class="lead">每支先生一張首格、一張尾格，給 Kling 當影片的頭尾。每張圖跑 2 版，疊上圖文與 Meta 安全區檢查，挑一版給製作人審核，通過才做下一張。</p>
+  <div class="handoff">
+    <div><h4>產出</h4><ul><li>首格、尾格各 3 張（另有 S2 的雙漫步機空景）</li></ul></div>
+    <div><h4>工具</h4><ul><li>Nano Banana Pro（Gemini 3 Pro Image），經 OpenRouter API，9:16、2K</li><li>參考圖：主片的角色三視表、定格，以及上一張的結果</li></ul></div>
+    <div><h4>檔案</h4><p class="path">previz\nano_banana_5s\&lt;編號&gt;\prompt.txt、圖1…、結果_N.png、採用_….png</p></div>
+    <div><h4>交接注意</h4><ul><li>API key 只放在本機 <code>~\.openrouter_api_key</code>，不要貼進對話或檔案。</li><li>總花費約 US$6.8（含 icon），每張約 US$0.14。</li></ul></div>
+  </div>
+  <nav class="subnav" aria-label="本頁段落"><a href="#rules3">生成規則</a><a href="#f-s1">S1 媽媽</a><a href="#f-s2">S2 爸爸</a><a href="#f-s3">S3 子女</a></nav>
+</div>
+
+<section id="rules3">
+  <h2>生成規則</h2>
+  <ol class="rules">
+    <li><b>參考圖照順序命名</b><span>資料夾裡的參考圖叫 圖1、圖2…，prompt 用 Image 1、Image 2 指稱。三視表要寫明「ONE person」，否則模型會畫成好幾個人。</span></li>
+    <li><b>版位用攝影語言描述，不要給百分比</b><span>在 prompt 裡寫「左 43%、37–57%」這種數字，有一次被畫成畫面上的假文字。後來改成「臉在右上方、下巴約在畫面 1/3 處」，並在結尾加一句「這是乾淨的照片，不要畫任何文字」。</span></li>
+    <li><b>臉太低就裁切，不要一直重生</b><span>模型習慣把臉放在畫面中間，下巴會碰到產品包裝。最有效的是微放大 8–15% 後往上裁（下緣對齊），臉就整張移到產品上方。</span></li>
+    <li><b>首尾格要用前一張當參考</b><span>尾格放首格當參考，場景、光線、服裝才會連戲。但模型也會照抄參考圖裡人物的大小和位置，要差很多時得在 prompt 裡寫「和 Image N 的差別：…兩倍大…」。</span></li>
+    <li><b>每張都疊圖文檢查</b><span>用 <code>review.py</code> 把 LOGO、飄帶、icon、產品與紅色安全區疊上去，左原圖、右疊圖並排比較。</span></li>
+  </ol>
+</section>
+
+<div id="framelist"></div>
+</div>
+
+<!-- ============ 4 Kling 影片 ============ -->
+<div role="tabpanel" id="stage4" aria-labelledby="tab-stage4" hidden>
+<div class="panelhead">
+  <div class="eyebrow">Stage 4｜Kling</div>
+  <h1>Kling 影片</h1>
+  <p class="lead">首尾格定案後，寫一份交接文件給 Claude Code CLI（已串 Kling MCP），由 CLI 生成並把結果放回指定資料夾，再由製作人挑版本。</p>
+  <div class="handoff">
+    <div><h4>產出</h4><ul><li>8 條 5 秒影片（每支 2 條，S3 因首格重做多 2 條）</li><li>採用：S1 v2、S2 v2、S3 v3</li></ul></div>
+    <div><h4>設定</h4><ul><li><code>kling-video-v4_0</code> 首尾幀，9:16、5 秒、720p</li><li>一次生成出 2 條，90 點（每條 45 點）</li><li>模型會附音軌，無法關閉，後製拿掉</li></ul></div>
+    <div><h4>檔案</h4><p class="path">previz\kling_5s\HANDOFF_Kling_5秒x3.md<br>previz\kling_5s\input\、output\、jobs.tsv</p></div>
+    <div><h4>交接注意</h4><ul><li>改了首尾幀就更新交接文件最後的「更新紀錄」，輸出用新的版本號，不要覆蓋舊檔。</li></ul></div>
+  </div>
+  <nav class="subnav" aria-label="本頁段落"><a href="#k-s1">S1 媽媽</a><a href="#k-s2">S2 爸爸</a><a href="#k-s3">S3 子女</a><a href="#k-cost">點數</a></nav>
+</div>
+<div id="klist"></div>
+<section id="k-cost">
+  <h2>點數</h2>
+  <div class="tblwrap"><table>
+    <thead><tr><th>支</th><th>生成次數</th><th>條數</th><th>點數</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td>S1 媽媽</td><td class="mono">1</td><td class="mono">2</td><td class="mono">90</td><td>尾幀在生成前已換成漫步機版</td></tr>
+      <tr><td>S2 爸爸</td><td class="mono">1</td><td class="mono">2</td><td class="mono">90</td><td></td></tr>
+      <tr><td>S3 子女</td><td class="mono">2</td><td class="mono">4</td><td class="mono">180</td><td>第一次首格太遠，重做首格再生一次</td></tr>
+      <tr><td><b>合計</b></td><td class="mono">4</td><td class="mono">8</td><td class="mono"><b>360</b></td><td></td></tr>
+    </tbody>
+  </table></div>
+</section>
+</div>
+
+<!-- ============ 5 合成與交付 ============ -->
+<div role="tabpanel" id="stage5" aria-labelledby="tab-stage5" hidden>
+<div class="panelhead">
+  <div class="eyebrow">Stage 5｜Compositing</div>
+  <h1>合成與交付</h1>
+  <p class="lead">把選定的 Kling 影片放大到 1080×1920、拿掉聲音，再逐格疊上 LOGO、標題飄帶、產品包裝和三個 icon 的進場動態。</p>
+  <div class="handoff">
+    <div><h4>產出</h4><ul><li>三支 5.00 秒、1080×1920、24 fps、無聲 mp4（H.264）</li></ul></div>
+    <div><h4>工具</h4><ul><li>Python（PIL）逐格合成，ffmpeg 解碼／編碼</li><li>放大：lanczos＋輕度銳化</li></ul></div>
+    <div><h4>檔案</h4><p class="path">previz\kling_5s\final_交付\</p></div>
+    <div><h4>交接注意</h4><ul><li>改時間軸或換版本，改 <code>5秒合成腳本_comp5s.py</code> 重跑即可。</li></ul></div>
+  </div>
+  <nav class="subnav" aria-label="本頁段落"><a href="#finals">成片</a><a href="#deliver">交付檔案</a></nav>
+</div>
+
+<section id="finals">
+  <h2>成片</h2>
+  <p class="lead">逐格抽查過：三支主角的臉全程都沒有被圖文擋到。S3 中段女兒入鏡時，後腦會經過產品後方，那時是背影，不影響。</p>
+  <div class="reel" style="margin-top:14px">
+    <figure class="win"><video src="assets/5s/final_s1_720p.mp4" poster="assets/5s/final_s1_poster.jpg" controls playsinline preload="none"></video><figcaption><b>S1 媽媽</b></figcaption></figure>
+    <figure class="win"><video src="assets/5s/final_s2_720p.mp4" poster="assets/5s/final_s2_poster.jpg" controls playsinline preload="none"></video><figcaption><b>S2 爸爸</b></figcaption></figure>
+    <figure class="win"><video src="assets/5s/final_s3_720p.mp4" poster="assets/5s/final_s3_poster.jpg" controls playsinline preload="none"></video><figcaption><b>S3 子女</b></figcaption></figure>
+  </div>
+  <div class="note"><strong>畫質：</strong>Kling 這次只輸出 720p，成片是放大到 1080p。手機上看沒有問題，但細節不如真正的 1080p；正式投放前建議用 Topaz 升級後重跑合成腳本。</div>
+</section>
+
+<section id="deliver">
+  <h2>交付檔案</h2>
+  <div class="tree">previz\kling_5s\final_交付\
+├─ 安親5秒_S1_媽媽_1080x1920.mp4     ← S1_媽媽_v2
+├─ 安親5秒_S2_爸爸_1080x1920.mp4     ← S2_爸爸_v2
+├─ 安親5秒_S3_子女_1080x1920.mp4     ← S3_子女_v3
+├─ 5秒合成腳本_comp5s.py              合成腳本（圖文位置、進場時間）
+└─ review.py                          圖文素材載入與疊圖檢查</div>
+  <p class="lead" style="margin-top:12px">重跑方式：<code>python comp5s.py &lt;Kling 原檔&gt; &lt;輸出.mp4&gt;</code>。腳本裡的素材路徑寫的是雲端工作區的路徑，在本機跑要先改成 <code>previz\seedance\final_1080p_交付\new\</code> 與 <code>previz\nano_banana_5s\</code>。</p>
+</section>
+</div>
+
+</main>
+<footer class="wrap">安親活力褲｜5 秒短影音 ×3 製作紀錄。白模以 Blender 製作，首尾格以 Nano Banana Pro 生成，icon 以 GPT Image 2.5 生成，影片以 Kling 4.0 生成。</footer>
+
+<script>
+const A="assets/5s/";
+const CLEAN="This is a clean photograph: do not draw any text, letters, labels, logos, graphics, icons, boxes or packaging. Vertical 9:16, golden morning backlight, warm slightly faded Taiwanese TV-drama color, real skin texture. Avoid plastic skin, beauty filter, CGI look, extra fingers, extra people.";
+const LAYOUT=`Layout: logo, headline, icons and product are added later, so keep these areas soft, simple background with no faces, hands or key action:
+- top-left: the left 26% of the width, 14%-22% from the top (logo);
+- left: the left 43% of the width, 37%-57% from the top (headline), and the left 61%, 57%-65% from the top (three icons);
+- right: 65%-93% across, 40%-65% from the top (product pack);
+- the bottom 35% will be covered by the app interface: only bodies, ground or background there.`;
+const ICONS=[["360°透氣","I1_icon360透氣"],["立體防漏側邊","I2_icon立體防漏側邊"],["高分子吸收體","I3_icon高分子吸收體"]];
+const ICON_PROMPT=`Image 1 is a product feature card. Image 2 is the brand's headline lettering.
+Create a feature icon in portrait 4:5 on a plain pure white background:
+- Top: recreate only the round circle illustration on the lower left (the close-up of the soft white cuff) of image 1 as a complete round icon. Keep its artwork, colors and style; complete the whole circle with an even, clean outer ring all the way around; redraw any part that is cut off; remove every word, badge and decoration that touches the circle (the crown and the "獨家" badge, the "全芯體0.2CM內棉" line).
+- Below the circle, centered: the label 「360°透氣」 in Traditional Chinese, exactly these characters and nothing else, in the same lettering style as image 2: heavy rounded sans-serif, deep blue fill with a thick white outline and a soft shadow. The label is as wide as about 90% of the circle.
+No other text anywhere. Crisp edges, high resolution.
+（送出時 background 設 transparent、quality high、比例 3:4）`;
+
+/* 每支：定案首尾格、prompt、試錯紀錄 */
+const SPOTS=[
+{id:"s1",title:"S1 媽媽：阿嬤漫步機，轉頭看鏡頭",
+ frames:[["s1_first","首格","new"],["s1_first_ov","首格＋圖文",""],["s1_end","尾格","new"],["s1_end_ov","尾格＋圖文",""]],
+ verdict:"尾格經過三輪：第一版不在漫步機上、和影片腳本不符，最後重生成「仍在漫步機上、雙手握扶手、轉頭看鏡頭」的版本，臉不必裁切就在產品上方。",
+ history:[["s1_h1","第 1 輪：胸上近景，臉略碰到產品"],["s1_h2","第 2 輪：要求臉放高，模型仍放太低"],["s1_h3","第 2 輪採用：放大 8% 往上裁；但人已不在漫步機上"],["s1_end","第 3 輪定案：在漫步機上、雙手握扶手"]],
+ prompts:[["M1 首格（參考：阿嬤三視表、定格 14、定格 07）",`Image 1 is Grandma: a turnaround sheet of ONE person (several views of the same woman side by side, not several people). Image 2 shows her face and expression on the air-walker. Image 3 shows the park, the air-walker machine and the morning light.
+Create a new vertical 9:16 photograph of the same woman on the same yellow-and-green outdoor air-walker in the same park. Keep her face, short dark-brown permed curls, teal zip-up tracksuit with white side stripes, white T-shirt and white towel around her neck exactly.
+Waist-up medium shot from her front-right, 35mm lens at chest height. She strides on the air-walker, both hands on the yellow handlebar, chin up, a proud, cheerful smile. A light headwind blows her curls and the towel ends backward.
+${LAYOUT}
+Her face (hair to chin, about 18% of the frame height) sits 52%-85% across and 17%-36% from the top. Her hands and the handlebar stay in the lower half, behind where the product will go.
+Golden morning backlight with a warm rim light on her hair, shallow depth of field, warm slightly faded Taiwanese TV-drama color, real skin texture, documentary realism.
+No text, no logos, no lettering, no packaging anywhere. Avoid plastic skin, beauty filter, CGI look, extra fingers. Avoid hands merging with the handlebar.`],
+ ["M2 尾格・定案（參考：阿嬤三視表、M1 結果）",`Image 1 is Grandma: a turnaround sheet of ONE person. Image 2 is the first frame of this shot: she is on a yellow-and-green outdoor air-walker in the park.
+Create the closing frame of the same shot, five seconds later: same place, same light, same wardrobe, and she is STILL ON THE SAME AIR-WALKER, mid-stride, both hands holding the yellow handlebar. Keep her face exactly as in image 1.
+The camera has gently pushed in to a medium shot from her front-right: from the top of her head down to her hips. The yellow handlebar and her two hands are clearly visible in the lower part of the frame, and the green posts of the machine rise beside her.
+She has turned her face toward the camera and looks into the lens with a warm, confident, slightly cheeky smile, chin a little raised. A light breeze lifts her curls and the ends of her towel.
+Framing: she stands on the right half of the frame and her head sits HIGH, in the upper right: the top of her hair about one sixth from the top of the frame and her chin about one third of the way down. Her head is about 17% of the frame height. Below her chin only her towel, teal jacket, arms, hands and the handlebar.
+35mm, shallow depth of field. Leave the left part of the frame as soft park background.
+${CLEAN}`]]},
+{id:"s2",title:"S2 爸爸：阿公、阿嬤一起踩漫步機",
+ frames:[["s2_first","首格","new"],["s2_first_ov","首格＋圖文",""],["s2_end","尾格","new"],["s2_end_ov","尾格＋圖文",""]],
+ verdict:"阿嬤的臉一直被標題飄帶蓋住，降低鏡位也沒用。最後改成「兩人並排、頭在同一高度」，阿嬤的臉剛好落在 LOGO 與標題之間的空檔。",
+ history:[["s2_plate","先做雙漫步機空景（機台結構比照主片）"],["s2_h1","尾格第 1 輪：阿嬤被飄帶蓋住"],["s2_h2","第 2 輪：低角度，阿嬤仍被蓋住"],["s2_end","第 3 輪定案：雙人並排"],["s2_alt","第 3 輪備選：全身入鏡、扶手偏綠"]],
+ prompts:[["F0 雙漫步機空景（參考：主片公園空景 06b、定格 07）",`Image 1 is an empty Taiwanese neighborhood park with one outdoor air-walker exercise machine. Image 2 shows the same machine in use, from a low angle. Copy this machine's design EXACTLY; it must look like the very same model.
+The machine's structure: two straight vertical green steel posts standing about 0.8 m apart; across their tops ONE yellow curved handlebar bridges both posts like a gate (an upside-down U joining the two post tops); between the posts hang two yellow pendulum arms, each ending in a yellow footplate a little above the ground; flaking paint and rust spots. There are no handles sticking out sideways and no extra arms.
+Create a new vertical 9:16 photograph of the same park in the same early-morning light with TWO of these identical machines standing in a row, side by side, about 1 m apart, both facing the same way, on the same rubber safety tiles. Two people on them could easily talk to each other.
+Camera at chest height, about 1.3 m, in front of the row and a little to the left, 35mm lens, looking across them at a slight angle: the nearer machine fills the right half of the frame; the second machine stands right behind it on the left, partly visible, clearly the same model and only a little smaller.
+Tall trees to the left and right, open sky in the upper part of the frame, the same wooden park bench in the background, golden low morning backlight, natural colors. No people.
+No text, no logos, no signage lettering. Avoid CGI look, mismatched machines, handles sticking out from one post, machines far apart.`],
+ ["F1 首格（參考：F0 空景、阿公三視表、阿嬤三視表）",`Image 1 is the park with two air-walker machines: keep its camera angle, lens, the two machines and the light exactly. Image 2 is Grandpa and image 3 is Grandma: each is a turnaround sheet of ONE person (several views of the same character side by side, not several people). Keep both faces exactly.
+Grandpa stands on the nearer machine on the right of the frame; Grandma stands on the second machine behind him on the left. Both stride in sync, both hands on their own handlebar, laughing together.
+Grandpa wears the same clothes as in image 2: a slightly yellowed white ribbed sleeveless undershirt, high-waisted grey-brown slacks with a thin black belt, plus the faded navy-blue baseball cap from panel 4 of image 2; white sneakers. Grandma: short dark-brown permed curls, teal zip-up tracksuit with white side stripes, white towel around her neck.
+Grandpa is the main subject, sharp; Grandma smaller and slightly soft.
+${LAYOUT}
+Grandpa's face sits 55%-85% across and 18%-34% from the top. Grandma's face sits 20%-40% across and 23%-34% from the top, between the logo area and the headline area.
+Vertical 9:16, 35mm, golden morning backlight, warm slightly faded Taiwanese TV-drama color, real skin texture, documentary realism.
+No text, no logos, no lettering, no packaging anywhere. Avoid plastic skin, beauty filter, CGI look, extra fingers. Avoid merged bodies, hands merging with the handlebars.`],
+ ["F2 尾格・定案（參考：F1 結果、阿公三視表、阿嬤三視表）",`Image 1 is the first frame of this shot. Image 2 is Grandpa and image 3 is Grandma: each is a turnaround sheet of ONE person. Keep their faces and wardrobe exactly: Grandpa's faded navy cap, white sleeveless undershirt and high-waisted slacks; Grandma's teal tracksuit and towel. Keep the outdoor air-walker machines exactly as in image 1: same structure, same colours.
+Create the closing frame: a two-shot. Grandpa and Grandma stand side by side on their air-walkers, shoulder to shoulder, at the SAME distance from the camera, both standing upright. Grandpa is on the right, Grandma is on the left, half a step behind his shoulder.
+Their two heads are at the SAME height in the frame, side by side in the upper part of the picture: Grandpa's face in the upper right, Grandma's face just to the left of his, overlapping his shoulder slightly, roughly in the middle of the frame width. Both faces are between one sixth and one third of the way down from the top. Grandma's head is slightly smaller than Grandpa's.
+Grandpa has turned to the camera with a proud, cheeky grin and one eyebrow raised, both hands on the handlebar, in sharp focus. Grandma laughs, looking at him, slightly soft.
+Below their shoulders only their bodies, arms and the machine. The left third of the frame below the top is soft trees and sky.
+Eye-level camera, 50mm, shallow depth of field.
+${CLEAN}`]]},
+{id:"s3",title:"S3 子女：爸媽走近，女兒入鏡露出欣慰的笑",
+ frames:[["s3_first","首格","new"],["s3_first_ov","首格＋圖文",""],["s3_end","尾格","new"],["s3_end_ov","尾格＋圖文",""]],
+ verdict:"這支改最多次。原本「女兒看爸媽背影」的側臉視線對不上；改成爸媽朝女兒走來後，又遇到首格爸媽推不遠、阿公帽子消失、首格太遠來不及走近等問題，一一修掉。",
+ history:[["s3_h1","原版首格：越肩看爸媽背影"],["s3_h2","原版尾格：側臉看向別處，視線和爸媽對不上"],["s3_h3","試「平行側面」：爸媽被飄帶蓋住，未採用"],["s3_h4","改成爸媽走來＋上推裁切，視線接上"],["s3_h5","首格：爸媽大小和尾格一樣，影片會原地踏步"],["s3_nocap","重生尾格（爸媽走近）：阿公帽子不見，再修圖補帽"],["s3_h6","首格改女兒不入鏡的遠景：太遠，Kling 中途會跳"],["s3_first","首格定案：爸媽中景約 8 m"]],
+ prompts:[["D1 首格・定案（參考：阿公三視表、阿嬤三視表、遠景版首格）",`Image 1 is Grandpa and image 2 is Grandma: each is a turnaround sheet of ONE person. Keep their faces and wardrobe exactly: Grandpa's faded navy baseball cap, white sleeveless undershirt, high-waisted grey-brown slacks and belt; Grandma's teal tracksuit with white stripes and white towel around her neck.
+Image 3 shows the same location, camera and light. Recreate that exact view of the palm-lined park path, the cracked paving, the trees, the golden morning haze and warm backlight, eye-level camera, 35mm.
+IMPORTANT DIFFERENCE from image 3: the parents are much CLOSER to the camera. Grandpa and Grandma walk toward the camera side by side, arm in arm, chatting and smiling, only about 8 m away. Each of them is about THREE TIMES as tall as in image 3: from the top of the cap to the shoes about 30% of the frame height. They are in the middle of the frame, slightly right of centre, their heads about one third of the way down from the top, their feet a little below the middle of the frame. Full bodies visible, slightly soft but clearly recognizable.
+Nobody is in the foreground; no other people in the frame.
+This is a clean photograph: do not draw any text, letters, labels, logos, graphics, icons, boxes or packaging. Vertical 9:16, warm slightly faded Taiwanese TV-drama color, real texture. Avoid CGI look, extra people.
+（輸出後放大 8%、往上裁切）`],
+ ["D2 尾格・第一步（參考：女兒、阿公、阿嬤三視表、首格）",`Image 1 is the daughter, image 2 is Grandpa and image 3 is Grandma: each is a turnaround sheet of ONE person (several views of the same character, not several people). Image 4 is the FIRST frame of this shot. Keep every face, hair and wardrobe exactly.
+Create the LAST frame of the same shot, five seconds later: the same park path, palm trees, haze and morning light, the same camera position and lens as image 4.
+The daughter stands exactly where she is in image 4, in the same three-quarter profile, still watching her parents, but now relieved and quietly moved: a soft smile spreading, eyes slightly glistening, one hand resting lightly on her chest. Her face is sharp.
+IMPORTANT DIFFERENCE from image 4: the parents have walked much CLOSER. Grandpa and Grandma, arm in arm, are now only about 5 m from her, walking toward the camera, smiling and chatting, Grandma laughing. They look about TWICE as tall as in image 4, their heads at the same height in the frame as the daughter's eyes, their bodies filling more of the left side of the path. Slightly soft, clearly recognizable.
+This is a clean photograph: do not draw any text, letters, labels, logos, graphics, icons, boxes or packaging. Vertical 9:16, warm slightly faded Taiwanese TV-drama color, real skin texture. Avoid plastic skin, beauty filter, CGI look, extra fingers, extra people.`],
+ ["D2 尾格・第二步：補帽修圖（參考：第一步結果、阿公三視表）",`Image 1 is a finished film still. Image 2 is a turnaround sheet of Grandpa.
+Edit image 1 with ONE change only: Grandpa (the older man in the white sleeveless undershirt walking on the left) must wear his faded navy-blue baseball cap exactly as in image 2, sitting naturally on his head, lit by the same warm backlight.
+Keep everything else in image 1 exactly the same: the same framing, the daughter, Grandma, the path, the trees, the light, the colours, the positions and sizes of all people.
+This is a clean photograph: do not draw any text, letters, labels, logos, graphics, icons, boxes or packaging.
+（輸出後放大 15%、往上裁切）`]]}
+];
+
+/* Kling */
+const NEG="text, subtitles, logo, watermark, extra people, extra fingers, deformed hands, face morphing, identity change, plastic skin, CGI look, sudden cuts, scene change";
+const KL=[
+{id:"s1",title:"S1 媽媽",meta:"首幀 M1・尾幀 M2（漫步機版）",takes:[["k_s1_v1","v1",""],["k_s1_v2","v2","採用"]],
+ verdict:"兩條阿嬤都全程在漫步機上，轉頭看鏡頭也自然。製作人選 v2。",
+ prompt:`A warm Taiwanese TV-drama moment in a city park at golden morning light. An elderly woman with short dark curly hair, teal tracksuit and a white towel around her neck strides happily on a yellow-and-green outdoor air-walker, both hands on the handlebar, a light breeze lifting her curls and the towel.
+She keeps striding on the air-walker with both hands on the handlebar the whole time. The camera slowly and smoothly pushes in a little and drifts slightly around to her front-right. Around the middle of the shot she turns her face to the camera and looks straight into the lens with a warm, confident, slightly cheeky smile, chin a little raised, and holds that look to the end.
+Natural, gentle motion, realistic skin, her face and outfit stay exactly the same throughout. One continuous shot, no cuts.`},
+{id:"s2",title:"S2 爸爸",meta:"首幀 F1・尾幀 F2（雙人並排）",takes:[["k_s2_v1","v1",""],["k_s2_v2","v2","採用"]],
+ verdict:"首尾幀差最多（阿嬤從後面一台機器變成並排），兩條都靠鏡頭推近順利接上。製作人選 v2。",
+ prompt:`A warm Taiwanese TV-drama moment in a city park at golden morning light. An elderly man in a faded navy cap, white sleeveless undershirt and high-waisted grey-brown slacks strides energetically on a yellow-and-green outdoor air-walker, laughing. His wife, in a teal tracksuit with a white towel, exercises on the machine next to him.
+The camera smoothly moves in and around so that the couple ends up side by side in a two-shot, Grandpa in front on the right, Grandma just beside him on the left. Grandpa slows his stride, keeps both hands on the handlebar, turns to the camera with a proud, cheeky grin and raises one eyebrow; Grandma laughs at him.
+Natural, gentle motion, realistic skin, faces and outfits stay exactly the same throughout. One continuous shot, no cuts.`},
+{id:"s3",title:"S3 子女",meta:"首幀 D1（中景）・尾幀 D2；v1、v2 用的是太遠的舊首幀",takes:[["k_s3_v1","v1（舊首幀）","重做"],["k_s3_v2","v2（舊首幀）","重做"],["k_s3_v3","v3","採用"],["k_s3_v4","v4",""]],
+ verdict:"第一次的首幀爸媽太遠，5 秒內走不到尾幀的位置，兩條都在 2–3 秒間突然變大。首格改成中景後重生 v3、v4，走近的速度自然；採用 v3。",
+ prompt:`A warm Taiwanese TV-drama moment on a palm-lined park path in hazy golden morning light. A few meters down the path an elderly couple walks steadily toward the camera arm in arm, chatting: the man in a navy cap, white sleeveless undershirt and grey-brown slacks, the woman in a teal tracksuit with a white towel.
+The camera slowly pulls back and arcs to the right. A middle-aged daughter in a beige cardigan, who was standing just behind the camera, enters the frame from the right foreground, first seen from behind over her shoulder, then she turns her head into a three-quarter profile, watching her parents. As the parents come closer and the mother laughs, the daughter's face softens into a relieved, quietly moved smile and she rests one hand lightly on her chest.
+Natural, gentle motion, realistic skin, every face and outfit stays exactly the same throughout. One continuous shot, no cuts.`}
+];
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function promptBox(text){return `<div class="promptbox"><pre>${esc(text)}</pre><button type="button" class="copy">複製</button></div>`}
+function fig(k,cap,cls){return `<figure class="frame ${cls||""}"><div class="ph"><img src="${A}${k}.jpg" alt="${esc(cap)}" data-zoom loading="lazy"></div><figcaption>${esc(cap)}</figcaption></figure>`}
+
+document.getElementById("iconrows").innerHTML=ICONS.map((ic,i)=>`<figure><div class="ph"><img src="${A}icon${i+1}_A.png" alt="${ic[0]} A 方案" loading="lazy"></div><figcaption>${ic[0]}｜A 圓圖</figcaption></figure><figure><div class="ph" style="outline:2px solid var(--teal);outline-offset:-2px"><img src="${A}icon${i+1}_B.png" alt="${ic[0]} B 方案" loading="lazy"></div><figcaption><b>${ic[0]}｜B 圓圖＋字</b> <span class="pick">採用</span></figcaption></figure>`).join("");
+document.getElementById("iconprompt").innerHTML=promptBox(ICON_PROMPT);
+
+document.getElementById("framelist").innerHTML=SPOTS.map(s=>`<section id="f-${s.id}"><h2>${s.title}</h2>
+ <div class="frames" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr));margin-top:14px">${s.frames.map(f=>fig(f[0],f[1],f[2])).join("")}</div>
+ <p class="verdict">${s.verdict}</p>
+ <details open><summary>試錯紀錄（依時間順序）</summary><div class="frames" style="margin-top:10px">${s.history.map((h,i)=>fig(h[0],h[1],i===s.history.length-1?"new":"old")).join("")}</div></details>
+ <details><summary>Prompt（實際送出的英文原文）</summary>${s.prompts.map(p=>`<p class="ptitle">${esc(p[0])}</p>${promptBox(p[1])}`).join("")}</details>
+</section>`).join("");
+
+document.getElementById("klist").innerHTML=KL.map(k=>`<article class="kshot" id="k-${k.id}">
+ <div class="head"><h3>${k.title}</h3><span class="meta">${k.meta}</span></div>
+ <div class="kctl"><button type="button" data-sync>全部同步從頭播</button></div>
+ <div class="reel" style="grid-template-columns:repeat(${Math.max(3,k.takes.length)},minmax(0,1fr))">${k.takes.map(t=>`<figure class="${t[2]==="採用"?"win":""}"><video src="${A}${t[0]}.mp4" poster="${A}${t[0]}_poster.jpg" controls playsinline muted preload="none"></video><figcaption><b>${t[1]}</b>${t[2]?`<span class="pick${t[2]==="採用"?"":" no"}">${t[2]}</span>`:""}</figcaption></figure>`).join("")}</div>
+ <p class="verdict">${k.verdict}</p>
+ <details><summary>Kling prompt（實際送出）</summary>${promptBox(k.prompt)}<p class="ptitle">負面提示（三支共用）</p>${promptBox(NEG)}</details>
+</article>`).join("");
+document.querySelectorAll(".kshot").forEach(sh=>{const vids=[...sh.querySelectorAll("video")];
+  sh.querySelector("[data-sync]").onclick=()=>{vids.forEach(v=>{v.pause();v.preload="auto";v.currentTime=0});vids.forEach(v=>{const p=v.play();if(p&&p.catch)p.catch(()=>{})})}});
+
+/* ---- tabs ---- */
+const TABS=[...document.querySelectorAll('[role="tab"]')];
+function panelOf(id){const el=document.getElementById(id);return el?(el.matches('[role="tabpanel"]')?el:el.closest('[role="tabpanel"]')):null}
+function activate(hash,scroll){const id=(hash||"").replace(/^#/,"")||"overview";const p=panelOf(id)||document.getElementById("overview");
+  document.querySelectorAll('[role="tabpanel"]').forEach(x=>x.hidden=x!==p);
+  TABS.forEach(t=>{const on=t.getAttribute("aria-controls")===p.id;t.setAttribute("aria-selected",String(on));t.tabIndex=on?0:-1;if(on)t.scrollIntoView({block:"nearest",inline:"nearest"})});
+  document.querySelectorAll("video,audio").forEach(m=>{if(!p.contains(m))m.pause()});
+  if(scroll!==false){const t=document.getElementById(id);if(t&&t!==p)requestAnimationFrame(()=>t.scrollIntoView());else window.scrollTo(0,0)}}
+window.addEventListener("hashchange",()=>activate(location.hash));
+document.querySelector(".tabs").addEventListener("keydown",e=>{const i=TABS.indexOf(document.activeElement);if(i<0)return;let j=null;
+  if(e.key==="ArrowRight")j=(i+1)%TABS.length;if(e.key==="ArrowLeft")j=(i-1+TABS.length)%TABS.length;if(j!==null){e.preventDefault();TABS[j].focus();TABS[j].click()}});
+/* ---- click helpers ---- */
+document.addEventListener("click",e=>{
+  const b=e.target.closest(".copy");if(b){const pre=b.parentElement.querySelector("pre");const txt=pre.textContent;
+    const done=()=>{b.textContent="已複製";setTimeout(()=>b.textContent="複製",1400)};
+    (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(done).catch(()=>{const r=document.createRange();r.selectNodeContents(pre);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="已選取，請按 Ctrl+C"});return;}
+  const im=e.target.closest("img[data-zoom]");if(im){openLB(im.src,im.alt);}
+});
+function openLB(src,alt){const d=document.createElement("div");d.className="lb";d.innerHTML=`<img src="${src}" alt="${esc(alt||"")}"><button type="button">關閉</button>`;
+  const close=()=>{d.remove();document.removeEventListener("keydown",k)};const k=ev=>{if(ev.key==="Escape")close()};
+  d.addEventListener("click",ev=>{if(ev.target===d||ev.target.tagName==="BUTTON")close()});document.addEventListener("keydown",k);document.body.appendChild(d);d.querySelector("button").focus();}
+
+document.querySelectorAll(".vtabs .chip").forEach(b=>b.onclick=()=>{const v=document.getElementById("pv");v.poster=b.dataset.poster;v.src=b.dataset.src;document.querySelectorAll(".vtabs .chip").forEach(x=>x.setAttribute("aria-pressed",String(x===b)))});
+activate(location.hash,!!location.hash);
+</script>
+</body>
+</html>
