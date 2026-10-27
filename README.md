@@ -7,11 +7,13 @@
 ```
 index.html                 15 秒主片「阿母的客兄」製作紀錄
 5s.html                    5 秒短影音 ×3（媽媽、爸爸、子女）製作紀錄
+models.html                影片模型比較（Kling、Seedance 2.0、Seedance 2.5；安親與好來）
 .nojekyll                  讓 GitHub Pages 原樣提供檔案
 assets/img/                生成的角色、場景與定格圖
 assets/gb/                 白模參考畫面與白模空景
 assets/video/              白模 v7 預演（對稿版、乾淨版）與封面圖
 assets/5s/                 5 秒短影音的首尾格、icon、Kling 生成與成片（網頁壓縮版）
+assets/models/             模型比較頁用的 Seedance 2.5 與好來影片（網頁壓縮版）
 ```
 
 ## 發佈到 GitHub Pages
