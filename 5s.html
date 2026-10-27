@@ -260,11 +260,11 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
     <p class="logline">延伸 15 秒主片「阿母的客兄」的角色與場景，做三支 5 秒、無聲的直式廣告，分別對媽媽、爸爸、子女三種受眾說「簡單安心，活力不受限」。</p>
     <p class="lead">每支都是同一個公式：一段 5 秒的生活動作，畫面上依序帶出安親 LOGO、標題飄帶、產品包裝與三個特色 icon。這一頁記錄每個階段做了什麼、用了哪些 prompt、試錯過程與檔案位置，給接手的同事看。</p>
     <div class="facts">
-      <div class="fact"><b>目前版本</b><span>v1 交付（10/21）</span></div>
+      <div class="fact"><b>目前版本</b><span>v2 交付（10/27）</span></div>
       <div class="fact"><b>規格</b><span>9:16・1080×1920・24 fps</span></div>
       <div class="fact"><b>片長</b><span>5.0 秒 ×3</span></div>
       <div class="fact"><b>聲音</b><span>無（無配音、音效、配樂）</span></div>
-      <div class="fact"><b>版位</b><span>Motion 全螢幕、文中直式；符合 Meta 安全區</span></div>
+      <div class="fact"><b>版位</b><span>Motion 全螢幕、文中直式</span></div>
       <div class="fact"><b>模型</b><span>首尾格 Nano Banana Pro・影片 Kling 4.0</span></div>
     </div>
   </div>
@@ -275,7 +275,7 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
       <button class="chip" type="button" data-src="assets/5s/final_s2_720p.mp4" data-poster="assets/5s/final_s2_poster.jpg" aria-pressed="false">S2 爸爸</button>
       <button class="chip" type="button" data-src="assets/5s/final_s3_720p.mp4" data-poster="assets/5s/final_s3_poster.jpg" aria-pressed="false">S3 子女</button>
     </div>
-    <p class="legend">網頁版為 720p 壓縮檔，原檔見「合成與交付」。</p>
+    <p class="legend">v2：10/27 依業務回饋調整版面。網頁版為 720p 壓縮檔，v1 與原檔見「合成與交付」。</p>
   </div>
 </section>
 
@@ -299,7 +299,7 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
     <thead><tr><th>支</th><th>受眾</th><th>5 秒內發生什麼</th><th>採用的影片</th></tr></thead>
     <tbody>
       <tr><td class="nowrap"><b>S1 媽媽</b></td><td>熟齡女性本人</td><td>阿嬤在公園漫步機上踩得起勁，鏡頭慢慢推近，她轉頭看鏡頭，自信又帶點得意地笑。延續 15 秒主片的結尾。</td><td class="mono">S1_媽媽_v2</td></tr>
-      <tr><td class="nowrap"><b>S2 爸爸</b></td><td>熟齡男性本人</td><td>阿公和阿嬤並排踩漫步機。阿公是主角，轉頭對鏡頭咧嘴笑、挑眉；阿嬤在旁邊笑他。阿公保留吊嘎＋高腰褲＋深藍帽。</td><td class="mono">S2_爸爸_v2</td></tr>
+      <tr><td class="nowrap"><b>S2 爸爸</b></td><td>熟齡男性本人</td><td>阿公和阿嬤一起踩漫步機，阿嬤在左後方自己的機台上。阿公是主角，鏡頭推近時轉頭對鏡頭咧嘴笑；阿嬤在後面笑他。阿公保留吊嘎＋高腰褲＋深藍帽。</td><td class="mono">S2_爸爸_v2</td></tr>
       <tr><td class="nowrap"><b>S3 子女</b></td><td>替父母採買的子女</td><td>爸媽挽著手在棕櫚步道上走來；鏡頭往後退、往右繞，女兒的背影從右前景入鏡，轉成側臉，手放胸口，露出放心的微笑。</td><td class="mono">S3_子女_v3</td></tr>
     </tbody>
   </table></div>
@@ -313,6 +313,7 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
       <li><b>圖文全部後製疊上：</b>生成的畫面裡不放任何字。版位固定，三支共用同一套位置與進場時間（階段 1）。</li>
       <li><b>icon：</b>原本的 icon 圖邊緣被裁切，改成重新生成「圓圖＋文字」一體的 B 方案，字型比照標題字卡（階段 2）。</li>
       <li><b>LOGO 右邊不放「活力褲」三個字</b>，只放安親 LOGO。</li>
+      <li><b>10/27 業務回饋（v2）：</b>圖文可以不受 Meta 安全區限制，比照 15 秒放在畫面下方；安親 LOGO 放大到和 15 秒一樣（高 165）；文案與 icon 大小不變。爸爸篇 3 秒左右多出一塊踏板，尾格改回「阿嬤留在後方自己的機台」後重生（S2 v4）。15 秒 End Cut 也改成同一套版面（v11）。</li>
       <li><b>首尾格的臉一律避開圖文：</b>模型常把臉放太低，碰到產品包裝；解法是微放大後往上裁切，而不是一直改 prompt（階段 3）。</li>
       <li><b>S3 改了腳本：</b>從「女兒看爸媽背影」改成「爸媽走近、女兒入鏡轉側臉」，首格是爸媽中景、女兒不在畫面中（階段 3）。</li>
       <li><b>影片由 CLI 生成：</b>這個專案的 Kling 生成都交給 Claude Code CLI（已串 Kling MCP），用交接文件溝通（階段 4）。</li>
@@ -331,7 +332,7 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
     <div class="panel"><h3>還沒定案的事</h3><ul class="clean">
       <li><b>畫質：</b>Kling 只輸出 720p，成片是本機放大到 1080p。正式投放前建議和主片一樣過一次 Topaz 升 1080p（要用 Higgsfield 點數）。</li>
       <li>產品包裝、icon 的文字是真實素材疊上的，不是生成的；但畫面裡若出現遠處招牌之類的假字，對外前仍要再看一次。</li>
-      <li>客戶尚未看過這三支。</li>
+      <li>業務已看過 v1，v2 依 10/27 回饋修改，待再次確認。</li>
     </ul></div>
   </div>
 </section>
@@ -354,7 +355,7 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
 
 <section id="safe">
   <h2>Meta 安全區（1080×1920）</h2>
-  <p class="lead">Reels／限時動態的介面會蓋住上下兩塊。重要文字與人臉都不能放進紅色區。</p>
+  <p class="lead">Reels／限時動態的介面會蓋住上下兩塊。v1 依這個規範排版；<b>10/27 起業務確認圖文可以不受安全區限制</b>，改成比照 15 秒放在下方，以下保留做為參考。</p>
   <div class="tblwrap"><table>
     <thead><tr><th>區域</th><th>範圍</th><th>規則</th></tr></thead>
     <tbody>
@@ -370,11 +371,11 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
   <div class="tblwrap"><table>
     <thead><tr><th>元素</th><th>x</th><th>y</th><th>說明</th></tr></thead>
     <tbody>
-      <tr><td>安親 LOGO</td><td class="mono">80–270</td><td class="mono">290–410</td><td>高 120；右邊不放「活力褲」字樣</td></tr>
-      <tr><td>標題飄帶＋「簡單安心 活力不受限」</td><td class="mono">80–460</td><td class="mono">720–1087</td><td>保留紅色飄帶，整組縮到寬 380</td></tr>
-      <tr><td>三個 icon</td><td class="mono">80–660</td><td class="mono">1092–1252</td><td>高 160，中心 x = 150／365／580</td></tr>
-      <tr><td>產品包裝</td><td class="mono">700–1000</td><td class="mono">780–1240</td><td>高 460，右緣 1000</td></tr>
-      <tr><td><b>人物臉部區</b></td><td class="mono">520–960</td><td class="mono">300–700</td><td>主角的臉必須在這裡，下巴不能低於約 760</td></tr>
+      <tr><td>安親 LOGO</td><td class="mono">60–320</td><td class="mono">255–420</td><td>高 165（比照 15 秒，v1 是高 120）；右邊不放「活力褲」字樣</td></tr>
+      <tr><td>標題飄帶＋「簡單安心 活力不受限」</td><td class="mono">60–440</td><td class="mono">1049–1416</td><td>寬 380（大小不變），放在 icon 正上方</td></tr>
+      <tr><td>三個 icon</td><td class="mono">88–647</td><td class="mono">1430–1590</td><td>高 160，中心 x = 150／365／580；底線對齊 15 秒的 y 1590</td></tr>
+      <tr><td>產品包裝</td><td class="mono">726–1020</td><td class="mono">1150–1590</td><td>高 440，位置比照 15 秒</td></tr>
+      <tr><td><b>人物臉部區</b></td><td class="mono">—</td><td class="mono">約 300–1000</td><td>v2 圖文都在下方，臉放在畫面上半部即可（v1 時限制在 x 520–960、y 300–700）</td></tr>
     </tbody>
   </table></div>
 </section>
@@ -460,7 +461,7 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
   <h1>Kling 影片</h1>
   <p class="lead">首尾格定案後，寫一份交接文件給 Claude Code CLI（已串 Kling MCP），由 CLI 生成並把結果放回指定資料夾，再由製作人挑版本。</p>
   <div class="handoff">
-    <div><h4>產出</h4><ul><li>8 條 5 秒影片（每支 2 條，S3 因首格重做多 2 條）</li><li>採用：S1 v2、S2 v2、S3 v3</li></ul></div>
+    <div><h4>產出</h4><ul><li>10 條 5 秒影片（每支 2 條；S3 因首格重做、S2 因尾格重做各多 2 條）</li><li>採用：S1 v2、S2 v4、S3 v3</li></ul></div>
     <div><h4>設定</h4><ul><li><code>kling-video-v4_0</code> 首尾幀，9:16、5 秒、720p</li><li>一次生成出 2 條，90 點（每條 45 點）</li><li>模型會附音軌，無法關閉，後製拿掉</li></ul></div>
     <div><h4>檔案</h4><p class="path">previz\kling_5s\HANDOFF_Kling_5秒x3.md<br>previz\kling_5s\input\、output\、jobs.tsv</p></div>
     <div><h4>交接注意</h4><ul><li>改了首尾幀就更新交接文件最後的「更新紀錄」，輸出用新的版本號，不要覆蓋舊檔。</li></ul></div>
@@ -474,9 +475,9 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
     <thead><tr><th>支</th><th>生成次數</th><th>條數</th><th>點數</th><th>備註</th></tr></thead>
     <tbody>
       <tr><td>S1 媽媽</td><td class="mono">1</td><td class="mono">2</td><td class="mono">90</td><td>尾幀在生成前已換成漫步機版</td></tr>
-      <tr><td>S2 爸爸</td><td class="mono">1</td><td class="mono">2</td><td class="mono">90</td><td></td></tr>
+      <tr><td>S2 爸爸</td><td class="mono">2</td><td class="mono">4</td><td class="mono">180</td><td>10/27 改尾幀重生一次（多出踏板）</td></tr>
       <tr><td>S3 子女</td><td class="mono">2</td><td class="mono">4</td><td class="mono">180</td><td>第一次首格太遠，重做首格再生一次</td></tr>
-      <tr><td><b>合計</b></td><td class="mono">4</td><td class="mono">8</td><td class="mono"><b>360</b></td><td></td></tr>
+      <tr><td><b>合計</b></td><td class="mono">5</td><td class="mono">10</td><td class="mono"><b>450</b></td><td></td></tr>
     </tbody>
   </table></div>
 </section>
@@ -487,35 +488,46 @@ footer{padding-block:44px 56px;color:var(--muted);font-size:13px}
 <div class="panelhead">
   <div class="eyebrow">Stage 5｜Compositing</div>
   <h1>合成與交付</h1>
-  <p class="lead">把選定的 Kling 影片放大到 1080×1920、拿掉聲音，再逐格疊上 LOGO、標題飄帶、產品包裝和三個 icon 的進場動態。</p>
+  <p class="lead">把選定的 Kling 影片放大到 1080×1920、拿掉聲音，再逐格疊上 LOGO、標題飄帶、產品包裝和三個 icon 的進場動態。10/27 依業務回饋改版面出 v2（S1 v2、S2 v4、S3 v3）。</p>
   <div class="handoff">
     <div><h4>產出</h4><ul><li>三支 5.00 秒、1080×1920、24 fps、無聲 mp4（H.264）</li></ul></div>
     <div><h4>工具</h4><ul><li>Python（PIL）逐格合成，ffmpeg 解碼／編碼</li><li>放大：lanczos＋輕度銳化</li></ul></div>
-    <div><h4>檔案</h4><p class="path">previz\kling_5s\final_交付\</p></div>
-    <div><h4>交接注意</h4><ul><li>改時間軸或換版本，改 <code>5秒合成腳本_comp5s.py</code> 重跑即可。</li></ul></div>
+    <div><h4>檔案</h4><p class="path">previz\kling_5s\final_交付\v2_1027\（v2）<br>previz\kling_5s\final_交付\（v1）</p></div>
+    <div><h4>交接注意</h4><ul><li>改時間軸或換版本，改 <code>v2_1027\5秒合成腳本_comp5s_v2.py</code>（版面在 <code>layout2.py</code>）重跑即可。</li></ul></div>
   </div>
   <nav class="subnav" aria-label="本頁段落"><a href="#finals">成片</a><a href="#deliver">交付檔案</a></nav>
 </div>
 
 <section id="finals">
   <h2>成片</h2>
-  <p class="lead">逐格抽查過：三支主角的臉全程都沒有被圖文擋到。S3 中段女兒入鏡時，後腦會經過產品後方，那時是背影，不影響。</p>
+  <p class="lead">v2 版面：LOGO 放大、文案與 icon 移到下方。逐格抽查過，三支主角的臉全程沒有被圖文擋到；爸爸篇 2–4 秒阿嬤腳下只有兩塊踏板。</p>
   <div class="reel" style="margin-top:14px">
     <figure class="win"><video src="assets/5s/final_s1_720p.mp4" poster="assets/5s/final_s1_poster.jpg" controls playsinline preload="none"></video><figcaption><b>S1 媽媽</b></figcaption></figure>
     <figure class="win"><video src="assets/5s/final_s2_720p.mp4" poster="assets/5s/final_s2_poster.jpg" controls playsinline preload="none"></video><figcaption><b>S2 爸爸</b></figcaption></figure>
     <figure class="win"><video src="assets/5s/final_s3_720p.mp4" poster="assets/5s/final_s3_poster.jpg" controls playsinline preload="none"></video><figcaption><b>S3 子女</b></figcaption></figure>
   </div>
+  <details><summary>v1（10/21，Meta 安全區版面）</summary><div class="reel" style="margin-top:10px">
+    <figure><video src="assets/5s/final_s1_v1_720p.mp4" poster="assets/5s/final_s1_v1_poster.jpg" controls playsinline preload="none"></video><figcaption><b>S1 v1</b></figcaption></figure>
+    <figure><video src="assets/5s/final_s2_v1_720p.mp4" poster="assets/5s/final_s2_v1_poster.jpg" controls playsinline preload="none"></video><figcaption><b>S2 v1</b></figcaption></figure>
+    <figure><video src="assets/5s/final_s3_v1_720p.mp4" poster="assets/5s/final_s3_v1_poster.jpg" controls playsinline preload="none"></video><figcaption><b>S3 v1</b></figcaption></figure>
+  </div></details>
   <div class="note"><strong>畫質：</strong>Kling 這次只輸出 720p，成片是放大到 1080p。手機上看沒有問題，但細節不如真正的 1080p；正式投放前建議用 Topaz 升級後重跑合成腳本。</div>
 </section>
 
 <section id="deliver">
   <h2>交付檔案</h2>
   <div class="tree">previz\kling_5s\final_交付\
-├─ 安親5秒_S1_媽媽_1080x1920.mp4     ← S1_媽媽_v2
-├─ 安親5秒_S2_爸爸_1080x1920.mp4     ← S2_爸爸_v2
-├─ 安親5秒_S3_子女_1080x1920.mp4     ← S3_子女_v3
-├─ 5秒合成腳本_comp5s.py              合成腳本（圖文位置、進場時間）
-└─ review.py                          圖文素材載入與疊圖檢查</div>
+├─ v2_1027\                                ← 目前版本（10/27 業務回饋）
+│  ├─ 安親5秒_S1_媽媽_1080x1920_v2.mp4    ← S1_媽媽_v2
+│  ├─ 安親5秒_S2_爸爸_1080x1920_v2.mp4    ← S2_爸爸_v4（新尾幀）
+│  ├─ 安親5秒_S3_子女_1080x1920_v2.mp4    ← S3_子女_v3
+│  ├─ 5秒合成腳本_comp5s_v2.py             合成腳本（進場時間）
+│  └─ layout2.py                           v2 版面（LOGO、文案、icon、產品位置）
+├─ 安親5秒_S1_媽媽_1080x1920.mp4          ← v1（10/21）
+├─ 安親5秒_S2_爸爸_1080x1920.mp4          ← v1，S2_爸爸_v2（有多出的踏板）
+├─ 安親5秒_S3_子女_1080x1920.mp4          ← v1
+├─ 5秒合成腳本_comp5s.py                   v1 合成腳本
+└─ review.py                               圖文素材載入與疊圖檢查</div>
   <p class="lead" style="margin-top:12px">重跑方式：<code>python comp5s.py &lt;Kling 原檔&gt; &lt;輸出.mp4&gt;</code>。腳本裡的素材路徑寫的是雲端工作區的路徑，在本機跑要先改成 <code>previz\seedance\final_1080p_交付\new\</code> 與 <code>previz\nano_banana_5s\</code>。</p>
 </section>
 </div>
@@ -561,8 +573,8 @@ Framing: she stands on the right half of the frame and her head sits HIGH, in th
 ${CLEAN}`]]},
 {id:"s2",title:"S2 爸爸：阿公、阿嬤一起踩漫步機",
  frames:[["s2_first","首格","new"],["s2_first_ov","首格＋圖文",""],["s2_end","尾格","new"],["s2_end_ov","尾格＋圖文",""]],
- verdict:"阿嬤的臉一直被標題飄帶蓋住，降低鏡位也沒用。最後改成「兩人並排、頭在同一高度」，阿嬤的臉剛好落在 LOGO 與標題之間的空檔。",
- history:[["s2_plate","先做雙漫步機空景（機台結構比照主片）"],["s2_h1","尾格第 1 輪：阿嬤被飄帶蓋住"],["s2_h2","第 2 輪：低角度，阿嬤仍被蓋住"],["s2_end","第 3 輪定案：雙人並排"],["s2_alt","第 3 輪備選：全身入鏡、扶手偏綠"]],
+ verdict:"v1 時阿嬤的臉一直被標題飄帶蓋住，所以改成兩人並排；但並排尾格和首格的前後關係差太多，Kling 中途多長出一塊踏板。v2 圖文移到下方後，阿嬤在後方的臉不會被擋，尾格改回第 1 輪「阿嬤留在後方自己的機台」，和首格空間一致。",
+ history:[["s2_plate","先做雙漫步機空景（機台結構比照主片）"],["s2_h1","尾格第 1 輪：阿嬤被飄帶蓋住"],["s2_h2","第 2 輪：低角度，阿嬤仍被蓋住"],["s2_h3","第 3 輪：雙人並排（v1 採用）"],["s2_h4","10/27 修掉多出的踏板，仍是並排（未採用）"],["s2_end","v2 定案：改回第 1 輪，阿嬤留在後方"]],
  prompts:[["F0 雙漫步機空景（參考：主片公園空景 06b、定格 07）",`Image 1 is an empty Taiwanese neighborhood park with one outdoor air-walker exercise machine. Image 2 shows the same machine in use, from a low angle. Copy this machine's design EXACTLY; it must look like the very same model.
 The machine's structure: two straight vertical green steel posts standing about 0.8 m apart; across their tops ONE yellow curved handlebar bridges both posts like a gate (an upside-down U joining the two post tops); between the posts hang two yellow pendulum arms, each ending in a yellow footplate a little above the ground; flaking paint and rust spots. There are no handles sticking out sideways and no extra arms.
 Create a new vertical 9:16 photograph of the same park in the same early-morning light with TWO of these identical machines standing in a row, side by side, about 1 m apart, both facing the same way, on the same rubber safety tiles. Two people on them could easily talk to each other.
@@ -577,7 +589,19 @@ ${LAYOUT}
 Grandpa's face sits 55%-85% across and 18%-34% from the top. Grandma's face sits 20%-40% across and 23%-34% from the top, between the logo area and the headline area.
 Vertical 9:16, 35mm, golden morning backlight, warm slightly faded Taiwanese TV-drama color, real skin texture, documentary realism.
 No text, no logos, no lettering, no packaging anywhere. Avoid plastic skin, beauty filter, CGI look, extra fingers. Avoid merged bodies, hands merging with the handlebars.`],
- ["F2 尾格・定案（參考：F1 結果、阿公三視表、阿嬤三視表）",`Image 1 is the first frame of this shot. Image 2 is Grandpa and image 3 is Grandma: each is a turnaround sheet of ONE person. Keep their faces and wardrobe exactly: Grandpa's faded navy cap, white sleeveless undershirt and high-waisted slacks; Grandma's teal tracksuit and towel. Keep the outdoor air-walker machines exactly as in image 1: same structure, same colours.
+ ["F2 尾格・v2 定案（第 1 輪結果 2；參考：F1 結果、阿公三視表）",`Image 1 is the first frame of this shot. Image 2 is Grandpa: a turnaround sheet of ONE person. Keep his face, cap, sleeveless undershirt and high-waisted slacks exactly as in image 1.
+Create the closing frame: the camera has pushed in to a chest-up shot of Grandpa on his air-walker. He has turned to the camera with a proud, cheeky grin and one eyebrow raised, both hands still on the handlebar. Behind him on the left, Grandma on her machine laughs at him, soft and out of focus.
+Keep the push-in moderate: his head with the cap is about 21% of the frame height.
+Layout: logo, headline, icons and product are added later, so keep these areas soft, simple background with no faces, hands or key action:
+- top-left: the left 26% of the width, 14%-22% from the top (logo);
+- left: the left 43% of the width, 37%-57% from the top (headline), and the left 61%, 57%-65% from the top (three icons);
+- right: 65%-93% across, 40%-65% from the top (product pack);
+- the bottom 35% will be covered by the app interface: only bodies, ground or background there.
+Grandpa's face sits 50%-88% across and 16%-37% from the top. Grandma's face, if visible, sits 15%-40% across and 23%-35% from the top.
+Vertical 9:16, 50mm, shallow depth of field, golden morning backlight, warm slightly faded Taiwanese TV-drama color, real skin texture.
+No text, no logos, no lettering, no packaging anywhere. Avoid plastic skin, beauty filter, CGI look, extra fingers.
+This is a clean photograph: the layout notes above only describe where to leave empty space; do not draw any text, letters, labels, logos, graphics, icons, boxes or packaging.`],
+ ["F2 尾格・v1 並排版（已不用）",`Image 1 is the first frame of this shot. Image 2 is Grandpa and image 3 is Grandma: each is a turnaround sheet of ONE person. Keep their faces and wardrobe exactly: Grandpa's faded navy cap, white sleeveless undershirt and high-waisted slacks; Grandma's teal tracksuit and towel. Keep the outdoor air-walker machines exactly as in image 1: same structure, same colours.
 Create the closing frame: a two-shot. Grandpa and Grandma stand side by side on their air-walkers, shoulder to shoulder, at the SAME distance from the camera, both standing upright. Grandpa is on the right, Grandma is on the left, half a step behind his shoulder.
 Their two heads are at the SAME height in the frame, side by side in the upper part of the picture: Grandpa's face in the upper right, Grandma's face just to the left of his, overlapping his shoulder slightly, roughly in the middle of the frame width. Both faces are between one sixth and one third of the way down from the top. Grandma's head is slightly smaller than Grandpa's.
 Grandpa has turned to the camera with a proud, cheeky grin and one eyebrow raised, both hands on the handlebar, in sharp focus. Grandma laughs, looking at him, slightly soft.
@@ -614,10 +638,11 @@ const KL=[
  prompt:`A warm Taiwanese TV-drama moment in a city park at golden morning light. An elderly woman with short dark curly hair, teal tracksuit and a white towel around her neck strides happily on a yellow-and-green outdoor air-walker, both hands on the handlebar, a light breeze lifting her curls and the towel.
 She keeps striding on the air-walker with both hands on the handlebar the whole time. The camera slowly and smoothly pushes in a little and drifts slightly around to her front-right. Around the middle of the shot she turns her face to the camera and looks straight into the lens with a warm, confident, slightly cheeky smile, chin a little raised, and holds that look to the end.
 Natural, gentle motion, realistic skin, her face and outfit stay exactly the same throughout. One continuous shot, no cuts.`},
-{id:"s2",title:"S2 爸爸",meta:"首幀 F1・尾幀 F2（雙人並排）",takes:[["k_s2_v1","v1",""],["k_s2_v2","v2","採用"]],
- verdict:"首尾幀差最多（阿嬤從後面一台機器變成並排），兩條都靠鏡頭推近順利接上。製作人選 v2。",
- prompt:`A warm Taiwanese TV-drama moment in a city park at golden morning light. An elderly man in a faded navy cap, white sleeveless undershirt and high-waisted grey-brown slacks strides energetically on a yellow-and-green outdoor air-walker, laughing. His wife, in a teal tracksuit with a white towel, exercises on the machine next to him.
-The camera smoothly moves in and around so that the couple ends up side by side in a two-shot, Grandpa in front on the right, Grandma just beside him on the left. Grandpa slows his stride, keeps both hands on the handlebar, turns to the camera with a proud, cheeky grin and raises one eyebrow; Grandma laughs at him.
+{id:"s2",title:"S2 爸爸",meta:"v1、v2 用並排尾幀；v3、v4 用 10/27 新尾幀（阿嬤留在後方）",takes:[["k_s2_v1","v1（舊尾幀）","重做"],["k_s2_v2","v2（舊尾幀）","重做"],["k_s2_v3","v3",""],["k_s2_v4","v4","採用"]],
+ verdict:"v1、v2 的尾幀是兩人並排，阿嬤得從後面的機台移過來，3 秒左右腳邊多出一塊踏板（業務回饋）。改用阿嬤留在後方的尾幀並補上「每台只有兩塊踏板」後重生，v3、v4 阿嬤全程留在自己機台、腳下兩塊踏板；製作人選 v4。",
+ prompt:`A warm Taiwanese TV-drama moment in a city park at golden morning light. Two identical yellow-and-green outdoor air-walkers stand in a row. An elderly man in a faded navy cap, white sleeveless undershirt and high-waisted grey-brown slacks strides energetically on the nearer machine, laughing with his wife. His wife, in a teal tracksuit with a white towel, exercises on the second machine behind him on the left, and she stays on her own machine, at the same distance behind him, for the whole shot.
+The camera slowly pushes in and arcs around to the front of the grandfather, from a low wide shot to a waist-up shot of him, with his wife still visible behind him on the left. He slows his stride, keeps both hands on the handlebar, turns his face to the camera with a proud, cheeky grin and a little nod; behind him his wife laughs at him.
+Each air-walker has exactly two yellow footplates hanging from its two swinging arms; both people keep their feet on their own machine's footplates, and no loose footplate, extra arm or extra machine ever appears. The machines keep the same shape and colours throughout.
 Natural, gentle motion, realistic skin, faces and outfits stay exactly the same throughout. One continuous shot, no cuts.`},
 {id:"s3",title:"S3 子女",meta:"首幀 D1（中景）・尾幀 D2；v1、v2 用的是太遠的舊首幀",takes:[["k_s3_v1","v1（舊首幀）","重做"],["k_s3_v2","v2（舊首幀）","重做"],["k_s3_v3","v3","採用"],["k_s3_v4","v4",""]],
  verdict:"第一次的首幀爸媽太遠，5 秒內走不到尾幀的位置，兩條都在 2–3 秒間突然變大。首格改成中景後重生 v3、v4，走近的速度自然；採用 v3。",
