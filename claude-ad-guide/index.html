@@ -1,0 +1,1359 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>AI 短片廣告入門</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231D56C9'/%3E%3Cpath d='M6 4.5l5.5 3.5L6 11.5z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="css/guide.css">
+<link rel="stylesheet" href="css/motion.css">
+<script>document.documentElement.className+=" js"</script>
+</head>
+<body>
+<div class="paper" aria-hidden="true"></div>
+<header class="bar"><i class="bar-prog" id="barProg" aria-hidden="true"></i>
+  <div class="wrap">
+    <span class="brand">AI 短片廣告入門</span>
+    <span class="tc mono" aria-label="閱讀進度，以片長時間碼表示">進度 <b id="pageTc">00:00:00:00</b></span>
+    <div class="seg" role="group" aria-label="選擇片長">
+      <button type="button" id="mode5" data-mode="5" aria-pressed="false">5 秒</button>
+      <button type="button" id="mode15" data-mode="15" aria-pressed="true">15 秒</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="hero-sec">
+  <div class="hero-bg" aria-hidden="true">
+    <span class="hero-num mono"><span data-only="15">15</span><span data-only="5">05</span></span>
+    <svg class="sk-el a" viewBox="0 0 260 150" width="260" height="150"><rect class="sk" x="4" y="14" width="72" height="128" rx="2" transform="rotate(-4 40 78)"/><rect class="sk" x="176" y="10" width="72" height="128" rx="2" transform="rotate(3 212 74)"/><path class="skd" d="M92 78C120 58 140 58 164 74"/><path class="sk" d="M156 66l9 8-11 5"/><text class="lbl" x="18" y="9">首格</text><text class="lbl" x="196" y="7">尾格</text><text class="lbl" x="114" y="52">5.0s</text></svg>
+    <svg class="sk-el b" viewBox="0 0 220 120" width="220" height="120"><path class="skd" d="M10 100Q110 -20 210 100"/><circle class="sk" cx="110" cy="96" r="6"/><path class="sk" d="M36 62l14-6 4 10-14 6z"/><path class="skd" d="M50 64L104 92"/><text class="lbl" x="122" y="26">50mm f/2.0</text><text class="lbl" x="150" y="114">緩進緩出</text></svg>
+    <svg class="sk-el c" viewBox="0 0 80 80" width="80" height="80"><path class="sk" d="M0 20h28M20 0v28M52 60h28M60 52v28"/></svg>
+  </div>
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <h1><span class="ln">拿到 Claude 之後，</span><span class="ln">做出第一支</span> <span class="ln"><em><span data-only="15">15 秒</span><span data-only="5">5 秒</span></em>廣告</span></h1>
+      <p>十一個步驟，從算秒數到交付成片。每一步都有可以直接貼給 Claude 的指令，旁邊的示範可以動手試。</p>
+      <div class="cta">
+        <a class="btn" href="#step-0">從第一步開始</a>
+        <a class="link" href="#days">先看三天怎麼排</a>
+        <a class="link" href="#skills-used">用到的 skill</a>
+      </div>
+    </div>
+
+    <div class="deck" aria-label="片長時間軸示範">
+      <div class="deck-top">
+        <div class="screen">
+          <svg viewBox="0 0 180 320" role="img" aria-label="白模預演畫面：人物與商品">
+            <rect width="180" height="320" fill="var(--sunk)"/>
+            <g id="cam">
+              <rect class="gA" x="-300" y="230" width="800" height="300"/>
+              <rect class="skd" x="108" y="52" width="52" height="84"/>
+              <line class="skd" x1="134" y1="52" x2="134" y2="136"/>
+              <rect class="gB" x="92" y="206" width="56" height="24" rx="2"/>
+              <g transform="translate(60 0)"><g id="fig">
+                <rect class="gC" x="-12" y="150" width="24" height="80" rx="12"/>
+                <circle class="gC" cx="0" cy="134" r="13"/>
+                <rect id="arm" class="gB" x="4" y="172" width="30" height="8" rx="4"/>
+              </g></g>
+              <g transform="translate(120 0)"><g id="prod">
+                <rect class="acc" x="-9" y="172" width="18" height="34" rx="3"/>
+                <rect class="acc" x="-5" y="164" width="10" height="9" rx="2"/>
+              </g></g>
+            </g>
+            <g id="endc" opacity="0">
+              <rect x="30" y="252" width="120" height="40" rx="4" fill="var(--surface)" stroke="var(--grey-c)" stroke-dasharray="3 3"/>
+              <text x="90" y="276" text-anchor="middle" style="font:400 10px var(--sans);fill:var(--ink2)">Logo 與標語，後期加上</text>
+            </g>
+          </svg>
+          <span class="tag mono" id="shotTag">S1</span>
+        </div>
+        <div class="shots">
+          <span class="cap" data-only="15">15 秒＝5 個鏡頭的剪接序列</span>
+          <span class="cap" data-only="5">5 秒＝一顆鏡頭，首格到尾格</span>
+          <div id="shotList"></div>
+          <p class="note">這是白模預演的樣子：人物用膠囊，商品用色塊。先對秒數與鏡位，再花錢生成</p>
+        </div>
+      </div>
+      <div class="transport">
+        <button type="button" class="ico" id="playBtn" aria-label="播放或暫停">
+          <svg viewBox="0 0 24 24" id="playIco"><path d="M7 5l12 7-12 7z"/></svg>
+        </button>
+        <div class="strip">
+          <div class="blocks" id="blocks"></div>
+          <div class="ph" id="ph"></div>
+          <input type="range" id="scrub" min="0" max="15" step="0.01" value="0" aria-label="拖曳時間軸">
+        </div>
+        <span class="readout mono" id="readout">00:00:00:00</span>
+      </div>
+    </div>
+  </section>
+</div>
+  <div class="scroll-hint mono" aria-hidden="true"><i></i><span>往下捲，播放頭跟著走</span></div>
+</div>
+
+<section id="days" class="band days-band">
+  <div class="days-pin">
+    <div class="wrap"><div class="sect-h"><h2 data-split>三天怎麼排</h2><p>真正能生成影片的機會只有兩到三次，所以第一次就要夠完整</p></div></div>
+    <div class="days-view">
+      <ol class="days-track" id="daysTrack">
+        <li class="day"><span class="day-n mono" aria-hidden="true">0</span><span class="k mono">Day 0</span><h3>腳本與預演</h3><p>算秒數、寫分場表、白模對一次鏡位。這天不花生成費</p><div class="day-steps" data-steps="step-0,step-1,step-2,step-3"></div></li>
+        <li class="day"><span class="day-n mono" aria-hidden="true">1</span><span class="k mono">Day 1</span><h3>素材與第一次生成</h3><p>定裝照、商品圖、首尾格一次備齊，口白先錄好，當天送出第一次生成</p><div class="day-steps" data-steps="step-4,step-voice,step-5"></div></li>
+        <li class="day"><span class="day-n mono" aria-hidden="true">2</span><span class="k mono">Day 2</span><h3>修補，不重來</h3><p>只補壞掉的段落，同時做配樂與音效。這天決定成敗</p><div class="day-steps" data-steps="step-6,step-7"></div></li>
+        <li class="day"><span class="day-n mono" aria-hidden="true">3</span><span class="k mono">Day 3</span><h3>合成與交付</h3><p>接片、上字卡與 Logo、內部審看、交件</p><div class="day-steps" data-steps="step-comp,step-8"></div></li>
+      </ol>
+    </div>
+    <div class="wrap"><div class="days-bar"><i id="daysFill"></i></div></div>
+  </div>
+</section>
+
+<div class="mq" aria-hidden="true"><div class="mq-t" id="mqT"></div></div>
+
+<div class="wrap">
+
+  <div class="flow" id="flow"><svg class="track" id="track" aria-hidden="true"></svg>
+    <nav class="rail" aria-label="步驟">
+      <ol id="rail"><span class="head" id="railHead" aria-hidden="true"></span></ol>
+    </nav>
+
+    <div>
+      <!-- 0 -->
+      <section class="step" id="step-0" data-name="開工">
+        <header class="step-h">
+          <div class="meta"><b>00</b><span>Day 0</span></div>
+          <h2>在專案資料夾裡打開 Claude</h2>
+          <p>Claude 只知道你告訴它的事，和資料夾裡看得到的檔案。第一句話先讓它看清楚現場</p>
+        </header>
+        <div class="step-b">
+          <div class="txt">
+            <div class="say"><div class="say-h"><span>對 Claude 說</span><button type="button" class="copy" data-copy="p0"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button></div>
+              <pre id="p0">讀一下這個專案資料夾，告訴我：有沒有上次留下的交接檔、目前能用哪些工具（生圖、圖生影片、配樂音效、Blender），以及你建議我下一步做什麼。</pre></div>
+            <ul class="pts">
+              <li><span><b>一次交代一件事。</b>看到結果、確認沒問題，再給下一個指令</span></li>
+              <li><span><b>把素材放進資料夾。</b>腳本、商品圖、參考片都放進去，再告訴 Claude 檔名</span></li>
+              <li><span><b>不確定就問它。</b>「這一步會花錢嗎」「會改到哪些檔案」都可以直接問</span></li>
+            </ul>
+          </div>
+          <figure class="demo" data-demo="term">
+            <div class="demo-h"><span>Claude Code 裡會看到的樣子</span><button type="button" class="replay">重播</button></div>
+            <div class="term mono">
+              <div class="you" id="termYou">讀一下這個專案資料夾，告訴我有沒有交接檔、能用哪些工具</div>
+              <div class="re">找到 HANDOFF.md：上次沒有未完成的工作</div>
+              <div class="re">可用工具：生圖、圖生影片、配樂音效、Blender 白模</div>
+              <div class="re">建議下一步：把腳本貼給我，先算秒數放不放得下</div>
+            </div>
+            <figcaption>交接檔是上一次工作結束時留下的紀錄。新的對話先讀它，才不會重做或漏做</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 1 -->
+      <section class="step" id="step-1" data-name="算秒數">
+        <header class="step-h">
+          <div class="meta"><b>01</b><span>Day 0</span></div>
+          <h2>先算秒數，再談創意</h2>
+          <p>觀眾看懂一個動作大約要 1.5 秒。把必須看懂的動作數出來，就知道片子裝不裝得下</p>
+        </header>
+        <div class="step-b">
+          <div class="txt">
+            <div class="say"><div class="say-h"><span>對 Claude 說</span><button type="button" class="copy" data-copy="p1"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button></div>
+              <pre id="p1">這是腳本：〈貼上腳本〉
+請列出觀眾必須看懂的動作，每個算 1.5 秒，結尾產品定格另外留 1.5 秒。告訴我 <span data-only="15">15</span><span data-only="5">5</span> 秒放不放得下，放不下的話建議砍掉或合併哪幾個。</pre></div>
+            <ul class="pts">
+              <li><span><b>先扣掉結尾定格。</b>產品停在畫面上的 1.5 秒要先留，剩下的才分給動作</span></li>
+              <li data-only="15"><span><b>15 秒大約裝 9 個動作。</b>超過就砍，剪快一點也塞不進去</span></li>
+              <li data-only="5"><span><b>5 秒只裝得下 2 個動作。</b>一個主要動作加一個收尾，例如推近、看鏡頭</span></li>
+              <li><span><b>塞不下的交給旁白和字幕。</b>一句旁白 2 秒能講三件事，畫面講一件就要 1.5 秒</span></li>
+            </ul>
+          </div>
+          <figure class="demo">
+            <div class="demo-h"><span>動作計算器</span><span class="mono" id="budgetSum"></span></div>
+            <div class="chips" id="chips"></div>
+            <form class="add" id="addForm"><input id="addInput" type="text" maxlength="14" placeholder="加一個動作，例如：打開瓶蓋" aria-label="新增動作"><button type="submit">加入</button></form>
+            <div class="meter"><div class="lim" id="lim"><span class="mono" id="limLab"></span></div><div class="bar2" id="bar2"></div></div>
+            <p class="verdict" id="verdict"></p>
+            <figcaption>每一格是 1.5 秒。斜線那格是結尾產品定格。切換上方的 5 秒與 15 秒看差別</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 2 -->
+      <section class="step" id="step-2" data-name="分場表">
+        <header class="step-h">
+          <div class="meta"><b>02</b><span>Day 0</span></div>
+          <h2 data-only="15">把腳本寫成分場表，不要寫成故事</h2>
+          <h2 data-only="5">寫成一顆鏡頭：首格、尾格、一段動作</h2>
+          <p data-only="15">同樣一次生成整支，寫成流暢故事的會失敗，寫成分場表的才成立</p>
+          <p data-only="5">5 秒不剪接。你給模型第一格和最後一格，它只負責補中間</p>
+        </header>
+        <div class="step-b">
+          <div class="txt">
+            <div class="say"><div class="say-h"><span>對 Claude 說</span><button type="button" class="copy" data-copy="p2"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button></div>
+              <pre id="p2"><span data-only="15">用 ai-video-15s-workflow 把這份腳本改寫成分場表：開頭是全域規則，每個鏡頭有時間碼、鏡位、一個主要動作和該段禁令，最後是統一的負向欄位。寫完先給我看，不要生成。</span><span data-only="5">把這個點子寫成一顆一鏡到底的 5 秒直式鏡頭：描述首格與尾格兩張圖，再寫一段動作 prompt。首尾格的人物位置關係要一致。寫完先給我看，不要生成。</span></pre></div>
+            <ul class="pts" data-only="15">
+              <li><span><b>明講這是剪接序列。</b>不講的話，模型會架一台不動的攝影機拍到底</span></li>
+              <li><span><b>每個鏡頭給不同的焦段和角度。</b>這是讓模型真的切鏡頭最強的訊號</span></li>
+              <li><span><b>演出拆成節拍。</b>「驚慌逃跑」一句話會變靜物，拆成四個帶秒數的動作才會演</span></li>
+              <li><span><b>不要的東西集中寫在最後。</b>文字、變形的手、一鏡到底，都放負向欄位</span></li>
+            </ul>
+            <ul class="pts" data-only="5">
+              <li><span><b>首尾格的空間關係要一樣。</b>誰在前、誰在後不能換。差太多，模型會憑空多長出東西</span></li>
+              <li><span><b>距離要走得到。</b>人物 5 秒內走不完的距離，影片中途會跳</span></li>
+              <li><span><b>只移動攝影機和一個主體。</b>推近、繞到正面、轉頭看鏡頭，這樣就夠</span></li>
+              <li><span><b>畫面不放任何字。</b>Logo、標題、產品圖卡都留給後期</span></li>
+            </ul>
+          </div>
+          <figure class="demo" data-demo="cmp">
+            <div class="demo-h"><span>兩種寫法</span><button type="button" class="replay">重播</button></div>
+            <div class="cmp" data-only="15">
+              <div class="no"><div class="lab"><i></i>會失敗：寫成故事</div><p>早晨的陽光灑進廚房，她走進來看見桌上的飲料，露出微笑拿起來喝了一口，整個人都醒了，最後產品出現。</p></div>
+              <div class="yes"><div class="lab"><i></i>會成立：寫成分場表</div>
+                <ol class="rows">
+                  <li><b>S1</b><span>0.0–2.5</span><span>遠景 35mm，她從左側走進廚房</span></li>
+                  <li><b>S2</b><span>2.5–5.5</span><span>硬切，中景 50mm，伸手向檯面</span></li>
+                  <li><b>S3</b><span>5.5–9.0</span><span>特寫 85mm，手握住瓶身，慢推</span></li>
+                  <li><b>S4</b><span>9.0–13.5</span><span>中景，喝一口，表情從睏變清醒</span></li>
+                  <li><b>S5</b><span>13.5–15</span><span>產品定格，畫面不出現文字</span></li>
+                </ol></div>
+            </div>
+            <div class="cmp" data-only="5">
+              <div class="no"><div class="lab"><i></i>會失敗：尾格換了站位</div><p>首格她站在檯面後方，尾格變成站在檯面前方拿著飲料。模型要把人搬過去，中途就會多出一隻手或一張桌子。</p></div>
+              <div class="yes"><div class="lab"><i></i>會成立：站位不變，只推近</div>
+                <ol class="rows">
+                  <li><b>首格</b><span>0.0</span><span>中景，她站在檯面旁，手握飲料</span></li>
+                  <li><b>動作</b><span>0.0–3.5</span><span>鏡頭慢慢推近，她把飲料舉到胸前</span></li>
+                  <li><b>收尾</b><span>3.5–5.0</span><span>她看向鏡頭微笑，停住</span></li>
+                  <li><b>尾格</b><span>5.0</span><span>胸上近景，同一個站位、同一套服裝</span></li>
+                </ol></div>
+            </div>
+            <figcaption>範例是虛構的飲料廣告，和上方時間軸示範是同一支</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 3 -->
+      <section class="step" id="step-3" data-name="白模預演">
+        <header class="step-h">
+          <div class="meta"><b>03</b><span>Day 0，時間不夠可跳過</span></div>
+          <h2>用白模先走一次鏡位</h2>
+          <p>白模是沒有材質的灰色 3D 場景。它不花生成費，卻能在第零天就發現秒數不夠或鏡位打架</p>
+        </header>
+        <div class="step-b">
+          <div class="txt">
+            <div class="say"><div class="say-h"><span>對 Claude 說</span><button type="button" class="copy" data-copy="p3"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button></div>
+              <pre id="p3">用 Blender 白模照分場表做運鏡稿：人物用膠囊人形，商品用色塊，攝影機的起點、終點和緩進緩出照每個鏡頭的規格。輸出灰模影片給我看。</pre></div>
+            <ul class="pts">
+              <li><span><b>人物用膠囊，不用擬真人偶。</b>擬真的人體模型當參考圖，會被影片工具的審查擋下</span></li>
+              <li><span><b>看的是時間和構圖。</b>動作來不來得及、主體佔畫面多大、鏡頭會不會穿幫</span></li>
+              <li><span><b>灰模影片可以當運鏡參考。</b>被擋下時，改用文字描述同一個運鏡</span></li>
+            </ul>
+          </div>
+          <figure class="demo" data-demo="orbit">
+            <div class="demo-h"><span>俯視圖：攝影機繞到人物正面並推近</span><button type="button" class="replay">重播</button></div>
+            <div class="stage">
+              <svg viewBox="0 0 320 200" role="img" aria-label="攝影機沿弧線移動的俯視圖">
+                <path class="skd" d="M60 150 A110 110 0 0 1 250 130"/>
+                <circle class="gC" cx="160" cy="80" r="14"/>
+                <rect class="acc" x="186" y="72" width="10" height="16" rx="2"/>
+                <text class="lbl" x="160" y="58" text-anchor="middle">人物</text>
+                <text class="lbl" x="204" y="70">商品</text>
+                <g id="orbCam">
+                  <path id="orbFov" d="M0 0 L46 -18 L46 18 Z" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1"/>
+                  <rect class="acc" x="-9" y="-6" width="14" height="12" rx="2"/>
+                </g>
+                <text class="lbl" x="52" y="170">起點 0.0s</text>
+                <text class="lbl" x="232" y="150">終點</text>
+              </svg>
+            </div>
+            <figcaption>起點和終點對應首格與尾格。緩進緩出讓推近看起來像有人在操作攝影機</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 4 -->
+      <section class="step" id="step-4" data-name="備素材">
+        <header class="step-h">
+          <div class="meta"><b>04</b><span>Day 1</span></div>
+          <h2>先鎖住長相，再談動作</h2>
+          <p>模型每生成一次就會重新想像一次人臉。所以先用生圖工具做定裝照和首尾格，再拿去生影片</p>
+        </header>
+        <div class="step-b">
+          <div class="txt">
+            <div class="say"><div class="say-h"><span>對 Claude 說</span><button type="button" class="copy" data-copy="p4"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button></div>
+              <pre id="p4">幫每個角色生成定裝照：正面、45 度、全側、背向，逐張存成單圖。再生成每個鏡頭的首格<span data-only="5">和尾格</span>，商品用我放在資料夾裡的實拍圖，畫面不要有任何文字。每張出 2 個版本讓我選。</pre></div>
+            <ul class="pts">
+              <li><span><b>定裝照挑涵蓋角度最廣的四張。</b>一個角色最多註冊四張，右邊試試看怎麼挑</span></li>
+              <li><span><b>必須正確的東西放進首尾格。</b>包裝、品牌字用實拍或設計稿，不讓模型重新生成</span></li>
+              <li><span><b>同一個場景共用同一個光位。</b>主光的方向和色溫先定下來，剪在一起才像同一個房間</span></li>
+            </ul>
+          </div>
+          <figure class="demo">
+            <div class="demo-h"><span>選四張定裝照</span><span class="mono" id="angCount">0 / 4</span></div>
+            <div class="angles" id="angles"></div>
+            <p class="verdict" id="angVerdict">點選四個角度，看看這組合夠不夠用</p>
+            <figcaption>六格一起丟給模型，它可能理解成畫面裡有六個人，所以要逐張裁開</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- voice -->
+      <section class="step" id="step-voice" data-name="口白">
+        <header class="step-h">
+          <div class="meta"><b></b><span>Day 1</span></div>
+          <h2>口白先做，影片才能對嘴</h2>
+          <p>口白用 Gemini 3.8 Flash TTS 生成。有對白的片子，口白要在生成影片之前完成，因為它會當成對嘴用的參考音檔</p>
+        </header>
+        <div class="step-b">
+          <div class="txt">
+            <div class="say"><div class="say-h"><span>對 Claude 說</span><button type="button" class="copy" data-copy="pv"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button></div>
+              <pre id="pv">用 Gemini 3.8 Flash TTS 幫這幾句台詞試音：每個角色挑 5 個聲線，每個聲線出 2 條，做成可以播放的比較頁讓我選。選定後每句分開生成，去掉頭尾靜音，各存成一個檔案。</pre></div>
+            <ul class="pts">
+              <li><span><b>先試音，再量產。</b>同一句話換聲線、換寫法各出幾條，聽過再選</span></li>
+              <li><span><b>台語台詞多試幾種寫法。</b>漢字和台羅各出一版，念出來不一樣</span></li>
+              <li><span><b>每句分開生成。</b>之後才能各自對位、各自調快慢</span></li>
+              <li><span><b>念錯的字事後可以換。</b>影片模型把某個詞念錯時，用 TTS 重做那一句，拉伸到嘴型的時間再換上去</span></li>
+              <li data-only="5"><span><b>5 秒無對白的片子可以晚點做。</b>旁白不用對嘴，放到配樂那一步一起處理也行</span></li>
+            </ul>
+          </div>
+          <figure class="demo">
+            <div class="demo-h"><span>試音表：聲線 × 寫法</span><span class="mono" id="audPick"></span></div>
+            <div class="aud" id="aud"></div>
+            <p class="verdict" id="audVerdict"></p>
+            <figcaption>這裡是示意，不會出聲。Claude 做出來的比較頁可以逐條播放</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 5 -->
+      <section class="step" id="step-5" data-name="生成">
+        <header class="step-h">
+          <div class="meta"><b></b><span>Day 1</span></div>
+          <h2>用 Kling 或 Seedance 生成，多跑幾條挑一條</h2>
+          <p>兩個工具都接在 Claude 上，你只要說用哪一個。無對白的 5 秒鏡頭用 Kling 首尾幀，要照錄音對嘴的鏡頭用 Seedance 全能參考</p>
+        </header>
+        <div class="step-b">
+          <div class="txt">
+            <div class="say"><div class="say-h"><span>對 Claude 說</span><button type="button" class="copy" data-copy="p5"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button></div>
+              <pre id="p5"><span data-tool-only="kling">用 Kling MCP 生成：先確認連線和剩餘點數，再用首尾幀模式做圖生影片，直式 9:16、5 秒，每個鏡頭 2 條。Kling 沒有負向欄位，不要的東西用「Avoid: …」接在 prompt 最後。送出前先告訴我會花多少點數，等我說好再送。每條生成完記到 jobs.tsv，檔名往後編號，不要覆蓋舊檔。</span><span data-tool-only="seedance">用 Higgsfield MCP 的 Seedance 2.0 生成，素材全部走全能參考：角色設定圖、首格、灰模影片、台詞錄音。在 prompt 裡依上傳順序用 @Image1、@Video1、@Audio1 標明每個素材的用途，嘴型對 @Audio1。不要用首尾幀模式。送出前先告訴我會花多少點數，等我說好再送。每條生成完記到 jobs.tsv，檔名往後編號，不要覆蓋舊檔。</span></pre></div>
+            <ul class="pts">
+              <li><span><b>每次送出都會扣點數。</b>先看估價再同意，不要讓 Claude 自己重送</span></li>
+              <li><span><b>用首格做圖生影片。</b>靜態圖可以慢慢挑，模型只做小幅度移動，身體就不容易壞</span></li>
+              <li><span><b>同一份指令跑幾條。</b>比拆成很多次生成划算，某一段不行再單獨補</span></li>
+              <li><span><b>身體壞掉用構圖解。</b>切在腰部以上、兩人並坐不重疊、動作放慢</span></li>
+              <li><span><b>留下紀錄。</b>哪條是哪次生成、花了多少點，之後查得到</span></li>
+            </ul>
+          </div>
+          <div class="col">
+          <figure class="demo">
+            <div class="demo-h"><span>素材怎麼交給工具</span>
+              <div class="seg" role="group" aria-label="選擇生成工具"><button type="button" id="toolK" data-tool="kling" aria-pressed="true">Kling</button><button type="button" id="toolS" data-tool="seedance" aria-pressed="false">Seedance</button></div></div>
+            <ol class="slots" data-tool-only="kling">
+              <li><b>首幀</b><span>首格圖。鏡頭從這張開始</span></li>
+              <li><b>尾幀</b><span>尾格圖。站位和前後關係要和首格一致</span></li>
+              <li><b>prompt</b><span>一段動作描述，只寫攝影機和一個主體怎麼動</span></li>
+              <li><b>Avoid:</b><span>不要的東西接在 prompt 最後：文字、浮水印、多餘的人、變形的手</span></li>
+            </ol>
+            <ol class="slots" data-tool-only="seedance">
+              <li><b>@Image1</b><span>角色設定圖。註明是同一個人的多個角度，不是多個人</span></li>
+              <li><b>@Image2</b><span>首格圖。場景、光線和構圖照這張</span></li>
+              <li><b>@Video1</b><span>灰模影片。註明只取運鏡和時間，灰色材質和人偶不得出現</span></li>
+              <li><b>@Audio1</b><span>台詞錄音。嘴型、語氣和快慢都照這個音檔</span></li>
+            </ol>
+            <span class="sub">要注意的事</span>
+            <ul class="pts" data-tool-only="kling">
+              <li><span>一次請求出 2 條，兩條一起計點</span></li>
+              <li><span>沒有關閉聲音的選項，附帶的音軌後期拿掉</span></li>
+              <li><span>擬真人偶的白模當參考會被審查擋下，改用膠囊人形或文字描述運鏡</span></li>
+              <li><span>需要多張參考圖或參考影片時，改用 Kling 的全能參考</span></li>
+            </ul>
+            <ul class="pts" data-tool-only="seedance">
+              <li><span>用了首尾幀模式，音檔會被忽略，就對不了嘴</span></li>
+              <li><span>台詞寫漢字加拼音，再加一句 No other words。只給錄音，模型會自己編台詞</span></li>
+              <li><span>一支只讓一個人講話。兩個人講話，就各給一個音檔</span></li>
+              <li><span>演技寫在眼睛、眉毛和頭。寫了嘆氣或吸氣，模型會加氣音，嘴型就跑掉</span></li>
+            </ul>
+          </figure>
+          <figure class="demo" data-demo="vars">
+            <div class="demo-h"><span>挑一條</span><button type="button" class="replay">重播</button></div>
+            <div class="vars" id="vars"></div>
+            <div class="log mono" id="jobLog"></div>
+            <figcaption>點一條當作選定。舊版本留著，之後要回頭比較才有得比</figcaption>
+          </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6 -->
+      <section class="step" id="step-6" data-name="審核診斷">
+        <header class="step-h">
+          <div class="meta"><b>06</b><span>Day 2</span></div>
+          <h2>壞掉的地方，讓 Claude 看影片找原因</h2>
+          <p>不用自己描述問題。把生成的影片交給 Claude，它會指出從哪一格開始壞</p>
+        </header>
+        <div class="step-b">
+          <div class="txt">
+            <div class="say"><div class="say-h"><span>對 Claude 說</span><button type="button" class="copy" data-copy="p6"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button></div>
+              <pre id="p6">把這次生成的結果做成審核頁，每個鏡頭的版本並排，我選好後貼回給你。
+另外請看 〈檔名〉 這條，判斷壞掉的原因是指令不夠具體，還是做法本身要換，再建議怎麼修。</pre></div>
+            <ul class="pts">
+              <li><span><b>指令不夠具體：</b>加描述可以解決，例如把形狀寫死</span></li>
+              <li><span><b>做法本身錯了：</b>加再多形容詞都沒用，要換構圖、換機位、換寫法</span></li>
+              <li><span><b>判斷方法：</b>同一件事寫得更用力兩次還是壞，就是第二種</span></li>
+              <li><span><b>只補壞掉的段落。</b>整支重來會吃掉最後一次機會</span></li>
+            </ul>
+          </div>
+          <figure class="demo">
+            <div class="demo-h"><span>常見失敗對照</span></div>
+            <div class="dx"><ul id="dxList"></ul>
+              <dl class="dx-out"><div><dt>真正的原因</dt><dd id="dxWhy"></dd></div><div><dt>怎麼修</dt><dd id="dxFix"></dd></div></dl></div>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 7 -->
+      <section class="step" id="step-7" data-name="配樂混音">
+        <header class="step-h">
+          <div class="meta"><b>07</b><span>Day 2 到 Day 3</span></div>
+          <h2>配樂、音效和混音</h2>
+          <p>影片模型附帶的聲音通常不能用。配樂和音效另外生成，和口白一起依時間碼對進去</p>
+        </header>
+        <div class="step-b">
+          <div class="txt">
+            <div class="say"><div class="say-h"><span>對 Claude 說</span><button type="button" class="copy" data-copy="p7"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button></div>
+              <pre id="p7">依分場表的時間碼做配樂和音效，各出 2 個版本，做成比較頁讓我選。選定後配樂調到 −14 LUFS、輸出 48 kHz，檔名往後編號。</pre></div>
+            <ul class="pts">
+              <li><span><b>音效對準動作，重音對準轉折。</b>配樂最重的那一拍，放在劇情翻轉的那個字上</span></li>
+              <li><span><b>口白出現時壓低配樂。</b>整支的音量調到 −14 LUFS</span></li>
+              <li><span><b>嘴型時間每次生成都不同。</b>換了影片，口白的對位就要重新量</span></li>
+              <li><span><b>對位要人來確認。</b>差幾格，整支片的節奏就不對</span></li>
+              <li><span><b>商用前確認授權。</b>配樂與音效工具各有授權條件，上線前請法務確認</span></li>
+            </ul>
+          </div>
+          <figure class="demo" data-demo="tracks">
+            <div class="demo-h"><span>依時間碼對位</span><button type="button" class="replay">重播</button></div>
+            <div class="tracks">
+              <div class="trk"><span>字卡</span><div class="lane"><div class="clip t" style="left:78%;width:22%">Logo 與標語</div></div></div>
+              <div class="trk"><span>影片</span><div class="lane"><div class="clip" style="left:0;width:100%">成片</div></div></div>
+              <div class="trk"><span>口白</span><div class="lane"><div class="clip a" data-dx="-40" style="left:14%;width:24%">第一句</div><div class="clip a" data-dx="50" style="left:58%;width:26%">第二句</div></div></div>
+              <div class="trk"><span>音樂</span><div class="lane"><div class="clip" data-dx="-70" style="left:0;width:100%">配樂</div></div></div>
+              <div class="trk"><span>音效</span><div class="lane"><div class="clip" data-dx="60" style="left:6%;width:10%">腳步</div><div class="clip" data-dx="-50" style="left:36%;width:9%">開瓶</div><div class="clip" data-dx="40" style="left:78%;width:8%">定格</div></div></div>
+            </div>
+            <div class="ticks mono"><span></span><div><span>0s</span><span data-only="15">5s</span><span data-only="15">10s</span><span data-only="15">15s</span><span data-only="5">2.5s</span><span data-only="5">5s</span></div></div>
+            <figcaption>音效對準畫面上的動作，口白避開音效最密的地方，字卡蓋在結尾定格上</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- comp -->
+      <section class="step" id="step-comp" data-name="動態字卡">
+        <header class="step-h">
+          <div class="meta"><b></b><span>Day 3</span></div>
+          <h2>字卡和 Logo 用 GSAP 寫，hyperframes 輸出成片</h2>
+          <p>畫面上的字都不交給生成模型。Logo、標語、產品圖用網頁的方式排好，GSAP 控制動態，hyperframes 把它和影片一起逐格算成 MP4</p>
+        </header>
+        <div class="step-b">
+          <div class="txt">
+            <div class="say"><div class="say-h"><span>對 Claude 說</span><button type="button" class="copy" data-copy="pc"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button></div>
+              <pre id="pc">用 hyperframes 做成片：選定的影片當底，配好的聲音當音軌。結尾字卡用 GSAP 寫成一條暫停的時間軸，Logo 淡入、標語兩行依序上升、產品圖放大淡入，素材用我放在資料夾裡的設計稿。先給我看預覽，確認後輸出 9:16 的 MP4。</pre></div>
+            <ul class="pts">
+              <li><span><b>字是真的字。</b>Logo 和標語用設計稿與網頁文字，不會像生成模型那樣長出假字</span></li>
+              <li><span><b>時間軸要能拖到任何一格。</b>不用計時器、不用隨機數、不無限重播，hyperframes 才能逐格算圖</span></li>
+              <li><span><b>改文案不用重做。</b>換一行字或換一段影片，重新輸出就好，也能再出 1:1 或 16:9</span></li>
+              <li><span><b>同一條時間軸可以再利用。</b>之後要做成 GSAP 的 HTML5 互動廣告，動態不用重寫</span></li>
+            </ul>
+          </div>
+          <figure class="demo" data-demo="comp">
+            <div class="demo-h"><span>結尾字卡的時間軸</span><button type="button" class="replay">重播</button></div>
+            <div class="ec-wrap">
+              <div class="ecard"><div class="bgfig"></div>
+                <div class="ov" id="ecLogo">Logo</div><div class="ov" id="ecL1">標語第一行</div><div class="ov" id="ecL2">標語第二行</div><div class="ov" id="ecPack"></div></div>
+              <div class="tree mono">const tl = gsap.timeline({ paused: true });
+
+tl.from("#logo", { autoAlpha: 0, duration: .5 }, 0)
+  .from(".line", { y: 36, autoAlpha: 0,
+      duration: .65, ease: "power3.out",
+      stagger: .18 }, .4)
+  .from("#pack", { scale: .95, autoAlpha: 0,
+      duration: .7 }, .5);
+
+<b>// hyperframes 逐格拖動這條時間軸</b>
+window.__timelines["endcard"] = tl;</div>
+            </div>
+            <div class="ec-bar"><span class="mono" style="font-size:12px;color:var(--ink3)">拖曳</span><input type="range" id="ecScrub" min="0" max="1" step="0.001" value="1" aria-label="拖曳字卡時間軸"><span class="mono" id="ecRead" style="font-size:12px;color:var(--ink2)"></span></div>
+            <figcaption>拖到哪一格，畫面就停在哪一格。這就是「可以逐格算圖」的意思，也是 GSAP 取代 Animate CC 時間軸的方式</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 8 -->
+      <section class="step" id="step-8" data-name="交付">
+        <header class="step-h">
+          <div class="meta"><b>08</b><span>Day 3</span></div>
+          <h2>整理、交付，留下交接檔</h2>
+          <p>下一個人，或下一次的你，打開資料夾就要知道哪個是最終版、還有什麼沒做完</p>
+        </header>
+        <div class="step-b">
+          <div class="txt">
+            <div class="say"><div class="say-h"><span>對 Claude 說</span><button type="button" class="copy" data-copy="p8"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button></div>
+              <pre id="p8">把選定的影片、配樂和音效整理到交付資料夾，舊版本保留不要刪。再寫一份交接檔：目前狀態、等我決定的事、你接下來要做的事、這次做過的決定和原因。</pre></div>
+            <div class="todo" id="todo">
+              <label><input type="checkbox" id="c1"><span>每個鏡頭都選定了一條，紀錄在 jobs.tsv</span></label>
+              <label><input type="checkbox" id="c2"><span>畫面裡沒有模型長出來的字或浮水印</span></label>
+              <label><input type="checkbox" id="c3"><span>結尾定格夠 1.5 秒，Logo 與標語已後期加上</span></label>
+              <label><input type="checkbox" id="c4"><span>口白、配樂、音效已對位，音量一致</span></label>
+              <label><input type="checkbox" id="c5"><span>授權已請法務確認</span></label>
+              <label><input type="checkbox" id="c6"><span>交接檔寫好了</span></label>
+            </div>
+          </div>
+          <figure class="demo">
+            <div class="demo-h"><span>交付資料夾的樣子</span></div>
+            <div class="tree mono">專案資料夾/
+├─ HANDOFF.md            <b>交接檔，新的對話先讀這個</b>
+├─ input/                首尾格、定裝照、商品圖
+├─ output/
+│  ├─ S1_v1.mp4          舊版本留著
+│  ├─ S1_v2.mp4          <b>選定</b>
+│  └─ S2_v3.mp4          <b>選定</b>，重生過所以編到 v3
+├─ audio/                口白、配樂、音效
+├─ jobs.tsv              每條生成的編號與點數
+└─ final/                交付的成片</div>
+            <figcaption>檔名只往後編號。覆蓋掉的版本，之後客戶說「還是上一版好」就救不回來</figcaption>
+          </figure>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<section id="skills-used" class="band skills-band"><div class="wrap skills-grid">
+    <div class="sect-h"><h2 data-split>這套流程用到的 skill</h2><p>skill 是寫給 Claude 看的作業手冊。對應的工作一出現，Claude 會自己讀</p></div>
+    <ul class="skills" style="padding-bottom:0">
+      <li class="sk"><div class="sk-h"><b>ai-video-15s-workflow</b><button type="button" class="copy" data-copy="sk0"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>15 秒廣告的完整流程：算秒數、分場表寫法、參考素材、生成、失敗診斷、聲音與後期</p><span class="use">用在：步驟 01、02、04 到 08</span></div>
+        <details><summary>展開 SKILL.md</summary><pre id="sk0">---
+name: ai-video-15s-workflow
+description: "用 AI 生成 15 秒廣告短片、社群影片、提案 demo 的完整製作流程：時間分配、分場表寫法、參考素材與元素設定、生成、失敗診斷、聲音與後期。提到短影音腳本、15 秒廣告、提案短片、分鏡、Kling／Seedance、圖生影、角色連戲、影片 prompt，或拿生成失敗的影片問怎麼修時使用。"
+---
+
+# 15 秒 AI 廣告短片製作流程
+
+## 這份流程在解決什麼
+
+一支 15 秒提案短片的實際製作窗口通常只有三天。扣掉腳本確認、素材準備、後期合成與內部審看，真正能拿來生成影片的機會只有兩到三次。
+
+所以目標不是「把片子做得好看」，而是**讓第一次生成就拿到夠完整的東西**，把後面的機會留給修補，而不是整支重來。
+
+下面每條規則都附了原因。原因比規則本身重要——模型每季都在換，但失敗的類型高度重複。理解了原因，換了工具還是能用。
+
+---
+
+## Step 0 · 先算時間，再談創意
+
+觀眾要看懂一個動作，畫面大約要停留 1.5 秒。少於這個時間，觀眾只會感覺到「有東西閃過去」，不知道那是什麼。
+
+把腳本裡**觀眾必須看懂的動作**一個一個數出來，乘以 1.5，就是這支片實際需要的長度。
+
+- 15 秒大約只容得下 **10 個動作**。超過就要砍，不要指望剪快一點塞得進去。
+- 先扣掉結尾產品定格需要的 1.5 秒，再分配剩下的。這件事不先算，會在剪接的最後一刻才爆炸。
+- 資訊塞不下時，優先交給旁白與字幕，不要交給畫面。畫面講一件事要 1.5 秒，旁白講一句只要 2 秒卻能塞進三個訊息。
+- 旁白拆成兩句、分散到不同段落，比集中在結尾好——結尾要留給情緒，不是留給資訊。
+
+**新設定特別貴。** 任何觀眾沒看過的世界觀（例如「書裡的插畫會對現實有反應」），光是讓人理解就要 1.5 秒以上。這種點子通常是整支片最好的部分，但要把成本算進去，並且刪掉其他重複的資訊來換。
+
+**重複的資訊要合併。** 如果小孩捏鼻子、動物也捏鼻子，那是同一件事講兩次，砍掉一個。順帶一提，讓配角或虛構角色來表達負面反應，通常比讓主角的家人來表達更安全——喜劇效果一樣，但不會傷害結尾的情感。
+
+---
+
+## Step 1 · 把腳本寫成分場表，不要寫成故事
+
+這是整份流程最關鍵的一步。
+
+實測過三次單次 15 秒生成：兩次失敗、一次成立。三次都是「一次跑完整支」，差別不在生成次數，而在**指令的結構**。失敗的兩次是一段流暢的敘事描述，成立的那次是一份分場表。
+
+一次生成整支是可行的，而且成本只算一次——前提是提示詞要長成分場表的樣子。
+
+### 分場表的格式
+
+開頭先放**全域規則**，它會約束每一段：
+
+```
+一支 15 秒的直式 9:16 廣告，剪接成 N 個鏡頭 —— 這是剪接過的序列，不是一鏡到底，
+每個鏡頭有自己的焦段、角度與構圖，切換要明確。
+
+適用於每一個鏡頭的全域規則：
+1. 構圖：全片切在腰部以上，腿、膝、腳一律不入鏡。
+2. 人物關係：兩人並坐，身體不重疊，各自是完整清楚的剪影。
+3. 道具：&lt;描述&gt;，且不可轉向鏡頭。
+4. 全片不出現任何文字。
+5. 演員的口型是自然說話，不張大嘴、不喊叫。
+6. 影像質地：&lt;焦段、色調、顆粒、幀率的統一描述&gt;
+```
+
+接著每一段給**時間碼 + 鏡位規格 + 單一主要動作 + 該段的禁令**：
+
+```
+SHOT 1 — 0.0 to 2.5s — &lt;場景&gt;, &lt;鏡距&gt;
+50mm，&lt;機位角度&gt;，&lt;運鏡&gt;，f/2.0，焦點在&lt;具體的一點&gt;。&lt;光位與明暗比&gt;。
+&lt;角色在做什麼，只講一件主要的事&gt;
+&lt;這一段特別要避免什麼&gt;
+
+SHOT 2 — 2.5 to 5.8s — 硬切 — &lt;場景&gt;
+&lt;鏡位規格&gt;
+節拍，依序：
+  0.0-1.2s &lt;第一拍&gt;
+  1.2-2.0s &lt;第二拍&gt;
+  2.0-2.8s &lt;第三拍&gt;
+  2.8-3.3s &lt;第四拍&gt;
+```
+
+最後放**統一的負向欄位**，把所有不想要的東西集中寫在一起。
+
+### 為什麼這個格式有效
+
+- **明講「這是剪接序列，不是一鏡到底」**，模型才會換機位。它的預設行為是架一台不動的攝影機拍到底。負向欄位也要放 `one continuous take, single locked-off camera`。
+- **每段給不同的焦段與角度**，是讓模型真的切換最強的訊號，比寫「鏡頭要有變化」有效得多。
+- **把演出拆到 0.8 秒級的節拍**。「動物驚慌逃跑」寫成一句話，模型會把它當成一個靜止畫面；寫成四個帶時間的動作，它才會照著演。同時要給足秒數——四個節拍塞不進 2 秒。
+- **運鏡綁在動作上，不要綁在時間上**。「氣體出現時鏡頭極輕微前推半個身位」比「第 1 秒鏡頭前推」好，因為模型理解的是畫面裡發生的事。
+- **場景轉換只留一次**。轉場是長段落生成最容易被模型直接省略的東西，一次才守得住。如果被吞掉了，單獨補拍那一段再剪進去，比整支重跑便宜。
+
+---
+
+## Step 2 · 素材：先鎖住長相，再談動作
+
+模型每生成一次就會重新想像一次人臉。所以要先用生圖工具做出定裝素材，再拿去生影片。
+
+### 定裝照要涵蓋角度，不要挑好看的
+
+一個角色做六個角度：正面、左右四十五度、全側、背向。生成後**逐格裁成單張**再使用——整張六格圖丟進去，模型有機會理解成「畫面裡有六個人」。
+
+多數影片工具允許用「元素」或「參考」功能註冊角色，常見的限制是**一支片最多七個元素、每個元素最多四張圖**。四張圖不是配額而是上限，要挑**涵蓋範圍最大、彼此最不重複**的四張：
+
+- 選 **正面／四十五度／全側／背向**，把頭從各個方向交代清楚。
+- 左四十五度和右四十五度對模型是同一個資訊（它會自己鏡像），不要浪費名額。
+- 微笑的正面和中性的正面也是同一個角度——表情本來就會依指令生成。
+- **看起來最沒用的全側與背向，往往最關鍵**：越肩鏡頭裡畫面上只有下顎、耳朵和後腦，沒有這兩個角度模型會開始自己想像。
+
+元素名額有限，所以只註冊**會重複出現、而且必須長得一樣**的東西。只出現一次的道具寫進指令就好。
+
+### 首尾影格：所有「必須正確」的東西都放這裡
+
+商品包裝、品牌字、既有的角色形象，用**首尾影格**（first / last frame）處理：把第一格和最後一格做成完整的靜態畫面——用生圖工具或直接用真實素材——模型只負責補中間。
+
+這樣包裝上的字不會被重新想像，因為它從來沒有被生成過。
+
+由此推出一條發想原則：**一個點子的關鍵畫面，要能被畫成一張靜態圖。** 能講成「從這張圖，變成那張圖」的點子都好做；精華在「中間怎麼變過去」的點子會很難控制。
+
+### 場景素材管的是光，不是好不好看
+
+同一個場景的多個鏡頭要共用同一個光位。做一張空景定裝，把主光的方向、高度、色溫定下來，剪在一起才不會像三個不同的房間。
+
+---
+
+## Step 3 · 生成
+
+- 用起始畫格做**圖生影**，不要純文字生成。靜態圖可以慢慢挑、慢慢數手指；動態生成只需要做小幅度位移，模型就不會重新發明身體。
+- **同一支多跑 3–5 個版本挑一支。** 單次生成的成本優勢就在這裡：與其拆成六次生成，不如同一份指令跑幾次挑最好的，某一段特別不行時再單獨補拍。
+- **否定要求寫進負向欄位，而且要重複寫。** 正向描述裡寫「封面沒有文字」，模型還是會長出假書名。這類模型對正向的否定句服從度不高，負向欄位有效得多。
+
+### 解剖問題用構圖解，不要用形容詞解
+
+身體比例壞掉時，加再多「正確的人體比例」都沒用。有效的做法依序是：
+
+1. **把出錯的部位裁出畫面。** 錯誤幾乎都集中在離臉最遠的四肢與關節——切在腰部以上，腿腳就不會錯。直式構圖本來就適合胸上鏡位，這一刀沒有損失。
+2. **避開會造成重疊的姿勢。** 盤腿、抱在懷裡、身體交疊，都會讓模型必須猜遮擋關係。改成並坐、只有肩膀手臂接觸，兩個完整不重疊的剪影就不用猜。
+3. **動作幅度壓小、速度放慢。** 大動作與快動作是模型重新推算身體的時機。
+4. 最後才輪到負向提示：`deformed limbs, extra limbs, missing limbs, merged bodies, extra fingers`。
+
+### 兩個互斥的要求不能寫在同一個鏡頭裡
+
+最常見的是「要看到人的正面表情，同時要看到他手上那本書／那支手機的畫面」。在正面機位下這兩件事物理互斥——畫面朝鏡頭，人就看不到它。模型的解法通常是把道具轉向鏡頭，於是角色在對著封底念故事。
+
+指令寫得再清楚都救不了，**要換角度讓兩件事同時成立**。常用解法是越肩高角：攝影機放在角色肩後、斜下約 45 度，道具維持朝向角色，鏡頭仍讀得到它的正面。代價是畫面裡不能有完整正臉——只給下顎與嘴的側面，剛好夠交代「那口氣是從他嘴裡出來的」，並在負向欄位加上 `he must not turn toward the camera`。
+
+---
+
+## Step 4 · 出問題時，把影片交給會讀影片的模型
+
+不要用文字描述問題。把生成出來的影片直接丟給能讀影片的模型，讓它指出哪一格開始壞掉——比人去猜準得多，也快得多。
+
+診斷時要分清楚兩種問題，因為修法完全不同：
+
+- **指令內容不夠具體**：加形容詞、加限制可以解決。例如膏體被生成成泡棉狀，就把形狀寫死成「沿刷毛整條擠上的扁平帶狀」。
+- **做法本身錯了**：加形容詞永遠解決不了。互斥的要求、身體比例、演出被當成靜物，都屬於這一類，要換構圖、換機位、換寫法。
+
+判斷的訣竅：如果你已經把同一件事寫得更用力兩次還是壞的，那它就是第二類。
+
+---
+
+## Step 5 · 聲音與後期
+
+影片模型不負責聲音，或產出的環境音不可用。三軌分開做，再依時間碼對進剪接軟體：
+
+- **口白**：語音生成工具，需要特定口音時明確指定。多句旁白分開生成，方便各自對位。
+- **音樂**：用關鍵字描述情緒與氛圍生成。
+- **音效**：把影片丟進依畫面生成音效的工具。
+
+對位這一步是人工的，因為時間碼的精度決定整支片的節奏成不成立。
+
+**畫面上所有的文字都在後期做**——品牌標、標語、法規小字、產品定版。這是全片唯一不交給生成模型的部分，也是唯一不能妥協的部分。
+
+---
+
+## 發想階段就該避開的點子
+
+在點子成形之前就攔下來，比在製作端補救便宜得多。動腦時用這四題快篩：
+
+1. **這個點子最關鍵的那一秒，能不能畫成一張圖？** 能，就適合首尾影格；精華在「中間怎麼變」的要先想清楚怎麼拆成幾個清楚的狀態。
+2. **有沒有哪個鏡頭同時要求兩件互相打架的事？** 發現了就在提案階段改掉。
+3. **畫面上會出現的字，是不是都能事先做成素材？** 能事先做成素材就沒問題；需要模型當場生出來的字，一律不行。
+4. **必須保持一致的角色、道具、場景加起來幾個？** 對照工具的元素上限（常見是七個）。超過就要合併——兩個配角併成一個、兩個場景併成同一空間的不同角落。
+
+其他要避開的：賣點就是手部精細操作的大特寫（手指是最容易崩的部位）、同一個角色要做很多件不同的事（每換一次場景或造型就多一組素材）、指定藝人或要求與真人一模一樣、功效示範（做不準，而且牽涉廣告法規）。
+
+反過來，這些方向做起來特別順：**前後對照**（天生就是首尾影格的形狀）、**一個明確的情緒轉折**（表情是模型最強的部分）、**擬人化或插畫世界的角色反應**（不需要跟現實比對，容錯大）、**用抽象元素包裝商品**（水、冰、光、煙沒有正確答案，商品本體用真實素材）。
+
+---
+
+## 常見失敗與對應
+
+| 看到的現象 | 真正的原因 | 怎麼修 |
+|---|---|---|
+| 整支只有一顆不動的鏡頭 | 沒有明講這是剪接序列 | 開頭宣告鏡頭數，每段給不同焦段與角度 |
+| 道具被轉向鏡頭、角色在讀背面 | 同一鏡頭有兩個互斥要求 | 換成越肩高角，畫面裡不給完整正臉 |
+| 角色崩壞變形 | 同時要動的東西太多、或主體太小 | 只讓一到兩個主體做主要動作，其餘幾乎不動 |
+| 身體比例奇怪、少一條腿 | 姿勢交疊、腿腳入鏡 | 切在腰部以上，改並坐不重疊 |
+| 某個場景整段消失 | 場景轉換被長段落吞掉 | 給它自己的時間碼與鏡位，或單獨補拍再剪 |
+| 包裝或招牌上是假字 | 讓模型當場生成文字 | 改用首尾影格放真實素材，或收回後期 |
+| 該演的東西沒演，像靜物 | 演出寫成一句話 | 拆成三到四個帶時間碼的節拍，並給足秒數 |
+| 特效退化成一團色霧 | 形狀描述不夠具體 | 要求可辨識的形狀與細節，負向排除 `mist / fog / foam / blob` |
+
+---
+
+## 三天的排法
+
+| | | |
+|---|---|---|
+| **Day 0** | 腳本與預演 | 定大綱、算時間分配。有條件的話用 3D 白模對一次口白與鏡位——這天不花任何算圖費，卻能把「秒數不夠」從第三輪提前到第零天 |
+| **Day 1** | 素材與第一次生成 | 定裝、商品參考圖、場景參考一次備齊，當天送出第一次生成 |
+| **Day 2** | 修補而不是重來 | 補壞掉的段落，同時做口白與音樂。這天決定成敗 |
+| **Day 3** | 合成與交件 | 接片、上品牌標與字卡、內部審看、交件 |
+
+這個排法只有在「Day 2 是修補而不是重來」的前提下成立。所以前面每一條規則的目的都一樣：**讓第一次生成就夠完整，把機會留給修補。**</pre></details></li>
+      <li class="sk"><div class="sk-h"><b>blender-greybox-previz</b><button type="button" class="copy" data-copy="sk1"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>在 Blender 裡做白模運鏡稿：攝影機路徑、緩進緩出、構圖比例，輸出灰模參考影片</p><span class="use">用在：步驟 03</span></div>
+        <details><summary>展開 SKILL.md</summary><pre id="sk1">---
+name: blender-greybox-previz
+description: Build greybox (white-model) previz in Blender via the MCP bridge — camera paths, easing, and pixel-accurate composition — to feed as video reference into AI video tools like Kling, Runway or Veo. Use this whenever the user is working on previz, greybox, blockout, 白模, 運鏡稿, camera blocking, or a camera move they need to match against a KV / storyboard / reference frame; also use it for any Blender scripting task that involves placing a camera or a character to hit a specific on-screen percentage, setting up ease-in/ease-out on a camera, or rendering a grey untextured reference clip. Reach for it even when the user just says "make me a reference video for the camera move" without naming Blender.
+---
+
+# Blender 白模 previz
+
+用 Blender 搭一支灰白示意影片，當成 AI 影片工具的 video reference。白模只負責
+**空間、機位、速度**；材質、光線、長相交給 AI。
+
+這份 SOP 是從一個真實專案（9:16、5 秒、三顆定格鏡頭）的踩坑紀錄整理出來的。
+裡面每一條「不要這樣做」都對應一次重做。
+
+## 先判斷要不要做
+
+**該做**：運鏡有幾何邏輯（穿越／環繞／上下切換）、兩顆鏡頭要像素級同機位、
+構圖要對齊既有 KV 的百分比、需要精確的加減速曲線。
+
+**不該做**：固定機位、只要氛圍不要精準、轉場是剪接不是運鏡。
+這種情況直接在 prompt 裡寫 `slow dolly in` 比建白模快。
+
+白模的成本幾乎都在「建立 → 驗證 → 修正」的迴圈上，所以先問清楚精度需求再動手。
+如果使用者的需求聽起來屬於「不該做」那一欄，先講出來再問要不要繼續，
+不要默默花兩小時做一支用不到的東西。
+
+## 環境前提
+
+透過 **Blender 官方 MCP**（`blender.org/lab/mcp-server`）操作，Blender 5.1+。
+這個環境有幾個非標準行為，**動手前先讀 `references/blender-mcp-gotchas.md`**，
+不然大概率會在前十分鐘卡住（沒有 `context.active_object`、某些 operator 被沙箱擋、
+action 的 fcurves 在新版換了存取路徑）。
+
+## 八步流程
+
+1. **先分析參考素材，不要先開 Blender。** 把 KV 疊上百分比格線，量出主體橫向中心在幾 %、
+   頭部縱向 band、前景從幾 % 開始、天花板佔幾 %。這組數字是後面反解的目標值。
+   用 `scripts/grid_compare.py` 的 `grid()`。
+
+2. **驗證參考素材在物理上做不做得到。** KV 常常是合成稿，人物被單獨縮放過。
+   用角尺寸算一次：焦段 f、主體距離 d，能不能同時滿足所有觀察到的百分比？
+   **算出做不到就不要硬幹**，三選一：保主體犧牲環境（長焦）、保環境犧牲主體（廣角）、
+   或像合成稿一樣把角色等比放大。第三條對 AI 完全沒影響——它讀構圖不讀物理。
+   跳過這一步的代價是在長焦與廣角之間來回改十次還對不上。
+
+3. **先定攝影機約束，再建場景。** 動不動？動哪個軸？允不允許轉向？焦段？幾個定格、各停多久？
+   **焦段定案後不要輕易改**——改焦段等於整個場景重算（房間尺寸、天花板高度、所有物件位置）。
+   9:16 有個垂直 FOV 陷阱，`references/blender-mcp-gotchas.md` 有對照表，
+   32mm 在直式是 90° 垂直視角，會明顯魚眼。
+
+4. **建場景**：真實尺度，一個 unit cube mesh 重複使用靠 scale 變形。
+   畫面裡有人就用指定的 IK Rig，不要用方塊人——方塊人會讓 AI 生出比例怪異的人。
+   見 `references/character-rig.md`。
+
+5. **用投影反解物件位置，不要用眼睛擺。** 這是整套流程最重要的一步。
+   見 `references/projection-solving.md`。
+
+6. **渲驗證幀，跟參考圖並排疊格線比對。** 不要只看白模自己。
+   用 `scripts/grid_compare.py` 的 `compare()`。
+
+7. **輸出 PNG 序列 + 外部 ffmpeg 編碼。** 不要用 Blender 內建的 FFMPEG 輸出。
+
+8. **寫一份規格 README 跟 .blend 放一起。** 焦段、sensor 設定、攝影機 euler、
+   各定格的 frame 與高度、easing 設法、pose 參數、踩過的坑。
+   三週後的自己不會記得為什麼 `rot_z` 是 180。
+
+## 三條鐵律
+
+這三件事各自對應一次整支重做，值得單獨拉出來。
+
+**一、構圖用算的，不要用看的。**
+在小縮圖上判斷「人好像太偏右」幾乎一定是錯的。要知道某個東西落在畫面的百分之幾，
+就用 `world_to_camera_view` 投影出來看數字。有數字就不用吵構圖對不對。
+
+**二、每次改完場景都跑一次擋鏡頭檢查。**
+道具離攝影機 1m 以內會變成糊掉的巨大灰塊擋住整個畫面，而且在縮圖上不一定看得出來。
+`near_camera()` 跑十秒，能省掉一輪重渲。
+
+**三、設完 easing 一定要 `fc.update()`。**
+設了 interpolation 和 handle type 但沒有 update，handle 不會重算，
+實際跑出來是線性等速——客戶一眼就看得出「沒有加減速」。
+
+## 產出什麼
+
+一支白模交付四件：`mp4`、`.blend`（存版本號，舊版不要覆蓋）、PNG 序列、規格 README。
+規格 README 最容易被省略，也最重要——有了它，下一支可以直接沿用同一組機位參數，
+而「同一組機位」正是系列廣告看起來是一家人的原因。
+
+## 交給 AI 影片工具的時候
+
+白模是**輸入資料**，AI 不會腦補，它會照單全收：灰白材質可能被當成畫面內容、
+無臉人偶可能真的生成出無臉的人、方塊道具可能真的變成方塊。所以 prompt 裡要明講：
+
+&gt; video reference 只提供攝影機運動與空間關係，灰白材質、無臉人偶、方塊道具
+&gt; 一律不得出現在成品畫面中
+
+negative prompt 加上：
+`greybox, low-poly, blockout geometry, clay render, grey untextured mannequin, faceless figure`
+
+**還有一件事要提早確認**：不是每個 AI 影片工具都真的會照著參考影片的運鏡跑。
+投入時間之前先用一支簡單的白模做對照組測一次。如果確認不吃運鏡，白模仍然有價值
+（可以當運鏡對稿讓後期手工做，或當分鏡的構圖依據），但那是另一條路線，要提早知道。
+
+## 參考資料
+
+| 檔案 | 什麼時候讀 |
+|---|---|
+| `references/blender-mcp-gotchas.md` | **動手前必讀。** MCP 環境的非標準行為、攝影機朝向、easing、渲染與輸出設定 |
+| `references/projection-solving.md` | 要擺物件位置、或要驗證構圖百分比的時候 |
+| `references/character-rig.md` | 畫面裡有人的時候。含已驗證可用的 pose 參數 |
+| `references/failure-modes.md` | 卡住的時候查症狀；收工前當檢查清單用 |
+| `scripts/previz_lib.py` | 送進 Blender 的函式庫（見下） |
+| `scripts/scene_template.py` | 新場景的起手式，改參數就能跑 |
+| `scripts/grid_compare.py` | 在本機跑（不是 Blender 裡），疊格線與並排比對 |
+
+## 怎麼用這些 script
+
+`previz_lib.py` 和 `scene_template.py` 是**要在 Blender 裡面跑的**，而 MCP 是把
+程式碼當字串送進去執行的，所以沒辦法 `import`。做法是把 `previz_lib.py` 的內容
+讀出來，當成前導碼接在你要跑的程式前面一起送。
+
+`grid_compare.py` 相反，它用 PIL 處理圖片，在本機環境直接跑就好。</pre></details></li>
+      <li class="sk"><div class="sk-h"><b>firefly-gen</b><button type="button" class="copy" data-copy="sk2"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>用 Adobe Firefly 批次生圖並存到指定路徑，用來做定裝照和首尾格</p><span class="use">用在：步驟 04</span></div>
+        <details><summary>展開 SKILL.md</summary><pre id="sk2">---
+name: firefly-gen
+description: Generate images with the user's Adobe Firefly account (GPT Image 2, GPT Image 2.5 Flare / Sunburst, Nano Banana Pro, Nano Banana 2, Firefly Image 5) through a Playwright script, and save each result to a chosen path. Use when the user asks to generate or regenerate images "in Firefly", with GPT-image / Nano Banana through Firefly, or to batch-generate images from a prompt list into project folders. Do not drive Firefly by hand through a browser MCP; this script costs far fewer tokens.
+---
+
+# Firefly image generation
+
+The script `scripts/firefly_gen.py` (next to this file) opens firefly.adobe.com in the installed Chrome with its own persistent profile (`~/.firefly-gen/profile`), picks the model, fills the prompt, clicks 產生, and saves the first result.
+
+Every generation spends the user's Firefly credits. Measured 2026-11-03: GPT Image 2 中 = 20, GPT Image 2.5 Flare / Sunburst 中 = 5, Nano Banana 2 2K = 20, Nano Banana Pro 1K = 40. The log records the actual cost of each job. Show the user the job list and get a yes before running anything that generates. `--dry-run` and `options` are free.
+
+## Models
+
+| alias | Firefly label |
+|---|---|
+| `gpt2` | GPT Image 2 |
+| `flare` | GPT Image 2.5 Flare |
+| `sunburst` | GPT Image 2.5 Sunburst |
+| `nbpro` | Gemini 3 (Nano Banana Pro) |
+| `nb2` | Gemini 3.1 (Nano Banana 2) |
+| `ff5` | Firefly Image 5 |
+
+The full label also works. Choices per model (checked 2026-11-03; re-check with `options --model &lt;alias&gt;`):
+
+| alias | aspect (`--aspect`) | quality (`--quality`) |
+|---|---|---|
+| `gpt2` | 21:9 16:9 5:4 4:3 3:2 1:1 4:5 3:4 2:3 9:16 | 低 中 高 |
+| `flare`, `sunburst` | 3:2 1:1 2:3 only | 低 中 高 |
+| `nbpro` | same as gpt2 | 1K 2K 4K (Firefly labels it 解析度) |
+| `nb2` | gpt2's list plus 8:1 4:1 1:4 1:8 | 512 1K 2K 4K |
+
+Empty aspect means 自動. Pass the ratio only (`9:16`), not the Chinese label.
+
+## Commands
+
+```
+python &lt;skill&gt;/scripts/firefly_gen.py login                       # user logs in once, then closes the window
+python &lt;skill&gt;/scripts/firefly_gen.py options --model nbpro       # aspect/quality choices, free
+python &lt;skill&gt;/scripts/firefly_gen.py one --model gpt2 --prompt "..." --out path/name.png [--aspect 16:9] [--quality 高] [--ref img.jpg]
+python &lt;skill&gt;/scripts/firefly_gen.py run jobs.csv [--only id1,id2] [--dry-run]
+```
+
+`jobs.csv` (UTF-8, header row): `id,model,prompt,out,aspect,quality,refs`. `out` and `refs` are relative to the CSV's folder; `refs` holds up to 6 reference images separated by `;`. Empty `aspect`/`quality` keep Firefly's defaults.
+
+Reference images must be JPEG, PNG or WebP. Convert anything else first (`python -c "from PIL import Image; Image.open('x.avif').save('x.png')"`).
+
+Each job gets a fresh browser launch: inside one session Firefly keeps earlier results on the page and the script once downloaded the previous job's image. After saving, the script fails a job whose file duplicates an earlier one in the run or whose shape doesn't match `aspect`.
+
+Each run appends one row per job to `firefly_log.tsv` beside the CSV (or beside `--out`): time, id, model, credit cost, ok/fail, output path, prompt. Exit code is 1 if any job failed.
+
+## After a run
+
+- Read the log, then look at each output image and check every character of any text in it; models still miswrite Chinese. Report wrong characters instead of calling the job done.
+- Firefly does not give transparent PNGs. Ask for a flat `#00FF00` background and key it out later.
+- Only one script run at a time: the Chrome profile is locked while the window is open.
+
+## When it fails
+
+- `Not logged in` → ask the user to run `login` (or run it in the background and let them log in).
+- `No option matching ...` → the error lists what Firefly offers; fix the value or the `MODELS` table.
+- Timeout → a `.error.png` screenshot sits next to the intended output; look at it (content block, out of credits, UI change).
+- After a Firefly redesign the role/label selectors in `generate()` may need updating. The UI labels are Traditional Chinese with English fallbacks.</pre></details></li>
+      <li class="sk"><div class="sk-h"><b>banana-gen</b><button type="button" class="copy" data-copy="sk3"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>用團隊的 Macro Banana 生圖，支援參考圖和批次</p><span class="use">用在：步驟 04</span></div>
+        <details><summary>展開 SKILL.md</summary><pre id="sk3">---
+name: banana-gen
+description: Generate images on Macro Banana (&lt;公司內部生圖站&gt;, the team's "大香蕉" studio) with Nano Banana Pro or Nano Banana 2 through a Playwright script, and save each result to a chosen path. Use whenever the user says to generate images "用大香蕉", with Macro Banana, or on &lt;公司內部生圖站&gt;, including batch generation from a prompt list and image-to-image with reference pictures. Do not drive the site by hand through a browser MCP; this script costs far fewer tokens.
+---
+
+# Macro Banana (大香蕉) image generation
+
+The script `scripts/banana_gen.py` (next to this file) opens &lt;公司內部生圖站&gt;/studio in the installed Chrome with its own persistent profile (`~/.banana-gen/profile`, signed in with Google), sets the model, aspect and resolution, fills the prompt, clicks GENERATE, and downloads the new result from its 生成詳情 panel.
+
+Default model is Nano Banana Pro (`nbpro`); use Nano Banana 2 (`nb2`) when the user asks for it, for the extra-wide/tall ratios, or for 512 drafts. The site shows no per-image cost. Generating still uses the team's quota, so confirm the job list with the user before a batch; `--dry-run` and `options` generate nothing.
+
+## Models and choices (checked 2026-11-03; re-check with `options --model &lt;alias&gt;`)
+
+| alias | site label | aspect (`--aspect`) | resolution (`--res`) |
+|---|---|---|---|
+| `nbpro` (default) | Nano Banana Pro | 1:1 2:3 3:2 3:4 4:3 4:5 5:4 9:16 16:9 21:9 | 1K 2K 4K |
+| `nb2` | Nano Banana 2 | nbpro's list plus 1:4 4:1 1:8 8:1 | 512 1K 2K 4K |
+| `gpt2` | GPT Image 2 | | currently disabled on the site (OpenRouter 額度不足) |
+
+Empty aspect/resolution keep whatever the site last used, so pass them explicitly. The script always sets the image count to 1 and leaves Google Search grounding as it is (Off by default).
+
+## Commands
+
+```
+python &lt;skill&gt;/scripts/banana_gen.py login                       # opens the site; the user signs in with Google, then closes the window
+python &lt;skill&gt;/scripts/banana_gen.py options [--model nb2]       # menu choices, free
+python &lt;skill&gt;/scripts/banana_gen.py one --prompt "..." --out path/name.png [--model nbpro] [--aspect 16:9] [--res 2K] [--ref img.jpg]
+python &lt;skill&gt;/scripts/banana_gen.py run jobs.csv [--only id1,id2] [--dry-run]
+```
+
+`jobs.csv` (UTF-8, header row): `id,model,prompt,out,aspect,res,refs`. Empty `model` means `nbpro`. `out` and `refs` are relative to the CSV's folder; `refs` holds reference images separated by `;` (the site takes up to 14, 20 MB each). With refs the script switches to 圖生圖 mode; refer to them in the prompt as `@image1`, `@image2`, … or "Image 1 is …".
+
+On Windows set `PYTHONIOENCODING=utf-8` so the console can print the site's labels.
+
+Each job gets a fresh browser launch. The script records the gallery's task IDs before clicking GENERATE and downloads only an image whose task ID is new, then fails the job if the file duplicates an earlier one in the run or its shape doesn't match `aspect`.
+
+Each run appends one row per job to `banana_log.tsv` beside the CSV (or beside `--out`): time, id, model, resolution, ok/fail, output path, task ID, prompt. Exit code is 1 if any job failed.
+
+## After a run
+
+- Read the log, then look at each output image and check every character of any text in it; models still miswrite Chinese. Report wrong characters instead of calling the job done.
+- Every result also stays in the user's Macro Banana gallery.
+- Only one script run at a time: the Chrome profile is locked while the window is open.
+
+## When it fails
+
+- `Not logged in` → tell the user they need to sign in, then run `login` in the background; they sign in with Google in the window that opens and close it. Don't retry generation until they have.
+- `... is not available right now: &lt;reason&gt;` → the site disabled that model (for example GPT Image 2 when OpenRouter credit runs out); use `nbpro` or `nb2`.
+- `No ... option` → the error lists what the site offers; fix the value or the `MODELS` table.
+- Timeout → a `.error.png` screenshot sits next to the intended output; look at it.
+- After a site redesign, the selectors in `pills()`, `pick()` and `generate()` may need updating. Setting chips sit under the prompt box in the order model, aspect, search, resolution; 圖生圖 mode drops the search chip.</pre></details></li>
+      <li class="sk"><div class="sk-h"><b>audio-gen</b><button type="button" class="copy" data-copy="sk4"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>配樂、歌曲和音效：挑引擎、寫 prompt、每段出 2 個以上版本、後製到可剪接的規格</p><span class="use">用在：步驟 08</span></div>
+        <details><summary>展開 SKILL.md</summary><pre id="sk4">---
+name: audio-gen
+description: Generate background music, songs and sound effects locally for video projects, with Stable Audio 3 (audio-studio-mcp) or MiniMax Music 3 (ComfyUI template). Use whenever the user asks for 配樂, BGM, 音效, SFX, stinger, ambience, a jingle, a song with lyrics, or wants music or sound for a video, ad or short; also when they mention audio-studio, Stable Audio or MiniMax Music. Picks the engine, writes the prompt in that engine's format, generates 2+ candidates and post-processes them for the edit.
+---
+
+# Local music and SFX generation
+
+Both engines run on this PC's RTX 4090 and cost no credits. Run them without asking; only the paid ElevenLabs/partner API nodes in ComfyUI need the user's yes.
+
+## Pick the engine
+
+| Need | Engine | Why |
+|---|---|---|
+| Sound effect, ambience, foley, whoosh, one-shot | **Stable Audio 3** | Has an sfx mode with source/action/material/space fields. MiniMax has no SFX mode. |
+| Song with vocals or lyrics | **MiniMax Music 3** | Stable Audio 3 cannot sing. |
+| Instrumental BGM or stinger | Both, 2 takes each, let the user listen | MiniMax takes a long multi-part caption; SA3 prompts cap at ~45 words but run ~30× faster. Which sounds better is the user's call. |
+| Many variations, loops, extend a cue, replace 2 seconds in the middle, loudness for delivery | **Stable Audio 3** | `edit_audio` (variation / inpaint / continue) and `process_audio` (loop, fades, LUFS, 48 kHz). |
+
+Measured on this PC (2026-11-04): SA3 medium, 2 candidates of 10 s ≈ 1 s warm, ≈ 19 s with the first model load. MiniMax Music 3 fp16, 10 s ≈ 28–32 s, 5 s ≈ 13 s.
+
+
+## Stable Audio 3 (audio-studio-mcp)
+
+Installed at `C:\tools\audio-studio-mcp`, registered as the user-scope MCP server `audio-studio`. The server's own instructions explain the prompt format; the essentials:
+
+- English, 1–2 sentences, ≤ ~45 words. Never write vocals / singer / lyrics.
+- Music: genre + adjectives → lead instruments → supporting layers → drums → mood. Tempo goes in `bpm`, not the prompt.
+- SFX: `audio_type: "sfx"` and fill `sound_source`, `sound_action`, `sound_material`, `sound_space`. Without the sfx prefix, effects come out as music.
+- Length fits content: impacts 1–3 s, actions 3–6 s, ambience 6–15 s.
+- `variations: 2–4`; quality varies a lot by seed.
+- Timing cues in the prompt ("hit at 3 s") are not followed. Generate, then use `edit_audio` inpaint/continue.
+- Outputs are 44.1 kHz 24-bit WAV with a `.json` sidecar. Set the folder with env `AUDIO_STUDIO_OUTPUT_DIR`, or move the files after.
+- Takes often start with 0.4–1.2 s of near-silence. For hits, run `process_audio` with `trim_silence: true`.
+- For video delivery: `process_audio` with `normalize: "loudness"`, `target_lufs: -14`, `sample_rate: 48000`.
+
+**Tools available** (MCP tools `generate_audio`, `edit_audio`, `process_audio`, `unload_models`): call them directly.
+
+**Tools not loaded in this session** (or for a batch): use the script next to this file, which calls the same function without MCP:
+
+```
+C:\tools\audio-studio-mcp\.venv\Scripts\python.exe &lt;skill&gt;\scripts\sa3_jobs.py jobs.json OUT_DIR
+```
+
+`jobs.json` is a list of `generate_audio` keyword sets; see the script's docstring. Always use that venv's python.
+
+The web UI is `C:\tools\audio-studio-mcp\.venv\Scripts\audio-studio-mcp.exe --web 8765`. It listens on 127.0.0.1 only; never expose it.
+
+## MiniMax Music 3 (ComfyUI)
+
+Use the comfy-mcp tools against the local ComfyUI (`server_info` first). The template is the free local `audio_minimax_music_3`, not an API node, and its models are already installed.
+
+1. `fetch_template("audio_minimax_music_3", &lt;project&gt;\comfy\&lt;name&gt;.json)` and confirm `local_check.runnable`.
+2. `set_workflow_slot(..., stdout=false)` with:
+   - `37/13.caption`: three blocks, `Global Metadata:` (genre, BPM, key, mood, "Instrumental only, no vocals." when instrumental), then vocal details if singing, then `Arrangement:` (instruments, development, ending).
+   - `37/13.lyrics`: `[Instrumental]` for BGM, or lyrics with `[intro] [verse] [chorus] [bridge] [outro]` tags. Only the tags drive structure.
+   - `37/13.max_duration` **and** `37/15.seconds`: both set to the target length.
+   - **`37/38.seed`**: this SeedNode is the seed that counts. Changing only `37/13.seed` / `37/9.seed` leaves the run fully cached and returns the old file.
+   - `35.filename_prefix` (e.g. `audio_test/D_warm_mm_0`), `35.format` = `flac`.
+3. `run_workflow` (`wait` is fine for ≤ 60 s clips). Output lands in `C:\ComfyUI_windows_portable\ComfyUI\output\&lt;prefix&gt;_00001.flac`. Copy it into the project.
+4. One take per run. For 2 takes, copy the JSON and change `37/38.seed`.
+
+MiniMax output can peak above 0 dBTP (seen +0.2 to +0.8). Normalize it with SA3's `process_audio` or ffmpeg before mixing.
+
+## After generating
+
+- Name files `&lt;cue&gt;_&lt;engine&gt;_&lt;n&gt;` (e.g. `B_sneaky_sa3_v1.wav`, `B_sneaky_mm_0.flac`) and never overwrite earlier takes.
+- Measure before handing over: `ffmpeg -i f -af ebur128=peak=true -f null -` gives integrated LUFS and true peak.
+- For more than a couple of takes, give the user a listening page (Artifact, mp3 files beside it, play button + waveform per take, a pick button, "複製選擇結果"). Reuse the layout of the comparison page above.
+- The ElevenLabs node in ComfyUI (`ElevenLabsTextToSoundEffects`) is paid, and two runs with one prompt returned identical audio. Prefer SA3 for SFX.
+
+## Licence (facts only; route commercial questions to legal)
+
+- Stable Audio 3 weights: Stability AI Community License, free commercial use under 1,000,000 USD total annual revenue, Enterprise licence above that.
+- MiniMax Music 3: the ComfyUI repack says apache-2.0, but the original model uses the MiniMax-Music3 Community License. Commercial use must display "MiniMax-Music3" in the product UI and needs written authorisation from MiniMax above 20,000,000 USD yearly revenue (incl. affiliates).
+- Before client or Nasdaq-listed-company deliverables use these outputs, tell the user to have legal confirm. Do not state a final legal conclusion.</pre></details></li>
+      <li class="sk"><div class="sk-h"><b>html5-ad-unit</b><button type="button" class="copy" data-copy="sk5"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>把生成素材做成 GSAP 的 HTML5 互動廣告版位。目前是基本架構，版位規格還沒填</p><span class="use">用在：成片之後的延伸</span></div>
+        <details><summary>展開 SKILL.md</summary><pre id="sk5">---
+name: html5-ad-unit
+description: Build HTML5 rich-media ad units with GSAP (the team's replacement for Animate CC canvas output), using Kling or Seedance footage as elements — turned into image sequences or green-screen keyed cut-outs, then animated or made interactive. Use whenever the user asks for an HTML5 廣告, 互動版位, rich media, banner 動態, 蓋版, 序列圖, 綠幕去背 for an ad, a clickTag, or names a TNMG placement; also when packaging an ad zip for an ad server. For the 5 s / 15 s MP4 version of the same creative, use this skill together with hyperframes.
+---
+
+# HTML5 ad unit
+
+An ad unit is one HTML page plus its assets, delivered as a zip that must pass the placement's spec. Animate CC used to handle the canvas, the timeline and the export. Here GSAP drives the timeline, a `&lt;canvas&gt;` or DOM layer draws the elements, and this skill holds the parts Animate CC did for us: the specs, clickTag, file-size budget and packaging.
+
+## Work loop
+
+1. **Identify the placement.** Look it up in `references/placements/_index.md` and read its file. If it is not listed, ask the user for the spec. Never guess sizes, weight limits or click behaviour.
+2. **Plan the assets** from the Kling / Seedance footage: image sequence, green-screen cut-out, or plain `&lt;video&gt;`. See `references/asset-pipeline.md`.
+3. **Build** the unit with GSAP: timeline, canvas sequence playback and interaction. See `references/gsap-ad-patterns.md`. Use the `gsap-skills` plugin for GSAP API details (`gsap-timeline`, `gsap-performance` and, for scroll placements, `gsap-scrolltrigger`).
+4. **Wire the platform layer**: clickTag, polite load, close and expand. See `references/platforms.md`.
+5. **Check and package**: weight per file and in total, frame rate on a mid-range phone, the click area, and the end frame (most specs cap the animation length). Then zip it as the placement requires.
+6. **Video version (5 s / 15 s)**: reuse the same timeline in hyperframes. Rules for keeping one timeline usable by both are in `references/gsap-ad-patterns.md` § Shared timeline.
+
+## Rules that hold for every placement
+
+- Output file names count upward (`v1`, `v2` …). Never overwrite an earlier version.
+- Read sizes, weights and durations from the placement file, not from memory.
+- Auto-playing video must be muted. Sound starts only on a user action.
+- Every exit goes through the platform's clickTag. No hard-coded URLs.
+- `&lt;!-- TODO --&gt;`: rules shared by all TNMG placements (brand safety, required end card or logo, whether an ad label is needed) go here once the user confirms them.
+
+## Files
+
+| File | What it holds | Status |
+|---|---|---|
+| `references/placements/_index.md` | Every placement: id, size, platform, link to its file | skeleton, waiting on specs |
+| `references/placements/_template.md` | Fields every placement file fills in | done |
+| `references/asset-pipeline.md` | Footage to sequence, sprite sheet, keyed alpha, compression | first draft |
+| `references/gsap-ad-patterns.md` | Canvas sequence driven by GSAP, interaction, shared timeline | first draft |
+| `references/platforms.md` | clickTag and packaging per ad server | skeleton, waiting on which servers are used |
+| `scripts/` | Planned: extract frames, key green, pack sprite sheet, size check, zip | not written yet |</pre></details></li>
+      <li class="sk"><div class="sk-h"><b>unslop</b><button type="button" class="copy" data-copy="sk6"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>做網頁時用的設計檢查流程：先定方向，再依序修間距、顏色、圖示、文案、字體、版面、細節、視覺與動態。這份教學頁就是照它做的</p><span class="use">用在：製作網頁與教學頁，不屬於影片流程。作者 Damir Sokolovsky（@heydamir），CC BY 4.0</span></div>
+        <details><summary>展開 SKILL.md</summary><pre id="sk6">---
+name: unslop
+description: Turns vibecoded, AI-looking UI into a designed interface with its own character. Finds a direction from the product itself, then fixes spacing, color, icons, copy, type, layout, details, visuals and motion in that order, and can generate a real hero visual with an image tool when one is available. Use when the user asks to unslop, polish, clean up or redesign a screen so it stops looking AI-generated, or when a UI shows the usual tells like purple gradients, glows, gradient text, emoji labels, "New ✨" badges, glossy blobs, uppercase tracked labels, pulsing elements or uneven spacing. Works on React, Tailwind, HTML and CSS, for dashboards, apps and landing pages.
+license: CC-BY-4.0
+metadata:
+  author: Damir Sokolovsky
+  x: https://x.com/heydamir
+  site: https://heydamir.design/unslop
+---
+
+# Unslop
+
+unslop was created by Damir Sokolovsky ([@heydamir](https://x.com/heydamir)), who started the Unslopping series on X. It is licensed under CC BY 4.0, so keep this credit in any copy or adaptation.
+
+Vibecoded UI fails in the same predictable ways. Every surface glows, every label has an emoji, spacing is whatever the model typed that day, and the copy shouts. Unslopping fixes the craft and keeps the product. The features, content and order of sections stay. What changes is that every size, color, word and image becomes deliberate.
+
+Removing slop is only half the job. A screen that is clean but could belong to any product is the next template. Every run ends with a screen that only this product could have.
+
+The difference between slop and craft is where the richness goes. Slop spreads color and effects over the chrome, the backgrounds, buttons, borders and labels. Craft keeps the chrome quiet and puts the richness into one or two moments of content that people remember, like a rendered object, a beautiful chart or an image from the product's world.
+
+Work like a designer doing a redline pass, one layer at a time, across the whole screen.
+
+## What good looks like
+
+- **One bright element.** Each screen has one polished thing that carries the color and the craft, a rendered object, a painted scene or a rich chart. Everything around it is quiet, so it reads instantly.
+- **Quiet chrome.** Navigation, buttons and text use the tinted neutrals and one accent. Nothing glows, nothing competes with the bright element.
+- **A clear idea.** You can say in one sentence what the visual shows and why it belongs to this product.
+- **Text on calm space.** The headline sits on a part of the image or layout that was left empty for it, short and specific, with one primary and one secondary action and nothing stacked under them.
+- **Real product, real material.** Previews look like the real app with plausible data, and objects look like real things with weight, light and shadow.
+
+Which visual styles tend to work, and which fail, is in [references/visuals.md](references/visuals.md). Finished examples to learn from are in [references/refs.md](references/refs.md), and code treatments like drawing an image in glyphs are in [references/effects.md](references/effects.md).
+
+## Run it
+
+1. **Look at the screen.** Find the files that render it. If you can run the app or open the file in a browser and take a screenshot, do it, so you judge what people see and not only the code.
+   - Only a link to a live site, no code? Save the page with `node &lt;skill folder&gt;/scripts/snapshot.mjs &lt;url&gt; unslop/original.html` and work on a copy of that file. Add `--dark` or `--light` to match the theme the user sees. It also saves `original.live.png`, a screenshot of the live page, so render the saved copy and compare the two before you start. Animated backgrounds drawn by scripts do not survive, so describe them in the audit from the live page.
+   - Only a screenshot? Rebuild the screen as one static HTML file first, matching it closely, and treat that as the original.
+   - In both cases the result is a redesigned page in code that the user can hand to whoever owns the real site, so say that in the report.
+2. **Audit.** Go through [references/signs.md](references/signs.md) and list every sign you find, one line each with where it lives.
+3. **Decide how much to change.** Read the audit honestly before planning anything.
+   - **Heavy slop**, many signs across color, type, icons and copy. Run the full process below.
+   - **Light slop**, a screen that is mostly designed with a few signs left. Polish mode. Fix only what the audit found, take the direction from the existing brand instead of inventing a new one, and keep the palette, type, layout and visual. Bigger ideas, like a moment that is missing or a scene for the hero, go into the report as suggestions, not changes.
+   - **No slop.** Say so plainly and suggest two or three small refinements at most, with exact values. Apply them only if the user agrees, and stop there. Never change a good screen just to make it different.
+4. **Set the direction and stop.** Write the five lines described below. Show the audit and the direction to the user and wait for their answer before editing, since changing the direction later means redoing everything. If you have a tool for asking the user questions, ask through it, otherwise ask in plain text and stop. Skip the wait only when the user already said to just do it.
+5. **Fix in nine passes, in order.** Finish a pass across the whole screen before starting the next. When nearly every line changes, plan the passes in order and then write the new screen in one go, as long as every pass is applied. Spacing comes first because everything else reads differently once the rhythm is right. Copy comes before type and layout because the length of the headline decides its size and where it sits. Visuals and motion come last because they should fit a screen that already works without them.
+6. **Check.** Run the checklist at the end of this file, render again and compare with the audit list. Anything still on the list gets fixed.
+7. **Report** the direction, a few lines per pass about what changed, and any image prompt you wrote.
+8. **Record, when asked or when the user wants something to share.** Build the story file and render the video described in [Story video](#story-video). If the user asks for it at the start, write each pass into the story file as you go.
+
+Keep a run quick. Render the screen to check it at most three times. When you generate an image, start it right after the direction is confirmed and keep doing the first passes while it runs, instead of waiting for it.
+
+Exact values for every pass live in [references/tokens.md](references/tokens.md).
+
+## Direction
+
+Before touching anything, write five short lines. Derive them from what the page says the product does and who it is for. Never from what is trending.
+
+- **Product.** What it does and for whom, in one plain sentence.
+- **Character.** Two or three concrete words, like `calm, exact, a little warm` or `fast, technical, playful`. Words like clean, modern, sleek, minimal and premium are not allowed, because they describe every template.
+- **World.** The place or material the product naturally belongs to. A note app lives near paper and ink, a monitoring tool near instruments and night shifts, a travel app near maps and window light. This world sets the tint of the neutrals, the accent and the visual.
+- **Moments.** One or two places where the screen gets rich color, material and detail, chosen from what the product shows. A rendered card or device inside the preview, a chart whose colors each mean a series, an object from the world placed next to the content. Write what they are.
+- **Signature.** One small detail only this product would have, used consistently. A live status dot for a monitoring tool, keycaps for a developer tool, hand drawn underlines for a teaching app, a route line for a delivery app. One detail, not five.
+
+The examples here only show the shape of an answer. Derive yours from the product in front of you, even when an example happens to fit.
+
+If the product already has a real brand, like a logo file, a color or a typeface that is not slop, keep it and build the direction around it. A violet to blue gradient, sparkles and glow are slop even when they sit in the logo, so they do not count as brand unless the user says they do.
+
+## 1. Spacing
+
+- Everything sits on a 4px grid. Margins, paddings, gaps and fixed heights are multiples of 4, so 28 or 104 are fine even though they are not in the token list. A 2px step is fine for nudges inside small controls, and an odd value that exactly centers something stays.
+- Same thing, same size. All rows in a list share one height and one gap, all cards in a row share one padding.
+- Space shows grouping. Space inside a group is smaller than space between groups, so a list reads as one block and sections read as separate ones.
+- Things line up. Icons sit in one column, labels start on one line, numbers align right in one column. Nothing is nudged off the line with a stray translate or odd margin.
+- Padding follows density. Compact panels and sidebars around 16, cards 20 to 24, page edges 24 to 32.
+- Navigation is the densest part of an app. Rows are 32 to 36 tall with 2 to 4 between them, icons in one column, labels on one line. A section label sits closer to its own items than to the section above it, like 24 above and 8 below. Measure the sidebar after the pass, it is where spacing breaks most often.
+- Remove one-off values that break the rhythm, like `mt-[13px]` or `py-[11px]`, and replace them with steps from the scale.
+
+## 2. Color
+
+- Build from one neutral ramp, tinted toward the world from the direction. Pick graphite, warm or ink from the tokens, or tint your own the same way. Background, raised surfaces, borders and text all come from that ramp.
+- In apps and dashboards the backgrounds, surfaces, borders and text stay neutral, the graphite ramp or something just as grey. People look at them for hours and the content has to carry the color. A screen whose background reads as orange, brown, blue or green has gone too far. The world shows in the accent, the charts and the moments, not in the surfaces. Landing pages can tint their surfaces further toward the world.
+- Three text roles, primary, secondary and muted. Not ten slightly different lavenders.
+- In the chrome, one accent, used rarely. It marks the primary action, the selection or the one number that matters.
+- The moments from the direction are the exception. Inside them color can be rich, several hues in a chart, a rendered object with real materials, an image with its own light, as long as it stays inside the world and each color means something.
+- If the brand has a real color, it becomes the accent and leaves the surfaces. If there is no real brand color, take the accent from the world.
+- Accent with text on it reaches 4.5 to 1 contrast. If it does not, darken it or put dark text on it. Accent used as text or ink on a light surface needs the same contrast, so use a darker shade of it there.
+- On dark themes the primary button can be an off white from the ramp with dark text, and the accent can live in a smaller place like the selection or a key figure. This often looks more deliberate than a colored button.
+- Semantic colors only carry meaning, like green for a good change and red for an error, and they are toned down to sit inside the palette.
+- Remove hue gradients on surfaces, gradient text, colored glows and colored shadows, radial color washes and blobs behind content, and neon borders.
+- Borders are quiet hairlines, the text color of the ramp at 6 to 10% opacity.
+- On dark themes depth comes from surface steps and hairlines, not from shadows. A window or object floating over an image may keep a soft neutral shadow. On light themes shadows are neutral, soft and small.
+- A gradient is allowed only as a small tone shift inside one neutral, like an active row going from #2b2b2b to #1f1f1f. Never from one hue to another.
+
+## 3. Icons
+
+- Every emoji used as an icon or as decoration in a label becomes a line icon from one set. Use the set the project already has, otherwise lucide.
+- One size and one stroke everywhere, 16 or 18px with a 1.5 stroke.
+- Icons take the color of their text role, usually secondary or muted. They never get their own colors.
+- The icon box has the same width in every row and the gap to the label is fixed, 8 or 10, so labels align.
+- Drop icons that add nothing, like an emoji in every card title or before every section label. Categories that need color get a small status dot.
+
+## 4. Copy
+
+- Headlines say what the product does for whom, in plain words, so they could not fit another product. Use the facts already on the page and do not invent new ones.
+- No exclamation marks in interface text, and never `!!`.
+- No greeting headlines like `Welcome back, Damir! 👋`. The title names the context, like the page name or the period, for example `October 2026`.
+- Short labels. `Search`, not `Search anything...`.
+- A change says what it compares to, like `+12% vs last month` or `3 fewer vs last month`.
+- Headlines, subheads, labels, buttons and captions end without a period. Only paragraphs of several sentences keep their periods.
+- No hype words like supercharge, seamless, unlock, magic, revolutionize or game-changing, and no `AI-powered` on everything.
+- Claims that cannot be checked, like `Loved by 10,000+ teams` or `10x faster`, become quiet and specific if the user confirms they are real, and are removed otherwise. Ask, and list them in the report.
+- Mock data looks real, with plausible numbers and names, never `[X]` or `123,456`.
+- Badges like `PRO`, `New ✨` or `Beta 🚀` go away unless the product really needs them, and then they are quiet text.
+
+## 5. Type
+
+- Choose type for the character in the direction, from the families in the tokens. Keep the project's font when it is part of a real brand. A default like Inter that nobody chose may be swapped when another family fits the character better. One family for the interface, plus at most one partner from any row of the tokens, a mono for figures and meta or a display face for large headlines.
+- A few sizes from a scale and two weights, 400 and 500, with 600 at most for rare emphasis. No 700 to 900 headings, no gradient text.
+- Hierarchy comes from size and color, not from weight.
+- Sentence case everywhere. Labels like `NAVIGATION` or `PAID THIS MONTH` with wide tracking become `Navigation` and `Paid this month`.
+- Small text never gets negative letter spacing. Readability on small text means bigger, a bit bolder or slightly looser. Tight tracking is only for large display text.
+- Numbers use `tabular-nums` and one format across the screen. If one figure is `$48,210`, the next is not `$124,860.40`.
+- No italic for emphasis.
+
+## 6. Layout
+
+- Keep the sections and their order. Inside a section, alignment and proportions may change when that makes the screen clearer.
+- Apps and dashboards keep real app proportions. The shell fills the viewport, a sidebar of 240 to 280 and fluid content, usually capped around 1440 to 1600 wide, and the page is as long as its content, with more sections below the first screen. Never shrink an app into a narrow centered column. If the original was drawn as a small window on a backdrop, keep it visibly a window, with its frame and backdrop, and still give it desktop proportions inside.
+- The strongest landing hero is a scene. One generated image fills the hero from edge to edge, its subject sits on one side, and the headline sits on the calm empty part of the same image, with the product view rising from the bottom edge. Look at the hero in the references to see it.
+- Without a scene, use an asymmetric split, text on one side and the visual given at least half the width, or text over a large product view below it. Everything stacked and centered is the template default, keep it only for a short hero with no visual.
+- In a scene hero, the text block sits in the upper part, in the space between the navigation and the top of the product view, at its optical center, a little above the true middle.
+- In a split, center the text block vertically against the visual, so neither side leaves a big empty corner. If the visual is much taller, shorten it instead of pushing the text down. Floating cards and devices next to the text are hard to balance, prefer one solid visual. The spacing token from the navigation to the headline applies to stacked heroes, a split hero is centered instead.
+- Long headlines align left. Centered text works for one or two short lines.
+- One primary action and at most one secondary action next to it. Anything else moves out of the hero.
+- Navigation stays quiet. Logo, the existing links, one button. Log in is a quiet text link next to it, not a second button. A floating pill header is not required. On small screens the links collapse into one menu button.
+- Compose the first screen as a whole. The hero fills the viewport height without a dead empty band. If the content is shorter, center it or let the product view start low and run past the bottom edge, so the page invites a scroll.
+- On small screens everything stacks in reading order, the headline drops to the mobile size from the tokens and the visual comes after the actions. A dense preview gets simpler on mobile, with fewer rows and columns, instead of being zoomed down. No text in it goes below 11px.
+
+## 7. Details
+
+- Nested radius. An inner radius equals the outer radius minus the padding between them, never less than 4. Controls 8 to 10, cards 12 to 16, panels 14 to 20. Not everything is a pill.
+- Counts and meta become quiet text, often mono and muted, instead of glowing pills.
+- Keyboard shortcuts become small keycaps.
+- Charts sit on a muted grid with muted mono labels. No rainbow bars inside one series, no glowing bars, no uppercase day labels. If the chart is placeholder noise, replace it with data that tells something real.
+- Charts have a hierarchy, like text. One main chart is clearly the biggest thing on the screen, drawn with care, like smooth lines or a mirrored comparison. Anything else that shows data is smaller and different in kind, like a ranked list with thin bars or a short table, never a second chart of the same size.
+- One accent per chart. The thing that matters, like the current month, the line you are tracking or the plan that grew, gets the accent, and everything else sits in neutral steps of the ramp. Several hues only when the chart really has to tell series apart, and even then one leads and the rest are quiet.
+- Stat cards are numbers. A label, a big figure and a change with what it compares to. No sparklines, tallies, mini bars or icons added to fill them, they read as decoration. A card can hold a real looking object when it is the very thing its number counts, like a paid receipt next to paid revenue or bank cards next to spend. Use as many as make sense for that dashboard, as long as each one reads on its own and none of them is a mini chart.
+- Vary the sizes. Cards of equal width side by side, each with the same kind of content, read as a template. Give the grid a rhythm, like three or four compact stats in a row above one wide chart, or a wide chart next to a narrow list.
+- Pick the chart type for the data. A trend is a line, a comparison is bars, a share is one stacked bar or a list with bars, a single goal is a progress bar.
+- The active state is a small surface step with a hairline highlight, not a gradient with a glow.
+- Hover and focus states exist and stay inside the palette. A visible focus ring for keyboard users.
+- The logo is the product name in the main family, plus a simple mark if there is one. No gradient wordmark and no sparkle tile.
+- The signature detail from the direction appears where it belongs and nowhere else.
+
+## 8. Visuals
+
+- Decorative filler goes. Glossy blobs, orbs, nebulas, floating cubes, glowing grids, holographic brains and robots say nothing about the product.
+- A landing hero gets a visual that shows something true.
+- Dashboards and app screens almost never need generated images. Their moments come from the product itself: a chart drawn with care, figures set beautifully, real content like product photos or avatars, a status that feels alive. A physical thing the product deals with, like a payment card in a finance app, is usually better built in code with real materials, a soft gradient, a chip, a number.
+- Generate images for an app only for empty states, onboarding and marketing moments, or when the user asks for it.
+- With an image generation tool, the first choice for a landing hero is a scene from the world in the direction, generated wide enough to sit behind the whole hero, with calm empty space where the text goes. It carries the color and the mood, and the chrome stays quiet over it.
+- Under the scene, or as the visual when there is no tool, show the product. Build a preview in code of what the page already promises, with the project's components or careful HTML and plausible data, like the main screen, one key card or the result the product produces. Showing what the copy already claims is not inventing a feature. In a scene hero it rises from the bottom edge and runs past it.
+- The product view carries a moment, not just a plain card. A rendered object inside it, like a payment card on a figure, a rich chart or a small object from the world. These are kinds of objects, so using one that fits is fine.
+- Before this pass, look at the references in [references/refs.md](references/refs.md). Take qualities from them, like composition, light, restraint and how the moment is placed, never their subject or layout.
+- Rendered objects and scenes come from an image generation tool when you have one. If you do not, build what you can in code, write the prompts for the rest and leave empty slots of the right size.
+- How to pick the subject, the prompt recipe and how to place the image are in [references/visuals.md](references/visuals.md). Read it before this pass.
+
+## 9. Motion
+
+- Remove motion that loops for no reason, like `animate-pulse` or `animate-ping` on things that are not live, shimmer on headings, breathing glows, floating elements and parallax.
+- Remove `transition-all`, bouncy springs, `hover:scale` on cards and anything that moves more than a few pixels on hover.
+- Keep motion that explains something. A hover is a quick color or surface change, a press is a tiny scale down, a menu fades and rises a few pixels from where it opens, a changed number tweens.
+- Transition color, background, border, opacity and transform, and name them, like `transition-colors` or `transition-[transform,opacity]` in Tailwind, instead of a catch all. Never animate width, height, top, left, margins or large blurs, they stutter on weak devices.
+- One easing curve and a few durations across the screen, from the tokens. Short for feedback, a little longer for things that enter.
+- At most one entrance on load, a short fade and rise for the main content with a small stagger. Not every card flying in from a different side.
+
+## Story video
+
+A short video where the screen unslops itself step by step, with red redlines on the slop. Look at [refs/story-dashboard-frames.webp](references/refs/story-dashboard-frames.webp) before you build it, eight frames from it in order. That video went viral, and this is how it works:
+
+- **Nothing is swapped, everything morphs.** One page, and each step only changes CSS, so padding, gaps, sizes, colors, radii and shadows tween from the old value to the new one in place. You see the spacing open up, the purple drain out, the corners soften.
+- **A wave.** Elements start a few dozen milliseconds apart from the top left down, so a change runs across the screen instead of everything flipping at once.
+- **Text rolls.** Copy that changes blurs out, and the new words rise in letter by letter.
+- **Redlines first.** The slop gets red selection boxes with tags, a spacing step shows red measurements that turn white once fixed, a details step outlines corners with their radius.
+- **Close and short.** Square, cropped close on the part that changes most, so it reads on a phone, and about 10 seconds.
+
+It adds a few minutes, so make it only when the user wants it.
+
+1. **One story file.** Build `unslop-story/story.html`, a standalone copy of the original screen with its styles in the file. Keep the original rules as they are, they are step 0.
+2. **Steps.** Three to five, merging passes so each one changes something you can see, like `Spacing`, `Color and icons`, `Type and copy`, `Details`. A new chart or visual goes into the last step. List them in the head as `&lt;meta name="unslop-steps" content="Spacing, Color and icons, Type and copy, Details"&gt;`. A name containing Spacing shows spacing measurements, one containing Details shows corner outlines.
+3. **Each step is CSS on top.** Write the changes of step 1 under `.s1`, step 2 under `.s2` and so on, like `.s1 .card { padding: 24px }` or `.s2 body { background-color: #141415 }`. The classes add up, so step 3 still has the rules of steps 1 and 2. Change values, never structure, so the browser can tween them.
+4. **What cannot tween, and how to handle it.**
+   - Gradients, glows and washes: put them on their own layer and fade its `opacity` to 0, with the solid color underneath changing. Gradient text goes on the `.from` span only, never on the swap or its parent, because a text clip also catches the hidden new text.
+   - Pills: write their radius as half the height, like `23px`, not `9999px`, or the corner only changes in the last frame.
+   - Use swaps sparingly, only where the words change, at most eight in a story. Twenty swaps blurring at once read as a cut between two pictures, which is exactly what the video must not look like. Weight, size, tracking and color changes tween on their own, so they never need a swap. A new font family switches directly in its step, without swaps.
+   - Text that changes, a new font family, an emoji that becomes an icon: `&lt;span class="swap" data-at="3"&gt;&lt;span class="from"&gt;Welcome back, Damir! 👋&lt;/span&gt;&lt;span class="to"&gt;October 2026&lt;/span&gt;&lt;/span&gt;`. At step 3 the old part blurs out and the new one rolls in.
+   - Emoji that become icons: put the new icon next to the emoji inside the same box, both absolutely stacked, and crossfade their `opacity` in the step. That is not a swap and does not count toward the limit.
+   - Things that disappear, like a `New ✨` badge: `data-out="2"` collapses them at step 2.
+   - Things that appear, like a legend: `data-in="4"` fades them in at step 4. Reserve their space so nothing jumps.
+5. **Redlines.** The measurements follow the elements live, so their numbers count from the old value to the new one while things move. That is the moment people watch, so choose them well.
+   - `data-gap` goes on the blocks of a vertical stack, like the brand row, the search, the navigation group and the plans group in a sidebar, or the headline, the stat row and the chart in the main column. Not on every row, or the screen fills with tiny 2px tags. Aim for four to six measured gaps per stack, and give each stack its own name if there is more than one, like `data-gap="sidebar"` and `data-gap="main"`.
+   - `data-radius` goes on two to four buttons and cards whose corners change.
+   - `data-slop="Gradient text"` and so on marks the slop for a short first beat, at most five, on the clearest examples that sit apart from each other, with short tags. It is optional, the reference video has none.
+6. **Only the screen and its background.** The video shows the story page as it is, with no extra window, border or shadow around it, so the page's own background fills the frame and the screen is the only box. If the screen sits in a window that grows to desktop proportions, anchor it to the left in the story so it widens to the right instead of gliding sideways. The story page renders 1440 wide and at least 900 tall, so do not size things from `100vh`, and keep `position: fixed` for background layers only.
+7. **Camera.** `&lt;meta name="unslop-frame" content="0 0 960"&gt;` sets which part of the page fills the frame, as x, y and width in page pixels. Point x and y at the screen's own top left corner, so the frame starts with the page background around it, and crop close on where the most visible change happens, usually the sidebar or headline and the first cards.
+8. **Render.** `node &lt;skill folder&gt;/scripts/story.mjs unslop-story/story.html unslop-story.mp4`, square by default, `--wide` for 16:9. It needs Playwright and ffmpeg, so if either is missing, tell the user the one command that installs it. To watch it live first, run it with `--play` instead of the output path, and it loops in a browser window until closed. Pull a few frames with ffmpeg and look at them before you hand it over. Checking the story file and the video does not count toward the render limit of a run.
+9. **The story file is a presentation piece.** The clean result still ships as normal code in the project's own stack, without `.s` classes or story attributes. Every video carries a small `unslop by @heydamir` credit, as the license asks.
+
+## Do not
+
+- Do not rename the product, even when the name has AI in it. Keep a real logo as it is. When the logo itself is slop, like an emoji or a sparkle in a gradient tile, redraw it flat: the wordmark alone in the new type, or a simple glyph from the product's idea in one solid color. Never a glossy or gradient ball, a glow or a gradient tile, those read as AI at first sight.
+- Do not change what the product is. Keep its features, content and the order of sections unless the user asks for more. Placeholder content that means nothing may be replaced with content that does.
+- Do not replace removed decoration with new decoration, and do not swap one trend for another like glass, grain, noise, neon or bento grids.
+- Do not invent features, claims or data.
+- Do not fall back to the same look for every product. The direction decides the palette tint, type and visual, not habit.
+
+## Checklist
+
+- [ ] The direction is written and every pass follows it
+- [ ] Every spacing value is on the 4px scale and equal things have equal sizes
+- [ ] Icons, labels and numbers each sit in one aligned column
+- [ ] One tinted neutral ramp, three text roles, one accent with enough contrast
+- [ ] No hue gradients, gradient text, glows, colored shadows or color blobs
+- [ ] No emoji left in the interface
+- [ ] One icon set at one size and stroke
+- [ ] Type chosen for the character, weights 400 to 600, no uppercase tracked labels, no italic, no negative tracking on small text
+- [ ] No exclamation marks, no trailing periods on short strings, no greeting headline, no unverified claims
+- [ ] Numbers in one format with tabular figures
+- [ ] Nested radii add up
+- [ ] A hero has a real visual or a product preview with at least one moment, never filler and never a labeled placeholder
+- [ ] The first screen is composed as a whole with no dead empty band
+- [ ] No looping or bouncy motion, one easing curve, no animated layout properties
+- [ ] Template check. If you swapped the product name for another product's, would the screen still fit? If yes, push the direction harder in the copy, the visual and the signature detail</pre></details></li>
+      <li class="sk"><div class="sk-h"><b>gsap-skills</b><button type="button" class="copy" data-copy="pl0"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>GSAP 官方 skill：時間軸、外掛、效能、捲動觸發的正確寫法</p><span class="use">用在：步驟 09，以及 HTML5 互動廣告</span></div>
+        <details><summary>展開安裝指令</summary><pre id="pl0">claude plugin marketplace add greensock/gsap-skills
+claude plugin install gsap-skills@gsap-skills</pre></details></li>
+      <li class="sk"><div class="sk-h"><b>hyperframes</b><button type="button" class="copy" data-copy="pl1"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>用 HTML 加 GSAP 時間軸寫畫面，逐格算成 MP4</p><span class="use">用在：步驟 09</span></div>
+        <details><summary>展開安裝指令</summary><pre id="pl1">claude plugin marketplace add heygen-com/hyperframes
+claude plugin install hyperframes@hyperframes
+
+# 關閉使用紀錄回傳：在 ~/.claude/settings.json 的 env 加上
+# "HYPERFRAMES_NO_TELEMETRY": "1"</pre></details></li>
+    </ul>
+    <p class="verdict" style="margin-top:8px">要裝到自己的電腦：在 <span class="mono">~/.claude/skills/</span> 底下建一個和 skill 同名的資料夾，把複製的內容存成 <span class="mono">SKILL.md</span>。firefly-gen、banana-gen、audio-gen、blender-greybox-previz、unslop 另外附有腳本或參考檔，只複製這一份會缺東西，請向團隊拿整個資料夾</p>
+</div></section>
+</main>
+
+<footer class="foot band">
+  <div class="wrap">
+    <p class="fin" data-split><span class="ln">第一次生成就夠完整，</span><span class="ln">把機會留給修補</span></p>
+    <div class="fin-row"><a class="btn" href="#step-0">回到第一步</a><span>範例中的飲料廣告為虛構示範。流程依據團隊的 15 秒 AI 廣告製作流程與 5 秒首尾格生成經驗整理</span></div>
+  </div>
+</footer>
+<div class="hud" aria-hidden="true">
+  <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+  <div class="hud-ruler" id="hudRuler"><div class="hud-ph" id="hudPh"><span class="mono" id="hudLab">開場</span></div></div>
+</div>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="js/guide.js"></script>
+<script src="js/motion.js"></script>
+</body>
+</html>

@@ -8,6 +8,7 @@
 index.html                 15 秒主片「阿母的客兄」製作紀錄
 5s.html                    5 秒短影音 ×3（媽媽、爸爸、子女）製作紀錄
 models.html                影片模型比較（Kling、Seedance 2.0、Seedance 2.5；安親與好來）
+claude-ad-guide/           新手教學：用 Claude 做 5 秒／15 秒 AI 廣告（GSAP＋ScrollTrigger＋Lenis，函式庫放在 vendor/）
 .nojekyll                  讓 GitHub Pages 原樣提供檔案
 assets/img/                生成的角色、場景與定格圖
 assets/gb/                 白模參考畫面與白模空景
