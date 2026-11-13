@@ -867,7 +867,7 @@ negative prompt 加上：
       <li class="sk"><div class="sk-h"><b>firefly-gen</b><button type="button" class="copy" data-copy="sk2"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><a class="copy dl" href="skills/firefly-gen.zip" download><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span>下載 zip</span></a><p>用 Adobe Firefly 批次生圖並存到指定路徑，用來做定裝照和首尾格</p><span class="use">用在：步驟 04</span></div>
         <details><summary>展開 SKILL.md</summary><pre id="sk2">---
 name: firefly-gen
-description: Generate images with the user's Adobe Firefly account (GPT Image 2.6 Flare / Sunburst, GPT Image 2, Nano Banana Pro, Nano Banana 2, Nano Banana 2.1, Firefly Image 5) through a Playwright script, and save each result to a chosen path. Use when the user asks to generate or regenerate images "in Firefly", with GPT-image / Nano Banana through Firefly, or to batch-generate images from a prompt list into project folders. Do not drive Firefly by hand through a browser MCP; this script costs far fewer tokens.
+description: Generate images with the user's Adobe Firefly account, by default with GPT Image 2.6 (Flare / Sunburst; GPT Image 2 and Firefly Image 5 also available), through a Playwright script, and save each result to a chosen path. Use when the user asks to generate or regenerate images "in Firefly" or with GPT-image, or to batch-generate images from a prompt list into project folders. For Nano Banana, use the banana-gen skill instead. Do not drive Firefly by hand through a browser MCP; this script costs far fewer tokens.
 ---
 
 # Firefly image generation
@@ -877,6 +877,8 @@ The script `scripts/firefly_gen.py` (next to this file) opens firefly.adobe.com/
 Every generation spends the user's Firefly credits. Shown 2026-11-13 at default settings: GPT Image 2.6 Flare / Sunburst 1K = 15, GPT Image 2.5 1K = 15, GPT Image 2 中 = 20, Nano Banana 2.1 1K = 10, Nano Banana 2 1K = 20, Nano Banana Pro 2K = 40, Firefly Image 5 1K = 10. Higher resolution costs more. The log records the actual cost of each job. Show the user the job list and get a yes before running anything that generates. `--dry-run`, `options` and `fetch` are free.
 
 ## Models
+
+Default to `flare` (GPT Image 2.6 Flare) unless the user names another model; use `sunburst` as the second GPT option. For Nano Banana (Pro / 2 / 2.1), use the `banana-gen` skill, not this one; the `nb*` aliases stay only for when the user asks for Nano Banana through Firefly.
 
 | alias | Firefly label |
 |---|---|
@@ -923,7 +925,7 @@ Each run appends one row per job to `firefly_log.tsv` beside the CSV (or beside 
 ## After a run
 
 - Read the log, then look at each output image and check every character of any text in it; models still miswrite Chinese. Report wrong characters instead of calling the job done.
-- Firefly does not give transparent PNGs. Ask for a flat `#00FF00` background and key it out later.
+- Transparent PNG: GPT Image 2.6 returns a real RGBA PNG when the prompt asks for it (tested 2026-11-13 with a reference image: 61% fully transparent, clean edges, no green spill; opaque pixels sit at alpha 254, and the outer edge has a faint soft fringe). Prompt wording that worked: "Output a PNG with a fully transparent background (alpha channel), no background color, no checkerboard pattern". After download, confirm the file is RGBA with transparent pixels (PIL `getchannel('A')`); if it is not, fall back to a flat `#00FF00` background and key it out. The green-screen route still gives slightly crisper edges, but fails on green or yellow-green subjects.
 - Only one script run at a time: the Chrome profile is locked while the window is open.
 
 ## When it fails
