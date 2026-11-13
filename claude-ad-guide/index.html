@@ -742,7 +742,7 @@ SHOT 2 — 2.5 to 5.8s — 硬切 — &lt;場景&gt;
 | **Day 3** | 合成與交件 | 接片、上品牌標與字卡、內部審看、交件 |
 
 這個排法只有在「Day 2 是修補而不是重來」的前提下成立。所以前面每一條規則的目的都一樣：**讓第一次生成就夠完整，把機會留給修補。**</pre></details></li>
-      <li class="sk"><div class="sk-h"><b>blender-greybox-previz</b><button type="button" class="copy" data-copy="sk1"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>在 Blender 裡做白模運鏡稿：攝影機路徑、緩進緩出、構圖比例，輸出灰模參考影片</p><span class="use">用在：步驟 03</span></div>
+      <li class="sk"><div class="sk-h"><b>blender-greybox-previz</b><button type="button" class="copy" data-copy="sk1"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><a class="copy dl" href="skills/blender-greybox-previz.zip" download><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span>下載 zip</span></a><p>在 Blender 裡做白模運鏡稿：攝影機路徑、緩進緩出、構圖比例，輸出灰模參考影片</p><span class="use">用在：步驟 03</span></div>
         <details><summary>展開 SKILL.md</summary><pre id="sk1">---
 name: blender-greybox-previz
 description: Build greybox (white-model) previz in Blender via the MCP bridge — camera paths, easing, and pixel-accurate composition — to feed as video reference into AI video tools like Kling, Runway or Veo. Use this whenever the user is working on previz, greybox, blockout, 白模, 運鏡稿, camera blocking, or a camera move they need to match against a KV / storyboard / reference frame; also use it for any Blender scripting task that involves placing a camera or a character to hit a specific on-screen percentage, setting up ease-in/ease-out on a camera, or rendering a grey untextured reference clip. Reach for it even when the user just says "make me a reference video for the camera move" without naming Blender.
@@ -864,7 +864,7 @@ negative prompt 加上：
 讀出來，當成前導碼接在你要跑的程式前面一起送。
 
 `grid_compare.py` 相反，它用 PIL 處理圖片，在本機環境直接跑就好。</pre></details></li>
-      <li class="sk"><div class="sk-h"><b>firefly-gen</b><button type="button" class="copy" data-copy="sk2"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>用 Adobe Firefly 批次生圖並存到指定路徑，用來做定裝照和首尾格</p><span class="use">用在：步驟 04</span></div>
+      <li class="sk"><div class="sk-h"><b>firefly-gen</b><button type="button" class="copy" data-copy="sk2"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><a class="copy dl" href="skills/firefly-gen.zip" download><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span>下載 zip</span></a><p>用 Adobe Firefly 批次生圖並存到指定路徑，用來做定裝照和首尾格</p><span class="use">用在：步驟 04</span></div>
         <details><summary>展開 SKILL.md</summary><pre id="sk2">---
 name: firefly-gen
 description: Generate images with the user's Adobe Firefly account (GPT Image 2, GPT Image 2.5 Flare / Sunburst, Nano Banana Pro, Nano Banana 2, Firefly Image 5) through a Playwright script, and save each result to a chosen path. Use when the user asks to generate or regenerate images "in Firefly", with GPT-image / Nano Banana through Firefly, or to batch-generate images from a prompt list into project folders. Do not drive Firefly by hand through a browser MCP; this script costs far fewer tokens.
@@ -927,7 +927,7 @@ Each run appends one row per job to `firefly_log.tsv` beside the CSV (or beside 
 - `No option matching ...` → the error lists what Firefly offers; fix the value or the `MODELS` table.
 - Timeout → a `.error.png` screenshot sits next to the intended output; look at it (content block, out of credits, UI change).
 - After a Firefly redesign the role/label selectors in `generate()` may need updating. The UI labels are Traditional Chinese with English fallbacks.</pre></details></li>
-      <li class="sk"><div class="sk-h"><b>banana-gen</b><button type="button" class="copy" data-copy="sk3"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>用團隊的 Macro Banana 生圖，支援參考圖和批次</p><span class="use">用在：步驟 04</span></div>
+      <li class="sk"><div class="sk-h"><b>banana-gen</b><button type="button" class="copy" data-copy="sk3"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><a class="copy dl" href="skills/banana-gen.zip" download><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span>下載 zip</span></a><p>用團隊的 Macro Banana 生圖，支援參考圖和批次</p><span class="use">用在：步驟 04</span></div>
         <details><summary>展開 SKILL.md</summary><pre id="sk3">---
 name: banana-gen
 description: Generate images on Macro Banana (&lt;公司內部生圖站&gt;, the team's "大香蕉" studio) with Nano Banana Pro or Nano Banana 2 through a Playwright script, and save each result to a chosen path. Use whenever the user says to generate images "用大香蕉", with Macro Banana, or on &lt;公司內部生圖站&gt;, including batch generation from a prompt list and image-to-image with reference pictures. Do not drive the site by hand through a browser MCP; this script costs far fewer tokens.
@@ -979,7 +979,7 @@ Each run appends one row per job to `banana_log.tsv` beside the CSV (or beside `
 - `No ... option` → the error lists what the site offers; fix the value or the `MODELS` table.
 - Timeout → a `.error.png` screenshot sits next to the intended output; look at it.
 - After a site redesign, the selectors in `pills()`, `pick()` and `generate()` may need updating. Setting chips sit under the prompt box in the order model, aspect, search, resolution; 圖生圖 mode drops the search chip.</pre></details></li>
-      <li class="sk"><div class="sk-h"><b>audio-gen</b><button type="button" class="copy" data-copy="sk4"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>配樂、歌曲和音效：挑引擎、寫 prompt、每段出 2 個以上版本、後製到可剪接的規格</p><span class="use">用在：步驟 08</span></div>
+      <li class="sk"><div class="sk-h"><b>audio-gen</b><button type="button" class="copy" data-copy="sk4"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><a class="copy dl" href="skills/audio-gen.zip" download><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span>下載 zip</span></a><p>配樂、歌曲和音效：挑引擎、寫 prompt、每段出 2 個以上版本、後製到可剪接的規格</p><span class="use">用在：步驟 08</span></div>
         <details><summary>展開 SKILL.md</summary><pre id="sk4">---
 name: audio-gen
 description: Generate background music, songs and sound effects locally for video projects, with Stable Audio 3 (audio-studio-mcp) or MiniMax Music 3 (ComfyUI template). Use whenever the user asks for 配樂, BGM, 音效, SFX, stinger, ambience, a jingle, a song with lyrics, or wants music or sound for a video, ad or short; also when they mention audio-studio, Stable Audio or MiniMax Music. Picks the engine, writes the prompt in that engine's format, generates 2+ candidates and post-processes them for the edit.
@@ -1000,17 +1000,12 @@ Both engines run on this PC's RTX 4090 and cost no credits. Run them without ask
 
 Measured on this PC (2026-11-04): SA3 medium, 2 candidates of 10 s ≈ 1 s warm, ≈ 19 s with the first model load. MiniMax Music 3 fp16, 10 s ≈ 28–32 s, 5 s ≈ 13 s.
 
+These rules came from a listening comparison on 2026-11-04.
 
 ## Stable Audio 3 (audio-studio-mcp)
 
-Installed at `C:\tools\audio-studio-mcp`, registered as the user-scope MCP server `audio-studio`. The server's own instructions explain the prompt format; the essentials:
+Installed at `C:\tools\audio-studio-mcp`, registered as the user-scope MCP server `audio-studio`. Follow the prompt format in that server's instructions (already in context when the server is connected). When it is not connected, the short form is: English, ≤ ~45 words, no vocal words; tempo in `bpm`; SFX need `audio_type: "sfx"` plus the four `sound_*` fields; `variations: 2–4`. Beyond those instructions:
 
-- English, 1–2 sentences, ≤ ~45 words. Never write vocals / singer / lyrics.
-- Music: genre + adjectives → lead instruments → supporting layers → drums → mood. Tempo goes in `bpm`, not the prompt.
-- SFX: `audio_type: "sfx"` and fill `sound_source`, `sound_action`, `sound_material`, `sound_space`. Without the sfx prefix, effects come out as music.
-- Length fits content: impacts 1–3 s, actions 3–6 s, ambience 6–15 s.
-- `variations: 2–4`; quality varies a lot by seed.
-- Timing cues in the prompt ("hit at 3 s") are not followed. Generate, then use `edit_audio` inpaint/continue.
 - Outputs are 44.1 kHz 24-bit WAV with a `.json` sidecar. Set the folder with env `AUDIO_STUDIO_OUTPUT_DIR`, or move the files after.
 - Takes often start with 0.4–1.2 s of near-silence. For hits, run `process_audio` with `trim_silence: true`.
 - For video delivery: `process_audio` with `normalize: "loudness"`, `target_lufs: -14`, `sample_rate: 48000`.
@@ -1032,7 +1027,7 @@ The web UI is `C:\tools\audio-studio-mcp\.venv\Scripts\audio-studio-mcp.exe --we
 Use the comfy-mcp tools against the local ComfyUI (`server_info` first). The template is the free local `audio_minimax_music_3`, not an API node, and its models are already installed.
 
 1. `fetch_template("audio_minimax_music_3", &lt;project&gt;\comfy\&lt;name&gt;.json)` and confirm `local_check.runnable`.
-2. `set_workflow_slot(..., stdout=false)` with:
+2. Run `list_workflow_slots` and confirm the node ids below still exist (they were read from the template on 2026-11-04 and change when the template is updated; if they differ, use the slots with the same input names). Then `set_workflow_slot(..., stdout=false)` with:
    - `37/13.caption`: three blocks, `Global Metadata:` (genre, BPM, key, mood, "Instrumental only, no vocals." when instrumental), then vocal details if singing, then `Arrangement:` (instruments, development, ending).
    - `37/13.lyrics`: `[Instrumental]` for BGM, or lyrics with `[intro] [verse] [chorus] [bridge] [outro]` tags. Only the tags drive structure.
    - `37/13.max_duration` **and** `37/15.seconds`: both set to the target length.
@@ -1047,7 +1042,7 @@ MiniMax output can peak above 0 dBTP (seen +0.2 to +0.8). Normalize it with SA3'
 
 - Name files `&lt;cue&gt;_&lt;engine&gt;_&lt;n&gt;` (e.g. `B_sneaky_sa3_v1.wav`, `B_sneaky_mm_0.flac`) and never overwrite earlier takes.
 - Measure before handing over: `ffmpeg -i f -af ebur128=peak=true -f null -` gives integrated LUFS and true peak.
-- For more than a couple of takes, give the user a listening page (Artifact, mp3 files beside it, play button + waveform per take, a pick button, "複製選擇結果"). Reuse the layout of the comparison page above.
+- For more than a couple of takes, give the user a listening page (Artifact, mp3 files beside it, play button + waveform per take, a pick button, "複製選擇結果"). Start from `templates/listening-page.html` in this skill: copy it, fill the `__PLACEHOLDER__` texts and the five constants at the top of its script (`M`, `ENG`, `MUSIC`, `SFX`, `NOTES`), and publish it with the mp3s as `media/&lt;cue id&gt;_&lt;take&gt;.mp3`. Do not re-read the old comparison Artifact for the layout. The template has no `&lt;meta charset&gt;` because the Artifact wrapper adds one; to preview it as a local file, put `&lt;!doctype html&gt;&lt;meta charset="utf-8"&gt;` in front.
 - The ElevenLabs node in ComfyUI (`ElevenLabsTextToSoundEffects`) is paid, and two runs with one prompt returned identical audio. Prefer SA3 for SFX.
 
 ## Licence (facts only; route commercial questions to legal)
@@ -1055,7 +1050,7 @@ MiniMax output can peak above 0 dBTP (seen +0.2 to +0.8). Normalize it with SA3'
 - Stable Audio 3 weights: Stability AI Community License, free commercial use under 1,000,000 USD total annual revenue, Enterprise licence above that.
 - MiniMax Music 3: the ComfyUI repack says apache-2.0, but the original model uses the MiniMax-Music3 Community License. Commercial use must display "MiniMax-Music3" in the product UI and needs written authorisation from MiniMax above 20,000,000 USD yearly revenue (incl. affiliates).
 - Before client or Nasdaq-listed-company deliverables use these outputs, tell the user to have legal confirm. Do not state a final legal conclusion.</pre></details></li>
-      <li class="sk"><div class="sk-h"><b>cred-ad-upload</b><button type="button" class="copy" data-copy="sk7"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>Cr.ED 上稿：先查版位的尺寸、格式、檔案大小上限，素材做完跑檢查腳本，全部通過才上稿，最後包進母模組</p><span class="use">用在：成片之後要上 Cr.ED 版位（Story、Motion、Immersion、文中鎖屏、Action）</span></div>
+      <li class="sk"><div class="sk-h"><b>cred-ad-upload</b><button type="button" class="copy" data-copy="sk7"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><a class="copy dl" href="skills/cred-ad-upload.zip" download><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span>下載 zip</span></a><p>Cr.ED 上稿：先查版位的尺寸、格式、檔案大小上限，素材做完跑檢查腳本，全部通過才上稿，最後包進母模組</p><span class="use">用在：成片之後要上 Cr.ED 版位（Story、Motion、Immersion、文中鎖屏、Action）</span></div>
         <details><summary>展開 SKILL.md</summary><pre id="sk7">---
 name: cred-ad-upload
 description: Make and upload ads for Ad2iction's Cr.ED platform (cmp.ad2iction.com), checking each placement's limits before any asset is made. Use whenever the user names a Cr.ED / CrED module or AIC 提案 placement (Story, Motion, Immersion, 文中鎖屏, Action, 置底, 大插頁, 全屏, Plus, 序列圖 zip), asks to 上稿 to Cr.ED, or wants 5 s / 15 s video or key visuals turned into a Cr.ED ad.
@@ -1094,7 +1089,7 @@ Cr.ED is Ad2iction's template platform. You pick a module, upload assets into it
 ## When the site changes
 
 Spec pages carry a 「最後更新時間」. When a check disagrees with what the site now accepts, re-read the spec page (`spec` URL in the JSON), update `placements.json`, and note the date in its `_source`.</pre></details></li>
-      <li class="sk"><div class="sk-h"><b>html5-ad-unit</b><button type="button" class="copy" data-copy="sk5"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>把 Kling／Seedance 素材和主視覺、文字、logo 用一條 GSAP 時間軸合成，輸出 MP4 或 Motion 的 Adobe Animate HTML5 zip，也做序列圖、去背和本機預覽頁</p><span class="use">用在：成片之後的延伸，版位限制從 cred-ad-upload 來</span></div>
+      <li class="sk"><div class="sk-h"><b>html5-ad-unit</b><button type="button" class="copy" data-copy="sk5"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><a class="copy dl" href="skills/html5-ad-unit.zip" download><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span>下載 zip</span></a><p>把 Kling／Seedance 素材和主視覺、文字、logo 用一條 GSAP 時間軸合成，輸出 MP4 或 Motion 的 Adobe Animate HTML5 zip，也做序列圖、去背和本機預覽頁</p><span class="use">用在：成片之後的延伸，版位限制從 cred-ad-upload 來</span></div>
         <details><summary>展開 SKILL.md</summary><pre id="sk5">---
 name: html5-ad-unit
 description: Compose ad creatives from Kling or Seedance footage with GSAP, for the team's Cr.ED placements. One timeline gives two outputs, an MP4 rendered with hyperframes or an HTML5 canvas zip for Cr.ED's Adobe Animate format (2MB on Motion v1.3.1, 10MB on v1.2.9) (the replacement for Animate CC). Also makes image sequences, green-screen cut-outs and local preview pages. Use whenever footage must be combined with key visuals, text or logo, animated, or turned into 序列圖 / 去背元件 / an HTML5 or Animate CC zip, or when the user wants a 測試頁 / 本機預覽 of an ad. Placement limits come from cred-ad-upload.
@@ -1131,7 +1126,7 @@ The placements are the 15 Cr.ED placements in `cred-ad-upload`, which owns their
 | `references/asset-pipeline.md` | Footage to sequence, keyed alpha, compression, budget check |
 | `references/gsap-ad-patterns.md` | Canvas sequence driven by GSAP, local preview per module, shared timeline with hyperframes |
 | `references/html5-output.md` | The Adobe Animate format: size limit per Motion version, entry file, motionSet and interaction buttons, packaging |</pre></details></li>
-      <li class="sk"><div class="sk-h"><b>unslop</b><button type="button" class="copy" data-copy="sk6"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>做網頁時用的設計檢查流程：先定方向，再依序修間距、顏色、圖示、文案、字體、版面、細節、視覺與動態。這份教學頁就是照它做的</p><span class="use">用在：製作網頁與教學頁，不屬於影片流程。作者 Damir Sokolovsky（@heydamir），CC BY 4.0</span></div>
+      <li class="sk"><div class="sk-h"><b>unslop</b><button type="button" class="copy" data-copy="sk6"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><a class="copy dl" href="skills/unslop.zip" download><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span>下載 zip</span></a><p>做網頁時用的設計檢查流程：先定方向，再依序修間距、顏色、圖示、文案、字體、版面、細節、視覺與動態。這份教學頁就是照它做的</p><span class="use">用在：製作網頁與教學頁，不屬於影片流程。作者 Damir Sokolovsky（@heydamir），CC BY 4.0</span></div>
         <details><summary>展開 SKILL.md</summary><pre id="sk6">---
 name: unslop
 description: Turns vibecoded, AI-looking UI into a designed interface with its own character. Finds a direction from the product itself, then fixes spacing, color, icons, copy, type, layout, details, visuals and motion in that order, and can generate a real hero visual with an image tool when one is available. Use when the user asks to unslop, polish, clean up or redesign a screen so it stops looking AI-generated, or when a UI shows the usual tells like purple gradients, glows, gradient text, emoji labels, "New ✨" badges, glossy blobs, uppercase tracked labels, pulsing elements or uneven spacing. Works on React, Tailwind, HTML and CSS, for dashboards, apps and landing pages.
@@ -1375,7 +1370,7 @@ claude plugin install hyperframes@hyperframes
 # 關閉使用紀錄回傳：在 ~/.claude/settings.json 的 env 加上
 # "HYPERFRAMES_NO_TELEMETRY": "1"</pre></details></li>
     </ul>
-    <p class="verdict" style="margin-top:8px">要裝到自己的電腦：在 <span class="mono">~/.claude/skills/</span> 底下建一個和 skill 同名的資料夾，把複製的內容存成 <span class="mono">SKILL.md</span>。firefly-gen、banana-gen、audio-gen、blender-greybox-previz、cred-ad-upload、html5-ad-unit、unslop 另外附有腳本或參考檔，只複製這一份會缺東西，請向團隊拿整個資料夾</p>
+    <p class="verdict" style="margin-top:8px">要裝到自己的電腦：只有 SKILL.md 的，在 <span class="mono">~/.claude/skills/</span> 底下建一個和 skill 同名的資料夾，把複製的內容存成 <span class="mono">SKILL.md</span>。附有腳本或參考檔的（blender-greybox-previz、firefly-gen、banana-gen、audio-gen、cred-ad-upload、html5-ad-unit、unslop），按「下載 zip」，解壓到 <span class="mono">~/.claude/skills/</span>，zip 裡已經是 skill 同名資料夾。公開版已拿掉內部網址、客戶案例和廣告 ID，用到時請向團隊要</p>
 </div></section>
 </main>
 
