@@ -1055,43 +1055,82 @@ MiniMax output can peak above 0 dBTP (seen +0.2 to +0.8). Normalize it with SA3'
 - Stable Audio 3 weights: Stability AI Community License, free commercial use under 1,000,000 USD total annual revenue, Enterprise licence above that.
 - MiniMax Music 3: the ComfyUI repack says apache-2.0, but the original model uses the MiniMax-Music3 Community License. Commercial use must display "MiniMax-Music3" in the product UI and needs written authorisation from MiniMax above 20,000,000 USD yearly revenue (incl. affiliates).
 - Before client or Nasdaq-listed-company deliverables use these outputs, tell the user to have legal confirm. Do not state a final legal conclusion.</pre></details></li>
-      <li class="sk"><div class="sk-h"><b>html5-ad-unit</b><button type="button" class="copy" data-copy="sk5"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>把生成素材做成 GSAP 的 HTML5 互動廣告版位。目前是基本架構，版位規格還沒填</p><span class="use">用在：成片之後的延伸</span></div>
-        <details><summary>展開 SKILL.md</summary><pre id="sk5">---
-name: html5-ad-unit
-description: Build HTML5 rich-media ad units with GSAP (the team's replacement for Animate CC canvas output), using Kling or Seedance footage as elements — turned into image sequences or green-screen keyed cut-outs, then animated or made interactive. Use whenever the user asks for an HTML5 廣告, 互動版位, rich media, banner 動態, 蓋版, 序列圖, 綠幕去背 for an ad, a clickTag, or names a TNMG placement; also when packaging an ad zip for an ad server. For the 5 s / 15 s MP4 version of the same creative, use this skill together with hyperframes.
+      <li class="sk"><div class="sk-h"><b>cred-ad-upload</b><button type="button" class="copy" data-copy="sk7"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>Cr.ED 上稿：先查版位的尺寸、格式、檔案大小上限，素材做完跑檢查腳本，全部通過才上稿，最後包進母模組</p><span class="use">用在：成片之後要上 Cr.ED 版位（Story、Motion、Immersion、文中鎖屏、Action）</span></div>
+        <details><summary>展開 SKILL.md</summary><pre id="sk7">---
+name: cred-ad-upload
+description: Make and upload ads for Ad2iction's Cr.ED platform (cmp.ad2iction.com), checking each placement's limits before any asset is made. Use whenever the user names a Cr.ED / CrED module or AIC 提案 placement (Story, Motion, Immersion, 文中鎖屏, Action, 置底, 大插頁, 全屏, Plus, 序列圖 zip), asks to 上稿 to Cr.ED, or wants 5 s / 15 s video or key visuals turned into a Cr.ED ad.
 ---
 
-# HTML5 ad unit
+# Cr.ED ad upload
 
-An ad unit is one HTML page plus its assets, delivered as a zip that must pass the placement's spec. Animate CC used to handle the canvas, the timeline and the export. Here GSAP drives the timeline, a `&lt;canvas&gt;` or DOM layer draws the elements, and this skill holds the parts Animate CC did for us: the specs, clickTag, file-size budget and packaging.
+Cr.ED is Ad2iction's template platform. You pick a module, upload assets into its form and get an ad tag. Nothing is coded. The work is to make assets that fit the placement's **limits** and fill the form correctly. A wrong size or weight is found only at upload time, after the assets are made, so limits come first.
 
 ## Work loop
 
-1. **Identify the placement.** Look it up in `references/placements/_index.md` and read its file. If it is not listed, ask the user for the spec. Never guess sizes, weight limits or click behaviour.
-2. **Plan the assets** from the Kling / Seedance footage: image sequence, green-screen cut-out, or plain `&lt;video&gt;`. See `references/asset-pipeline.md`.
-3. **Build** the unit with GSAP: timeline, canvas sequence playback and interaction. See `references/gsap-ad-patterns.md`. Use the `gsap-skills` plugin for GSAP API details (`gsap-timeline`, `gsap-performance` and, for scroll placements, `gsap-scrolltrigger`).
-4. **Wire the platform layer**: clickTag, polite load, close and expand. See `references/platforms.md`.
-5. **Check and package**: weight per file and in total, frame rate on a mid-range phone, the click area, and the end frame (most specs cap the animation length). Then zip it as the placement requires.
-6. **Video version (5 s / 15 s)**: reuse the same timeline in hyperframes. Rules for keeping one timeline usable by both are in `references/gsap-ad-patterns.md` § Shared timeline.
+1. **Pin the placement.** Run `python scripts/check_assets.py --list` and match the user's words to one id. If two could fit (Story 置底 or 置底＋全屏, 文中鎖屏 圖片版 or 圖影版), ask. Done when one id is chosen.
+2. **Read the limits before making anything.** Run `python scripts/check_assets.py --spec &lt;id&gt;` and show the user the result as a short table: each component, its size, formats and weights, and the count. If it says UNVERIFIED, stop and ask for the spec (see `references/modules/motion.md`). Done when the user has seen the limits, and every planned asset (for example the 15 s MP4, each frame, the key visual) has a component it goes into.
+3. **Read the module file** for the form fields and design rules: `references/modules/{story,immersion,lockscreen,action,motion}.md`.
+4. **Make the assets** to those limits, into `&lt;project&gt;/cred/&lt;id&gt;/v&lt;N&gt;/&lt;component&gt;/`, one subfolder per component key from step 2. Keep important content in the red safe area. Extend backgrounds into the blue area, which may be cropped.
+   - Finished footage that only needs a crop or re-encode: do it here with ffmpeg.
+   - Anything composed (footage with key visuals, text or logo, animation, Immersion sequences) or a Motion **Adobe Animate** HTML zip (2MB on v1.3.1, 10MB on v1.2.9): use `html5-ad-unit`, which renders an MP4 or an HTML5 zip from one GSAP timeline and can build a local preview that never touches Cr.ED.
+5. **Gate on the check.** Run `python scripts/check_assets.py &lt;id&gt; &lt;folder&gt;` (add `--copy copy.json` for Action). Fix every FAIL and re-run until it prints PASS. Report every WARN to the user. An Adobe Animate zip goes in an `animate/` subfolder; the same command checks it (one zip; add `--motion 1.2.9` for the older parent).
+6. **Upload in Cr.ED.** The UI and its rules are in `references/ui.md`. Fill the form from the module file. Save, deploy, copy and delete only after the user confirms that exact action, because the ad list is shared production data. After saving, open 預覽 and check it on a phone-sized view.
+7. **Wrap it in the parent.** A child ad does not play until a parent wraps it.
+   - Publish the child to get its id.
+   - Fill that id into a parent ad: Motion for Story, Action and Immersion 全屏/置底/Plus; Nation for every 文中 format (Immersion 文中 and 文中鎖屏).
+   - Publish the parent, then check the parent's preview.
+   - Each publish needs the user's confirmation.
+   - Steps and fallbacks: `references/ui.md` § Parent and child modules.
+8. **Name it** `&lt;客戶名&gt;-&lt;活動名&gt;_&lt;版位簡稱&gt;_&lt;上稿者&gt;_&lt;秒數&gt;`. Add the prefix `參考用_` for a test or demo. A demo's links are all `https://www.ad2iction.com`.
 
-## Rules that hold for every placement
+## Rules for every placement
 
-- Output file names count upward (`v1`, `v2` …). Never overwrite an earlier version.
-- Read sizes, weights and durations from the placement file, not from memory.
-- Auto-playing video must be muted. Sound starts only on a user action.
-- Every exit goes through the platform's clickTag. No hard-coded URLs.
-- `&lt;!-- TODO --&gt;`: rules shared by all TNMG placements (brand safety, required end card or logo, whether an ad label is needed) go here once the user confirms them.
+- Limits come only from `references/placements.json` via the script. When the spec page and the upload form disagree, the JSON already holds the stricter value. Follow it.
+- Images: JPG/PNG under 150KB and GIF under 400KB unless the placement says otherwise. 文中鎖屏 images are JPG only.
+- Videos: MP4 (H.264), 100MB max. The site transcodes after upload; wait for the 影片連結 to work before previewing.
+- Version folders count upward (`v1`, `v2` …). Never overwrite an earlier version.
+- Login: read `CRED_ACCOUNT` / `CRED_PASSWORD` from `~/.cred/cred_ed.env` (keep the folder readable only by your own account). Never print the values or copy them into another file, a handoff or a memory. If the file is missing or empty, ask the user to fill it (ask the team for a Cr.ED account).
+
+## When the site changes
+
+Spec pages carry a 「最後更新時間」. When a check disagrees with what the site now accepts, re-read the spec page (`spec` URL in the JSON), update `placements.json`, and note the date in its `_source`.</pre></details></li>
+      <li class="sk"><div class="sk-h"><b>html5-ad-unit</b><button type="button" class="copy" data-copy="sk5"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>把 Kling／Seedance 素材和主視覺、文字、logo 用一條 GSAP 時間軸合成，輸出 MP4 或 Motion 的 Adobe Animate HTML5 zip，也做序列圖、去背和本機預覽頁</p><span class="use">用在：成片之後的延伸，版位限制從 cred-ad-upload 來</span></div>
+        <details><summary>展開 SKILL.md</summary><pre id="sk5">---
+name: html5-ad-unit
+description: Compose ad creatives from Kling or Seedance footage with GSAP, for the team's Cr.ED placements. One timeline gives two outputs, an MP4 rendered with hyperframes or an HTML5 canvas zip for Cr.ED's Adobe Animate format (2MB on Motion v1.3.1, 10MB on v1.2.9) (the replacement for Animate CC). Also makes image sequences, green-screen cut-outs and local preview pages. Use whenever footage must be combined with key visuals, text or logo, animated, or turned into 序列圖 / 去背元件 / an HTML5 or Animate CC zip, or when the user wants a 測試頁 / 本機預覽 of an ad. Placement limits come from cred-ad-upload.
+---
+
+# Ad creative from footage
+
+The placements are the 15 Cr.ED placements in `cred-ad-upload`, which owns their sizes, weights and upload. Each placement takes either media (video / images / sequence zip) or, with the Motion **Adobe Animate** format, an HTML5 zip (2MB on Motion v1.3.1, 10MB on Motion-魔動星軌 v1.2.9). This skill makes the creative for either. When footage only needs a crop or a re-encode, skip this skill: `cred-ad-upload` handles that directly.
+
+## Work loop
+
+1. **Get the limits and pick the output.** Run `python ~/.claude/skills/cred-ad-upload/scripts/check_assets.py --spec &lt;id&gt;`. With the user, pick the output for this placement:
+   - **media**: the composed result is an MP4, images or a sequence zip that go into the placement's components.
+   - **html**: the composed result is an HTML5 canvas zip for the Adobe Animate format (2MB on v1.3.1, 10MB on v1.2.9).
+   Done when the output is chosen and every footage clip, image and text line has a place in it.
+2. **Make the elements** from footage: sequence, green-screen cut-out, or plain video. See `references/asset-pipeline.md`.
+3. **Build one GSAP timeline** for the creative, using `buildTimeline(tl)` from `references/gsap-ad-patterns.md` § Shared timeline. That function is the only place the animation lives, so both outputs stay identical.
+4. **Render the chosen output:**
+   - media → hyperframes renders the timeline to MP4 at the component's size. Write it into cred-ad-upload's folder layout `&lt;project&gt;/cred/&lt;id&gt;/v&lt;N&gt;/&lt;component&gt;/`. For Immersion, turn the MP4 into a sequence zip (`asset-pipeline.md` § 1, § 3).
+   - html → wrap the timeline in a canvas page and package it. See `references/html5-output.md`.
+5. **Preview locally** before upload when the user wants to see it: `preview.html` that plays the result the way the placement does. See `references/gsap-ad-patterns.md` § Local preview. It never touches Cr.ED.
+6. **Hand back to cred-ad-upload** for `check_assets.py &lt;id&gt; &lt;folder&gt;` (media, or the zip in `animate/`) and the upload.
+
+## Rules
+
+- Output folders count upward (`v1`, `v2` …). Never overwrite an earlier version.
+- Sizes and weights come from step 1 every time, never from memory.
+- Auto-playing video is muted. Sound starts only on a user action.
 
 ## Files
 
-| File | What it holds | Status |
-|---|---|---|
-| `references/placements/_index.md` | Every placement: id, size, platform, link to its file | skeleton, waiting on specs |
-| `references/placements/_template.md` | Fields every placement file fills in | done |
-| `references/asset-pipeline.md` | Footage to sequence, sprite sheet, keyed alpha, compression | first draft |
-| `references/gsap-ad-patterns.md` | Canvas sequence driven by GSAP, interaction, shared timeline | first draft |
-| `references/platforms.md` | clickTag and packaging per ad server | skeleton, waiting on which servers are used |
-| `scripts/` | Planned: extract frames, key green, pack sprite sheet, size check, zip | not written yet |</pre></details></li>
+| File | What it holds |
+|---|---|
+| `references/asset-pipeline.md` | Footage to sequence, keyed alpha, compression, budget check |
+| `references/gsap-ad-patterns.md` | Canvas sequence driven by GSAP, local preview per module, shared timeline with hyperframes |
+| `references/html5-output.md` | The Adobe Animate format: size limit per Motion version, entry file, motionSet and interaction buttons, packaging |</pre></details></li>
       <li class="sk"><div class="sk-h"><b>unslop</b><button type="button" class="copy" data-copy="sk6"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>複製</span></button><p>做網頁時用的設計檢查流程：先定方向，再依序修間距、顏色、圖示、文案、字體、版面、細節、視覺與動態。這份教學頁就是照它做的</p><span class="use">用在：製作網頁與教學頁，不屬於影片流程。作者 Damir Sokolovsky（@heydamir），CC BY 4.0</span></div>
         <details><summary>展開 SKILL.md</summary><pre id="sk6">---
 name: unslop
@@ -1336,7 +1375,7 @@ claude plugin install hyperframes@hyperframes
 # 關閉使用紀錄回傳：在 ~/.claude/settings.json 的 env 加上
 # "HYPERFRAMES_NO_TELEMETRY": "1"</pre></details></li>
     </ul>
-    <p class="verdict" style="margin-top:8px">要裝到自己的電腦：在 <span class="mono">~/.claude/skills/</span> 底下建一個和 skill 同名的資料夾，把複製的內容存成 <span class="mono">SKILL.md</span>。firefly-gen、banana-gen、audio-gen、blender-greybox-previz、unslop 另外附有腳本或參考檔，只複製這一份會缺東西，請向團隊拿整個資料夾</p>
+    <p class="verdict" style="margin-top:8px">要裝到自己的電腦：在 <span class="mono">~/.claude/skills/</span> 底下建一個和 skill 同名的資料夾，把複製的內容存成 <span class="mono">SKILL.md</span>。firefly-gen、banana-gen、audio-gen、blender-greybox-previz、cred-ad-upload、html5-ad-unit、unslop 另外附有腳本或參考檔，只複製這一份會缺東西，請向團隊拿整個資料夾</p>
 </div></section>
 </main>
 
